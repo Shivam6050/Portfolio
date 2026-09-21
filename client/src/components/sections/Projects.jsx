@@ -18,12 +18,12 @@ export default function Projects() {
   const { projects, loading, error } = useApp();
 
   return (
-    <section id="work" className="section-shell py-20 sm:py-28">
-      <div className="mb-10 grid gap-5 md:grid-cols-[100px_1fr]">
+    <section id="work" className="section-shell section-block">
+      <div className="section-heading">
         <p className="sec-num">02 / selected work</p>
-        <div>
+        <div><div className="section-meta"><span>03 projects</span><span>01—03</span></div>
           <h2 className="section-title">Things I&apos;ve <em>built</em></h2>
-          <p className="mt-4 max-w-2xl text-muted">
+          <p className="section-lede">
             Systems where product thinking, backend architecture and AI meet practical software.
           </p>
         </div>
@@ -63,7 +63,7 @@ export default function Projects() {
                       </span>
                     ))}
                   </div>
-                  <div className="mt-6 flex gap-5 font-mono text-[10px] uppercase tracking-widest">
+                  <div className="project-links">
                     {project.demo ? <a className="u-link" href={project.demo} target="_blank" rel="noreferrer">Live demo ↗</a> : null}
                     <a className="u-link" href={project.code} target="_blank" rel="noreferrer">Code ↗</a>
                   </div>

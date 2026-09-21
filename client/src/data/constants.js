@@ -190,7 +190,7 @@ export const STACK_GROUPS = [
   }
 ];
 
-const icon = (name, color) => "https://cdn.simpleicons.io/" + name + "/" + color;
+const icon = (name, color) => "https://cdn.simpleicons.org/" + name + "/" + color;
 
 export const LOGOS = {
   javascript: icon("javascript", "F7DF1E"), typescript: icon("typescript", "3178C6"), sql: icon("postgresql", "4169E1"),

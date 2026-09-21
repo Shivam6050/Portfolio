@@ -1,15 +1,93 @@
+import { useEffect, useState } from "react";
 import Logo from "../ui/Logo.jsx";
 import { useApp } from "../../context/AppContext.jsx";
 
 function Skeleton() {
   return (
-    <div className="grid animate-pulse gap-6 border-t border-ink/15 py-8 md:grid-cols-[80px_1fr_260px]">
-      <div className="skeleton h-6 w-10" />
-      <div>
-        <div className="skeleton mb-3 h-9 w-3/4" />
-        <div className="skeleton h-16 w-full max-w-xl" />
-      </div>
-      <div className="skeleton h-40 w-full" />
+    <div className="project-card-skeleton">
+      <div className="skeleton project-skeleton-media" />
+      <div className="skeleton project-skeleton-copy" />
+    </div>
+  );
+}
+
+function ProjectPreview({ project }) {
+  const previews = project.previews?.length ? project.previews : [project.preview];
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    if (previews.length < 2) return undefined;
+    const timer = window.setInterval(
+      () => setActive((current) => (current + 1) % previews.length),
+      4500
+    );
+    return () => window.clearInterval(timer);
+  }, [previews.length]);
+
+  const move = (direction) => {
+    setActive((current) => (current + direction + previews.length) % previews.length);
+  };
+
+  if (!previews[active]) return null;
+
+  return (
+    <div className="project-preview-shell">
+      <a
+        className="project-preview-link"
+        href={project.demo || project.code}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={`Open live ${project.title}`}
+      >
+        <img
+          className="project-preview-image"
+          src={previews[active]}
+          alt={`${project.title} live website preview`}
+          loading="lazy"
+          draggable="false"
+        />
+        <span className="project-preview-overlay">
+          <span>{project.demo ? "Open live site" : "View source"}</span>
+          <span aria-hidden="true">↗</span>
+        </span>
+      </a>
+
+      {previews.length > 1 && (
+        <>
+          <button
+            type="button"
+            className="project-preview-arrow project-preview-prev"
+            onClick={() => move(-1)}
+            aria-label="Previous project preview"
+          >
+            ←
+          </button>
+          <button
+            type="button"
+            className="project-preview-arrow project-preview-next"
+            onClick={() => move(1)}
+            aria-label="Next project preview"
+          >
+            →
+          </button>
+          <div className="project-preview-dots" aria-label="Project preview selector">
+            {previews.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                className={`project-preview-dot ${index === active ? "is-active" : ""}`}
+                onClick={() => setActive(index)}
+                aria-label={`Show preview ${index + 1}`}
+                aria-pressed={index === active}
+              />
+            ))}
+          </div>
+        </>
+      )}
+
+      <span className="project-preview-status">
+        {previews.length > 1 ? `${String(active + 1).padStart(2, "0")} / ${String(previews.length).padStart(2, "0")}` : "LIVE PREVIEW"}
+      </span>
     </div>
   );
 }
@@ -21,7 +99,8 @@ export default function Projects() {
     <section id="work" className="section-shell section-block">
       <div className="section-heading">
         <p className="sec-num">02 / selected work</p>
-        <div><div className="section-meta"><span>03 projects</span><span>01—03</span></div>
+        <div>
+          <div className="section-meta"><span>03 projects</span><span>01—03</span></div>
           <h2 className="section-title">Things I&apos;ve <em>built</em></h2>
           <p className="section-lede">
             Systems where product thinking, backend architecture and AI meet practical software.
@@ -29,50 +108,49 @@ export default function Projects() {
         </div>
       </div>
 
-      <div>
+      <div className="project-list">
         {loading
           ? [1, 2, 3].map((item) => <Skeleton key={item} />)
           : projects.map((project, index) => (
               <article
                 key={project._id || project.slug}
-                className="proj project-card"
+                className="project-card project-card-featured"
                 style={{ "--delay": `${index * 120}ms` }}
               >
-                <div className="font-serif text-2xl italic text-rust">0{index + 1}</div>
+                <div className="project-index">0{index + 1}</div>
 
-                <div>
-                  <div className="mb-3 flex flex-wrap items-center gap-2">
-                    <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-muted">
-                      {project.tag}
-                    </span>
+                <div className="project-content">
+                  <div className="project-heading-row">
+                    <span className="project-tag">{project.tag}</span>
+                    <span className="project-type">{project.demo ? "Live project" : "Open source"}</span>
                   </div>
-                  <h3 className="font-serif text-[clamp(2rem,4vw,3.6rem)] leading-[.92]">
-                    {project.title}
-                  </h3>
-                  <p className="mt-5 max-w-2xl text-sm leading-6 text-muted sm:text-base">
-                    {project.summary}
-                  </p>
-                  <p className="mt-3 max-w-2xl text-sm leading-6 text-ink/70">
-                    {project.detail}
-                  </p>
-                  <div className="mt-6 flex flex-wrap gap-2">
+
+                  <h3>{project.title}</h3>
+                  <p className="project-summary">{project.summary}</p>
+                  <p className="project-detail">{project.detail}</p>
+
+                  <div className="project-stack">
                     {project.stack.map((item) => (
                       <span className="tag" key={item.name}>
-                        <Logo name={item.name} label={item.label} size={17} />
+                        <Logo name={item.name} label={item.label} size={15} />
                         {item.label}
                       </span>
                     ))}
                   </div>
+
                   <div className="project-links">
-                    {project.demo ? <a className="u-link" href={project.demo} target="_blank" rel="noreferrer">Live demo ↗</a> : null}
-                    <a className="u-link" href={project.code} target="_blank" rel="noreferrer">Code ↗</a>
+                    {project.demo ? (
+                      <a className="project-primary-link" href={project.demo} target="_blank" rel="noreferrer">
+                        Visit live site ↗
+                      </a>
+                    ) : null}
+                    <a className="u-link" href={project.code} target="_blank" rel="noreferrer">
+                      View source ↗
+                    </a>
                   </div>
                 </div>
 
-                <div className={`pattern ${project.pattern}`}>
-                  <span className="font-mono text-xs font-bold tracking-tight">{project.thumbLabel}</span>
-                  <span className="mt-2 font-mono text-[9px] uppercase tracking-widest opacity-70">{project.thumbSub}</span>
-                </div>
+                <ProjectPreview project={project} />
               </article>
             ))}
       </div>

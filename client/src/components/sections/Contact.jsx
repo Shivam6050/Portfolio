@@ -40,8 +40,8 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="section-shell py-20 sm:py-28">
-      <div className="grid gap-12 lg:grid-cols-[1fr_1.15fr]">
+    <section id="contact" className="section-shell section-block contact-section">
+      <div className="contact-grid">
         <div>
           <p className="sec-num">04 / contact</p>
           <h2 className="section-title mt-5">Let&apos;s make something <em>useful.</em></h2>
@@ -66,7 +66,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <form onSubmit={submit} className="border border-ink/15 bg-paper p-5 sm:p-8">
+        <div className="form-header"><span>CONTACT / 01</span><span>REPLY VIA EMAIL</span></div><form onSubmit={submit} className="contact-panel">
           <div className="grid gap-6 sm:grid-cols-2">
             <label className="form-label">
               Name

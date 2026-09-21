@@ -3,6 +3,7 @@ import { PROFILE } from "../../data/constants.js";
 
 const links = [
   ["Work", "#work"],
+  ["Experience", "#experience"],
   ["Stack", "#stack"],
   ["Contact", "#contact"]
 ];

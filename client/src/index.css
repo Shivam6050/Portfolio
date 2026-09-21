@@ -658,3 +658,91 @@ textarea {
   .contact-panel form > .form-label { margin-top: 24px; }
   .contact-details a { font-size: 9px; }
 }
+
+
+/* --- Experience section: deliberate editorial grid and safe edge spacing --- */
+.experience-section {
+  width: 100%;
+  box-sizing: border-box;
+  padding-inline: clamp(20px, 4vw, 64px);
+  overflow: hidden;
+}
+.experience-inner {
+  width: min(100%, 1280px);
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+.experience-section .section-heading {
+  width: 100%;
+  margin: 0;
+}
+.experience-section .section-meta {
+  padding-top: 2px;
+}
+.experience-section .mt-12 {
+  margin-top: 64px;
+}
+.experience-section article.grid {
+  grid-template-columns: minmax(210px, 260px) minmax(0, 1fr);
+  column-gap: clamp(36px, 5vw, 84px);
+  align-items: start;
+}
+.experience-section article.grid > div:first-child {
+  padding-right: 12px;
+}
+.experience-section article.grid > ul {
+  margin: 0;
+  padding-top: 2px;
+}
+.experience-section article.grid > ul li {
+  max-width: 850px;
+}
+.experience-section .mt-16 {
+  margin-top: 92px;
+}
+.experience-section .mt-16 > div {
+  min-width: 0;
+}
+.experience-section .border-l-2.border-rust {
+  padding-left: 22px;
+}
+.experience-section .border-l-2.border-rust + .border-l-2.border-rust {
+  margin-top: 34px;
+}
+.experience-section .mt-16 .space-y-6 > article {
+  padding-top: 4px;
+  padding-bottom: 6px;
+}
+.experience-section .mt-16 .space-y-6 > article > p:first-child {
+  font-size: 1.55rem;
+  line-height: 1.1;
+}
+.experience-section .mt-16 > div:last-child .space-y-6 > article {
+  min-height: 145px;
+  padding: 28px 26px;
+  box-sizing: border-box;
+}
+@media (max-width: 900px) {
+  .experience-section {
+    padding-inline: 24px;
+  }
+  .experience-section article.grid {
+    grid-template-columns: 1fr;
+    row-gap: 22px;
+  }
+  .experience-section article.grid > div:first-child {
+    padding-right: 0;
+  }
+}
+@media (max-width: 640px) {
+  .experience-section {
+    padding-inline: 18px;
+  }
+  .experience-section .mt-16 {
+    margin-top: 68px;
+  }
+  .experience-section .mt-16 > div:last-child .space-y-6 > article {
+    min-height: 0;
+    padding: 22px 18px;
+  }
+}

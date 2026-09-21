@@ -33,10 +33,21 @@ export default function Hero() {
           <p className="mb-5 max-w-xl font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
             Full Stack Developer · Backend & AI Engineering
           </p>
-          <h1 className="hero-title">
-            <span className="hero-name hero-name-1">Shivam</span>
-            <span className="hero-name hero-name-2">Sagar<span className="text-rust">.</span></span>
-          </h1>
+          <div className="flex flex-col gap-8 sm:flex-row sm:items-end">
+            <div className="min-w-0 flex-1">
+              <h1 className="hero-title">
+                <span className="hero-name hero-name-1">Shivam</span>
+                <span className="hero-name hero-name-2">Sagar<span className="text-rust">.</span></span>
+              </h1>
+            </div>
+            <div className="shrink-0 overflow-hidden border border-ink/15 bg-cream p-1 sm:mb-2">
+              <img
+                src={PROFILE.photo}
+                alt="Shivam Sagar"
+                className="h-40 w-32 object-cover object-top sm:h-48 sm:w-36"
+              />
+            </div>
+          </div>
           <p className="mt-8 max-w-2xl text-balance text-base leading-7 text-muted sm:text-lg">
             {PROFILE.summary}
           </p>

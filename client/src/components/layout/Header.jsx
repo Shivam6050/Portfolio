@@ -12,12 +12,12 @@ export default function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="relative z-50 mx-auto flex max-w-7xl items-center justify-between px-5 py-6 sm:px-8 lg:px-10">
-      <a href="#top" className="font-mono text-xs font-bold tracking-[0.18em] uppercase">
+    <header className="site-header"><div className="section-shell header-inner">
+      <a href="#top" className="brand-mark">
         SS<span className="text-rust">.</span>
       </a>
 
-      <nav className="hidden items-center gap-2 md:flex">
+      <nav className="desktop-nav hidden items-center gap-2 md:flex">
         {links.map(([label, href]) => (
           <a key={href} className="nav-pill" href={href}>
             {label}
@@ -25,11 +25,11 @@ export default function Header() {
         ))}
       </nav>
 
-      <a className="btn-ink hidden sm:inline-flex" href={`mailto:${PROFILE.email}`}>
+      <div className="header-actions"><a className="header-github" href={PROFILE.github} target="_blank" rel="noreferrer">GitHub ↗</a><a className="btn-ink hidden sm:inline-flex" href={`mailto:${PROFILE.email}`}>
         Let's talk <span aria-hidden>↗</span>
-      </a>
+      </a></div>
 
-      <button
+      <button className="mobile-menu-button"
         className="inline-flex h-10 w-10 items-center justify-center border border-ink/15 md:hidden"
         aria-label="Toggle menu"
         aria-expanded={open}
@@ -42,7 +42,7 @@ export default function Header() {
       </button>
 
       {open && (
-        <div className="absolute left-5 right-5 top-20 border border-ink/10 bg-paper p-3 shadow-lg md:hidden">
+        <div className="mobile-menu absolute left-5 right-5 top-20 border border-ink/10 bg-paper p-3 shadow-lg md:hidden">
           {links.map(([label, href]) => (
             <a
               key={href}
@@ -55,6 +55,6 @@ export default function Header() {
           ))}
         </div>
       )}
-    </header>
+    </div></header>
   );
 }

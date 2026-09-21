@@ -1,3 +1,5 @@
+import { PROFILE_PHOTO } from "./profilePhoto.js";
+
 export const PROFILE = {
   name: "Shivam Sagar",
   firstName: "Shivam",
@@ -8,8 +10,67 @@ export const PROFILE = {
   linkedin: "https://linkedin.com/in/shivam-sagar-14241028a",
   github: "https://github.com/Shivam6050",
   location: "India",
+  photo: PROFILE_PHOTO,
   summary:
-    "Computer Science Engineering undergraduate and Full Stack Developer with hands-on experience building production-oriented applications using React.js, Next.js, Node.js, Express.js, MongoDB, PostgreSQL, and TypeScript. Experienced in REST API development, authentication, database design, cloud deployment, testing, CI/CD, and backend architecture. Additional Backend AI Engineering experience includes integrating multiple third-party LLM APIs, usage metering, billing, AI workflows, retrieval-augmented workflows, and evaluation/testing for production AI systems."
+    "Computer Science Engineering undergraduate and Full Stack Developer with hands-on experience building production-oriented applications using React.js, Next.js, Node.js, Express.js, MongoDB, PostgreSQL, and TypeScript. Experienced in REST API development, authentication, database design, cloud deployment, testing, CI/CD, and backend architecture. Additional Backend AI Engineering experience includes integrating multiple third-party LLM APIs, usage metering, billing, AI workflows, retrieval-augmented workflows, and evaluation/testing for production AI systems.",
+  education: [
+    {
+      institution: "Arya College of Engineering",
+      period: "Aug. 2023 – May 2027",
+      degree: "Bachelor of Technology in Computer Science Engineering",
+      result: "CGPA: 7.5/10"
+    },
+    {
+      institution: "Sainik School, Bhubaneswar",
+      period: "",
+      degree: "Intermediate (Class XII)",
+      result: "71%"
+    },
+    {
+      institution: "Sainik School, Bhubaneswar",
+      period: "",
+      degree: "Matriculation (Class X)",
+      result: "83.8%"
+    }
+  ],
+  experience: [
+    {
+      company: "FlyRank AI",
+      period: "Jul. 2026 – Sep. 2026",
+      role: "Backend AI Engineering Intern",
+      stack: "Node.js · Express.js · TypeScript · Prisma · REST APIs",
+      points: [
+        "Designed and built a backend service for LLM API usage metering and billing, integrating multiple third-party LLM providers into a unified RESTful system.",
+        "Implemented real-time usage tracking, threshold-based alerting, and usage-based billing workflows using Node.js, Express.js, TypeScript, and Prisma ORM.",
+        "Worked on API contract design, backend architecture, retrieval-augmented workflows, evaluation, and testing for production-oriented AI systems.",
+        "Completed 17 technical assignments across backend engineering and AI engineering, with 156+ verified hours across assignments, capstone delivery, and technical coursework."
+      ]
+    },
+    {
+      company: "GeeksforGeeks",
+      period: "Jun. 2025 – Oct. 2025",
+      role: "MERN Stack Developer Intern",
+      stack: "MongoDB · Express.js · React.js · Node.js",
+      points: [
+        "Built and maintained full-stack web applications end to end using the MERN stack.",
+        "Designed and implemented RESTful APIs for user authentication, data handling, and dynamic content delivery.",
+        "Built reusable, responsive React components and optimized database queries and API response times for improved application performance.",
+        "Collaborated on debugging, feature development, and version-control workflows using Git and GitHub."
+      ]
+    }
+  ],
+  certifications: [
+    {
+      issuer: "Anthropic",
+      title: "Claude & Agentic AI",
+      detail: "Claude Code in Action, Claude Platform 101, Claude Code 101, Introduction to Model Context Protocol, MCP Advanced Topics, Claude Cowork, Claude 101, and AI Fluency."
+    },
+    {
+      issuer: "Google Skills / DeepMind",
+      title: "AI & LLM Training",
+      detail: "Skill badges covering small language models, language data, neural networks, large language models, generative AI, responsible AI, Google Cloud responsible AI, and prompt design in Agent Platform."
+    }
+  ]
 };
 
 export const PROJECTS = [
@@ -17,8 +78,8 @@ export const PROJECTS = [
     slug: "llm-usage-metering-billing-service",
     title: "LLM Usage Metering & Billing Service",
     tag: "FLAGSHIP",
-    summary: "A production-oriented backend and dashboard for measuring LLM consumption and turning usage into reliable billing signals.",
-    detail: "Full-stack dashboard aggregating real-time LLM token consumption, automated token-exhaustion notifications, usage metering, threshold-based alerting and a usage-based billing workflow.",
+    summary: "A full-stack dashboard that aggregates real-time consumption data across multiple third-party LLM provider APIs into a unified interface.",
+    detail: "Built automated token-allocation alerts and centralized usage-based billing with a type-safe Node.js/Express/Prisma backend, PostgreSQL, and a React/TypeScript frontend.",
     stack: [
       { name: "react", label: "React" }, { name: "typescript", label: "TypeScript" },
       { name: "nodedotjs", label: "Node.js" }, { name: "express", label: "Express" },
@@ -28,15 +89,15 @@ export const PROJECTS = [
     code: "https://github.com/Shivam6050/Backend-capstone-llm-metering",
     pattern: "pattern-1",
     thumbLabel: "metering.service",
-    thumbSub: "tokens → $$",
+    thumbSub: "tokens → billing",
     order: 1
   },
   {
     slug: "learning-map-builder",
     title: "Learning Map Builder",
     tag: "AI",
-    summary: "An AI-assisted learning path builder that turns goals and resources into structured, personalized maps.",
-    detail: "Multi-stage AI pipeline using Gemini and YouTube with server-side URL validation, Supabase PostgreSQL RLS, Vitest coverage, GitHub Actions and daily dead-link detection.",
+    summary: "A multi-stage AI pipeline that creates personalized, budget-aware learning paths from goals and resources.",
+    detail: "Uses Gemini API and YouTube Data API with server-side URL validation, Supabase PostgreSQL row-level security, per-user AI rate limiting, GitHub Actions CI/CD, Vitest, Google OAuth, and automated dead-link detection.",
     stack: [
       { name: "nextjs", label: "Next.js" }, { name: "typescript", label: "TypeScript" },
       { name: "supabase", label: "Supabase" }, { name: "googlegemini", label: "Gemini API" },
@@ -53,8 +114,8 @@ export const PROJECTS = [
     slug: "e-commerce-web-application",
     title: "E-Commerce Web Application",
     tag: "FULL-STACK",
-    summary: "A full-stack commerce platform with authentication, catalog, cart, orders and an administration surface.",
-    detail: "MERN e-commerce application with RESTful APIs, reusable React interfaces, scalable backend architecture and a foundation for payment gateway integration.",
+    summary: "A full-stack e-commerce platform with user authentication, product catalog management, shopping cart, and order-processing workflows.",
+    detail: "Built RESTful APIs with MongoDB, a dedicated admin dashboard for product and inventory operations, and a responsive customer interface with a scalable backend architecture.",
     stack: [
       { name: "react", label: "React" }, { name: "nodedotjs", label: "Node.js" },
       { name: "express", label: "Express" }, { name: "mongodb", label: "MongoDB" }
@@ -71,40 +132,60 @@ export const PROJECTS = [
 export const STACK_GROUPS = [
   {
     title: "Languages",
-    items: [["javascript", "JavaScript"], ["typescript", "TypeScript"], ["cplusplus", "C++"], ["html5", "HTML5"], ["css3", "CSS3"]]
+    items: [
+      ["javascript", "JavaScript"], ["typescript", "TypeScript"], ["sql", "SQL"],
+      ["cplusplus", "C++"], ["c", "C"], ["html5", "HTML5"], ["css3", "CSS3"]
+    ]
   },
   {
     title: "Frontend",
-    items: [["react", "React.js"], ["nextjs", "Next.js"], ["tailwind", "Tailwind"]]
+    items: [["react", "React.js"], ["nextjs", "Next.js"], ["responsive", "Responsive Web Design"]]
   },
   {
-    title: "Backend",
-    items: [["nodedotjs", "Node.js"], ["express", "Express"], ["postgresql", "PostgreSQL"], ["mongodb", "MongoDB"], ["prisma", "Prisma"], ["supabase", "Supabase"]]
+    title: "Backend & Data",
+    items: [
+      ["nodedotjs", "Node.js"], ["express", "Express.js"], ["mongodb", "MongoDB"],
+      ["postgresql", "PostgreSQL"], ["supabase", "Supabase"], ["prisma", "Prisma ORM"]
+    ]
   },
   {
     title: "AI / LLM",
-    items: [["googlegemini", "Gemini API"], ["anthropic", "Anthropic"], ["openai", "OpenAI"]]
+    items: [
+      ["googlegemini", "Gemini API"], ["anthropic", "Anthropic"], ["openai", "OpenAI"],
+      ["rag", "RAG"], ["mcp", "MCP"], ["prompt", "Prompt Engineering"], ["evaluation", "AI Evaluation"]
+    ]
   },
   {
-    title: "Testing",
-    items: [["vitest", "Vitest"], ["postman", "Postman"]]
+    title: "Security & Engineering",
+    items: [
+      ["auth", "Authentication"], ["authorization", "Authorization"], ["oauth", "Google OAuth"],
+      ["security", "Row-Level Security"], ["ratelimit", "Rate Limiting"], ["system", "System Design"], ["dsa", "DSA"]
+    ]
   },
   {
-    title: "DevOps & Tools",
-    items: [["git", "Git"], ["github", "GitHub"], ["githubactions", "GitHub Actions"], ["vercel", "Vercel"], ["netlify", "Netlify"], ["vscode", "VS Code"]]
+    title: "Tools & Delivery",
+    items: [
+      ["git", "Git"], ["github", "GitHub"], ["githubactions", "GitHub Actions"],
+      ["vercel", "Vercel"], ["netlify", "Netlify"], ["postman", "Postman"], ["vscode", "VS Code"], ["vitest", "Vitest"]
+    ]
   }
 ];
 
-const icon = (name, color) => `https://cdn.simpleicons.io/${name}/${color}`;
+const icon = (name, color) => "https://cdn.simpleicons.io/" + name + "/" + color;
 
 export const LOGOS = {
-  javascript: icon("javascript", "F7DF1E"), typescript: icon("typescript", "3178C6"), cplusplus: icon("cplusplus", "00599C"),
-  html5: icon("html5", "E34F26"), css3: icon("css3", "1572B6"), react: icon("react", "61DAFB"), nextjs: icon("nextdotjs", "000000"),
-  tailwind: icon("tailwindcss", "06B6D4"), nodedotjs: icon("nodedotjs", "339933"), express: icon("express", "000000"),
-  mongodb: icon("mongodb", "47A248"), postgresql: icon("postgresql", "4169E1"), supabase: icon("supabase", "3ECF8E"),
-  prisma: icon("prisma", "2D3748"), googlegemini: icon("googlegemini", "8E75E2"), anthropic: icon("anthropic", "000000"),
-  openai: icon("openai", "412991"), git: icon("git", "F05032"), github: icon("github", "181717"),
-  githubactions: icon("githubactions", "2088FF"), vscode: icon("visualstudiocode", "007ACC"), vercel: icon("vercel", "000000"),
-  netlify: icon("netlify", "00C7B7"), postman: icon("postman", "FF6C37"), vitest: icon("vitest", "6E9F18"),
-  google: icon("google", "4285F4"), youtube: icon("youtube", "FF0000"), linkedin: icon("linkedin", "0A66C2")
+  javascript: icon("javascript", "F7DF1E"), typescript: icon("typescript", "3178C6"), sql: icon("postgresql", "4169E1"),
+  cplusplus: icon("cplusplus", "00599C"), c: icon("c", "A8B9CC"), html5: icon("html5", "E34F26"), css3: icon("css3", "1572B6"),
+  react: icon("react", "61DAFB"), nextjs: icon("nextdotjs", "000000"), nodedotjs: icon("nodedotjs", "339933"),
+  express: icon("express", "000000"), mongodb: icon("mongodb", "47A248"), postgresql: icon("postgresql", "4169E1"),
+  supabase: icon("supabase", "3ECF8E"), prisma: icon("prisma", "2D3748"), googlegemini: icon("googlegemini", "8E75E2"),
+  anthropic: icon("anthropic", "000000"), openai: icon("openai", "412991"), git: icon("git", "F05032"),
+  github: icon("github", "181717"), githubactions: icon("githubactions", "2088FF"), vscode: icon("visualstudiocode", "007ACC"),
+  vercel: icon("vercel", "000000"), netlify: icon("netlify", "00C7B7"), postman: icon("postman", "FF6C37"),
+  vitest: icon("vitest", "6E9F18"), youtube: icon("youtube", "FF0000"), linkedin: icon("linkedin", "0A66C2"),
+  google: icon("google", "4285F4"), responsive: icon("css3", "1572B6"), rag: icon("googlegemini", "8E75E2"),
+  mcp: icon("modelcontextprotocol", "000000"), prompt: icon("googlegemini", "8E75E2"), evaluation: icon("vitest", "6E9F18"),
+  auth: icon("auth0", "EB5424"), authorization: icon("auth0", "EB5424"), oauth: icon("google", "4285F4"),
+  security: icon("owasp", "000000"), ratelimit: icon("cloudflare", "F38020"), system: icon("diagramsdotnet", "F08705"),
+  dsa: icon("cplusplus", "00599C")
 };

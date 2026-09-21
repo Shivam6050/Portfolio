@@ -43,7 +43,7 @@ export default function Contact() {
     <section id="contact" className="section-shell section-block contact-section">
       <div className="contact-grid">
         <div>
-          <p className="sec-num">04 / contact</p>
+          <p className="sec-num">05 / contact</p>
           <h2 className="section-title mt-5">Let&apos;s make something <em>useful.</em></h2>
           <p className="mt-6 max-w-lg leading-7 text-muted">
             Have a product, backend problem or AI workflow in mind? Send a note and let&apos;s start there.
@@ -66,7 +66,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <div className="form-header"><span>CONTACT / 01</span><span>REPLY VIA EMAIL</span></div><form onSubmit={submit} className="contact-panel">
+        <div className="contact-panel"><div className="form-header"><span>CONTACT / 01</span><span>REPLY VIA EMAIL</span></div><form onSubmit={submit}>
           <div className="grid gap-6 sm:grid-cols-2">
             <label className="form-label">
               Name
@@ -89,7 +89,7 @@ export default function Contact() {
               {sending ? "Sending…" : "Send message ↗"}
             </button>
           </div>
-        </form>
+        </form></div>
       </div>
     </section>
   );

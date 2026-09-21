@@ -16,12 +16,14 @@ export const PROFILE = {
   education: [
     {
       institution: "Arya College of Engineering",
+      logo: "arya-college",
       period: "Aug. 2023 – May 2027",
       degree: "Bachelor of Technology in Computer Science Engineering",
       result: "CGPA: 7.5/10"
     },
     {
       institution: "Sainik School, Bhubaneswar",
+      logo: "sainik-school",
       period: "",
       degree: "Intermediate (Class XII)",
       result: "71%"
@@ -36,9 +38,10 @@ export const PROFILE = {
   experience: [
     {
       company: "FlyRank AI",
+      logo: "flyrank",
       period: "Jul. 2026 – Sep. 2026",
       role: "Backend AI Engineering Intern",
-      stack: "Node.js · Express.js · TypeScript · Prisma · REST APIs",
+      stack: [["nodedotjs", "Node.js"], ["express", "Express.js"], ["typescript", "TypeScript"], ["prisma", "Prisma"], ["rest", "REST APIs"]],
       points: [
         "Designed and built a backend service for LLM API usage metering and billing, integrating multiple third-party LLM providers into a unified RESTful system.",
         "Implemented real-time usage tracking, threshold-based alerting, and usage-based billing workflows using Node.js, Express.js, TypeScript, and Prisma ORM.",
@@ -48,9 +51,10 @@ export const PROFILE = {
     },
     {
       company: "GeeksforGeeks",
+      logo: "geeksforgeeks",
       period: "Jun. 2025 – Oct. 2025",
       role: "MERN Stack Developer Intern",
-      stack: "MongoDB · Express.js · React.js · Node.js",
+      stack: [["mongodb", "MongoDB"], ["express", "Express.js"], ["react", "React.js"], ["nodedotjs", "Node.js"]],
       points: [
         "Built and maintained full-stack web applications end to end using the MERN stack.",
         "Designed and implemented RESTful APIs for user authentication, data handling, and dynamic content delivery.",
@@ -62,11 +66,13 @@ export const PROFILE = {
   certifications: [
     {
       issuer: "Anthropic",
+      logo: "anthropic",
       title: "Claude & Agentic AI",
       detail: "Claude Code in Action, Claude Platform 101, Claude Code 101, Introduction to Model Context Protocol, MCP Advanced Topics, Claude Cowork, Claude 101, and AI Fluency."
     },
     {
       issuer: "Google Skills / DeepMind",
+      logo: "deepmind",
       title: "AI & LLM Training",
       detail: "Skill badges covering small language models, language data, neural networks, large language models, generative AI, responsible AI, Google Cloud responsible AI, and prompt design in Agent Platform."
     }
@@ -200,5 +206,11 @@ export const LOGOS = {
   mcp: icon("modelcontextprotocol", "000000"), prompt: icon("googlegemini", "8E75E2"), evaluation: icon("vitest", "6E9F18"),
   auth: icon("auth0", "EB5424"), authorization: icon("auth0", "EB5424"), oauth: icon("google", "4285F4"),
   security: icon("owasp", "000000"), ratelimit: icon("cloudflare", "F38020"), system: icon("diagramsdotnet", "F08705"),
-  dsa: icon("cplusplus", "00599C")
+  dsa: icon("cplusplus", "00599C"),
+  rest: icon("postman", "FF6C37"),
+  flyrank: "https://flyrank.ai/favicon.ico",
+  geeksforgeeks: "https://www.geeksforgeeks.org/favicon.ico",
+  deepmind: "https://deepmind.google/favicon.ico",
+  "arya-college": "https://www.aryacollege.org/favicon.ico",
+  "sainik-school": "https://sainikschoolbhubaneswar.edu.in/favicon.ico"
 };

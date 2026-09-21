@@ -2,13 +2,13 @@ import { PROFILE } from "../../data/constants.js";
 
 export default function Experience() {
   return (
-    <section id="experience" className="section-shell border-y border-ink/10 bg-paper py-20 sm:py-28">
-      <div className="grid gap-10 md:grid-cols-[100px_1fr]">
+    <section id="experience" className="section-shell section-block experience-section">
+      <div className="section-heading">
         <p className="sec-num">03 / background</p>
 
         <div>
-          <h2 className="section-title">Experience, <em>education</em> &amp; training</h2>
-          <p className="mt-4 max-w-2xl text-muted">
+          <div className="section-meta"><span>Experience / education</span><span>2023—2027</span></div><h2 className="section-title">The path <em>so far</em></h2>
+          <p className="section-lede">
             Backend AI engineering, MERN development, formal computer-science education, and focused training in modern AI systems.
           </p>
 

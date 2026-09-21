@@ -29,8 +29,7 @@ export default function Header() {
         Let's talk <span aria-hidden>↗</span>
       </a></div>
 
-      <button className="mobile-menu-button"
-        className="inline-flex h-10 w-10 items-center justify-center border border-ink/15 md:hidden"
+      <button className="mobile-menu-button inline-flex h-10 w-10 items-center justify-center border border-ink/15 md:hidden"
         aria-label="Toggle menu"
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}

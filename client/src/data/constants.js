@@ -70,6 +70,12 @@ export const PROFILE = {
       title: "AI & LLM Training",
       detail: "Skill badges covering small language models, language data, neural networks, large language models, generative AI, responsible AI, Google Cloud responsible AI, and prompt design in Agent Platform."
     }
+  ],
+  additionalActivities: [
+    "Actively building and deploying full-stack applications to strengthen practical software-engineering experience and production readiness.",
+    "Practicing Data Structures and Algorithms in C++ and exploring scalable system design and backend architecture.",
+    "Building practical expertise at the intersection of full-stack development, backend engineering, and applied AI/LLM systems.",
+    "Long-term goal of building and launching technology products and startups."
   ]
 };
 

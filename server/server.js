@@ -62,6 +62,24 @@ app.use(async (req, res, next) => {
 });
 
 // --------------------------------------------------
+// Root
+// --------------------------------------------------
+
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Shivam Sagar Portfolio API is running",
+    version: "1.0.0",
+    endpoints: {
+      health: "/api/health",
+      projects: "/api/projects",
+      messages: "/api/messages",
+      stats: "/api/stats"
+    }
+  });
+});
+
+// --------------------------------------------------
 // Health
 // --------------------------------------------------
 

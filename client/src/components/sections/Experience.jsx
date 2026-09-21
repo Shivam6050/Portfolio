@@ -1,4 +1,5 @@
 import { PROFILE } from "../../data/constants.js";
+import Logo from "../ui/Logo.jsx";
 
 export default function Experience() {
   return (
@@ -23,10 +24,20 @@ export default function Experience() {
               {PROFILE.experience.map((item) => (
                 <article key={item.company} className="grid gap-5 lg:grid-cols-[190px_1fr]">
                   <div>
-                    <p className="font-serif text-2xl italic">{item.company}</p>
+                    <div className="flex items-center gap-3">
+                      <Logo name={item.logo} label={item.company} size={34} className="border border-ink/10 bg-cream p-1" />
+                      <p className="font-serif text-2xl italic">{item.company}</p>
+                    </div>
                     <p className="mt-1 font-mono text-[9px] uppercase tracking-widest text-muted">{item.period}</p>
                     <p className="mt-3 text-sm font-medium">{item.role}</p>
-                    <p className="mt-1 font-mono text-[9px] leading-5 text-muted">{item.stack}</p>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {item.stack.map(([name, label]) => (
+                        <span key={name} className="inline-flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-wider text-muted">
+                          <Logo name={name} label={label} size={13} />
+                          {label}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                   <ul className="space-y-3 text-sm leading-6 text-muted">
                     {item.points.map((point) => (
@@ -48,7 +59,10 @@ export default function Experience() {
               <div className="space-y-6">
                 {PROFILE.education.map((item) => (
                   <article key={item.degree} className="border-l-2 border-rust pl-4">
-                    <p className="font-serif text-xl italic">{item.institution}</p>
+                    <div className="flex items-center gap-3">
+                      <Logo name={item.logo} label={item.institution} size={30} className="border border-ink/10 bg-cream p-1" />
+                      <p className="font-serif text-xl italic">{item.institution}</p>
+                    </div>
                     <p className="mt-1 text-sm">{item.degree}</p>
                     <p className="mt-1 font-mono text-[9px] uppercase tracking-widest text-muted">
                       {[item.period, item.result].filter(Boolean).join(" · ")}
@@ -67,7 +81,10 @@ export default function Experience() {
               <div className="space-y-6">
                 {PROFILE.certifications.map((item) => (
                   <article key={item.issuer} className="border border-ink/10 bg-cream p-5">
-                    <p className="font-mono text-[9px] uppercase tracking-widest text-rust">{item.issuer}</p>
+                    <div className="flex items-center gap-3">
+                      <Logo name={item.logo} label={item.issuer} size={30} className="border border-ink/10 bg-cream p-1" />
+                      <p className="font-mono text-[9px] uppercase tracking-widest text-rust">{item.issuer}</p>
+                    </div>
                     <h4 className="mt-2 font-serif text-2xl italic">{item.title}</h4>
                     <p className="mt-3 text-sm leading-6 text-muted">{item.detail}</p>
                   </article>

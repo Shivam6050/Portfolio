@@ -49,12 +49,12 @@ export default function Contact() {
             Have a product, backend problem or AI workflow in mind? Send a note and let&apos;s start there.
           </p>
 
-          <div className="mt-10 space-y-4 font-mono text-xs">
-            <a className="flex items-center gap-3 w-fit u-link" href={`mailto:${PROFILE.email}`}>
+          <div className="contact-details">
+            <a className="u-link" href={`mailto:${PROFILE.email}`}>
               <Logo name="google" label="Email" size={18} /> {PROFILE.email}
             </a>
             <a className="flex items-center gap-3 w-fit u-link" href={`tel:${PROFILE.phone.replace(/[^+\d]/g, "")}`}>
-              <span className="flex h-[18px] w-[18px] items-center justify-center border border-ink/30 text-[9px]">☎</span>
+              <span className="contact-icon flex h-[18px] w-[18px] items-center justify-center border border-ink/30 text-[9px]">☎</span>
               {PROFILE.phone}
             </a>
             <a className="flex items-center gap-3 w-fit u-link" href={PROFILE.linkedin} target="_blank" rel="noreferrer">

@@ -26,11 +26,12 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="top" className="section-shell pb-20 pt-10 sm:pb-28 sm:pt-16 lg:pb-36">
-      <div className="grid gap-12 lg:grid-cols-[1fr_300px] lg:items-end">
-        <div>
+    <section id="top" className="section-shell hero-section">
+      <div className="hero-grid">
+        <div className="hero-main">
+          <div className="hero-kicker"><span className="eyebrow"><i /> Available for conversations</span><span>India · IST</span></div>
           <p className="sec-num">01 / introduction</p>
-          <p className="mb-5 max-w-xl font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+          <p className="hero-role">
             Full Stack Developer · Backend & AI Engineering
           </p>
           <div className="flex flex-col gap-8 sm:flex-row sm:items-end">
@@ -40,25 +41,20 @@ export default function Hero() {
                 <span className="hero-name hero-name-2">Sagar<span className="text-rust">.</span></span>
               </h1>
             </div>
-            <div className="shrink-0 overflow-hidden border border-ink/15 bg-cream p-1 sm:mb-2">
-              <img
-                src={PROFILE.photo}
-                alt="Shivam Sagar"
-                className="h-40 w-32 object-cover object-top sm:h-48 sm:w-36"
-              />
+            <div className="profile-frame">
+              <div className="profile-photo"><img src={PROFILE.photo} alt="Portrait of Shivam Sagar" /></div><div className="profile-caption"><span>SHIVAM / SS</span><span>PROFILE</span></div>
             </div>
           </div>
-          <p className="mt-8 max-w-2xl text-balance text-base leading-7 text-muted sm:text-lg">
+          <div className="hero-bottom"><p className="hero-summary">
             {PROFILE.summary}
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          </p><div className="hero-actions">
             <a className="btn-ink" href="#work">View selected work ↘</a>
             <a className="tag" href={`mailto:${PROFILE.email}`}>Available for conversations</a>
-          </div>
+          </div></div>
         </div>
 
-        <aside className="border-l border-ink/10 pl-5 lg:mb-2">
-          <div className="mb-7 flex items-center gap-3">
+        <aside className="hero-aside">
+          <div className="aside-label">Current profile</div><div className="experience-signal">
             <FlyRankLogo size={52} />
             <div>
               <p className="font-mono text-[9px] uppercase tracking-widest text-muted">Recent experience</p>
@@ -67,7 +63,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 border-y border-ink/10 py-5">
+          <div className="experience-signal secondary">
             <GfGLogo size={34} />
             <span className="font-mono text-[9px] uppercase tracking-widest text-muted">MERN · full stack</span>
             {["react", "nodedotjs", "mongodb"].map((name) => (
@@ -75,7 +71,7 @@ export default function Hero() {
             ))}
           </div>
 
-          <div className="mt-5 grid grid-cols-2 gap-4 font-mono text-[9px] uppercase tracking-widest text-muted">
+          <div className="aside-metrics">
             <div>
               <span className="block text-ink">IST {time || "--:--:--"}</span>
               live local time
@@ -86,9 +82,8 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="mt-5 flex items-center gap-2 font-mono text-[9px] uppercase tracking-widest">
-            <span className={`api-status-dot ${error ? "bg-rust" : "bg-moss"}`} />
-            <span>{error ? "API offline" : "API connected"}</span>
+          <div className="proof-row">
+            <span>Public work &amp; source</span><a href={PROFILE.github} target="_blank" rel="noreferrer">↗</a>
           </div>
         </aside>
       </div>

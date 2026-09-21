@@ -2,7 +2,8 @@ import { PROFILE } from "../../data/constants.js";
 
 export default function Experience() {
   return (
-    <section id="experience" className="section-shell section-block experience-section">
+    <section id="experience" className="section-block experience-section">
+      <div className="experience-inner">
       <div className="section-heading">
         <p className="sec-num">03 / background</p>
 
@@ -82,6 +83,7 @@ export default function Experience() {
           </div>
         </div>
       </div>
+    </div>
     </section>
   );
 }

@@ -3,12 +3,12 @@ import Logo from "../ui/Logo.jsx";
 
 export default function Stack() {
   return (
-    <section id="stack" className="section-shell border-y border-ink/10 bg-paper py-20 sm:py-28">
-      <div className="grid gap-8 md:grid-cols-[100px_1fr]">
+    <section id="stack" className="section-shell section-block stack-section">
+      <div className="section-heading">
         <p className="sec-num">03 / toolkit</p>
         <div>
-          <h2 className="section-title">Tools of the <em>trade</em></h2>
-          <p className="mt-4 max-w-xl text-muted">
+          <div className="section-meta"><span>Technical stack</span><span>Hands-on</span></div><h2 className="section-title">Tools of the <em>trade</em></h2>
+          <p className="section-lede">
             A practical stack spanning product interfaces, APIs, databases, AI integrations and delivery.
           </p>
 

@@ -199,7 +199,7 @@ export const LOGOS = {
   express: icon("express", "000000"), mongodb: icon("mongodb", "47A248"), postgresql: icon("postgresql", "4169E1"),
   supabase: icon("supabase", "3ECF8E"), prisma: icon("prisma", "2D3748"), googlegemini: icon("googlegemini", "8E75E2"),
   anthropic: icon("anthropic", "000000"), openai: icon("openai", "412991"), git: icon("git", "F05032"),
-  github: icon("github", "181717"), githubactions: icon("githubactions", "2088FF"), vscode: icon("visualstudiocode", "007ACC"),
+  github: icon("github", "181717"), gmail: icon("gmail", "EA4335"), githubactions: icon("githubactions", "2088FF"), vscode: icon("visualstudiocode", "007ACC"),
   vercel: icon("vercel", "000000"), netlify: icon("netlify", "00C7B7"), postman: icon("postman", "FF6C37"),
   vitest: icon("vitest", "6E9F18"), youtube: icon("youtube", "FF0000"), linkedin: icon("linkedin", "0A66C2"),
   google: icon("google", "4285F4"), responsive: icon("css3", "1572B6"), rag: icon("googlegemini", "8E75E2"),

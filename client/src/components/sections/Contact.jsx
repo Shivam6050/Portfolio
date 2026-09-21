@@ -3,6 +3,7 @@ import { PROFILE } from "../../data/constants.js";
 import { api } from "../../api/client.js";
 import { useApp } from "../../context/AppContext.jsx";
 import Logo from "../ui/Logo.jsx";
+import { Phone } from "lucide-react";
 
 const initialForm = { name: "", email: "", message: "" };
 
@@ -51,10 +52,10 @@ export default function Contact() {
 
           <div className="contact-details">
             <a className="u-link" href={`mailto:${PROFILE.email}`}>
-              <Logo name="google" label="Email" size={18} /> {PROFILE.email}
+              <Logo name="gmail" label="Gmail" size={18} /> {PROFILE.email}
             </a>
             <a className="flex items-center gap-3 w-fit u-link" href={`tel:${PROFILE.phone.replace(/[^+\d]/g, "")}`}>
-              <span className="contact-icon flex h-[18px] w-[18px] items-center justify-center border border-ink/30 text-[9px]">☎</span>
+              <span className="contact-icon flex h-[18px] w-[18px] items-center justify-center"><Phone size={17} strokeWidth={1.8} /></span>
               {PROFILE.phone}
             </a>
             <a className="flex items-center gap-3 w-fit u-link" href={PROFILE.linkedin} target="_blank" rel="noreferrer">

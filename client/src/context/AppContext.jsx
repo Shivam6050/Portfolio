@@ -5,8 +5,7 @@ import { api } from "../api/client.js";
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
-  const [projects, setProjects] = useState(PROJECTS);
-  const [loading, setLoading] = useState(false);
+  // Portfolio content is intentionally local and data-driven. Edit constants.js to update it.\n  const projects = PROJECTS;\n  const loading = false;
   const [error, setError] = useState("");
   const [stats, setStats] = useState({ views: 0 });
   const [toasts, setToasts] = useState([]);

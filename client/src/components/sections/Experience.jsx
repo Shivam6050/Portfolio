@@ -60,7 +60,7 @@ export default function Experience() {
                 {PROFILE.education.map((item) => (
                   <article key={item.degree} className="border-l-2 border-rust pl-4">
                     <div className="flex items-center gap-3">
-                      <Logo name={item.logo} label={item.institution} size={30} className="border border-ink/10 bg-cream p-1" />
+                      <Logo name={item.logo} label={item.institution} size={52} className="border border-ink/10 bg-cream p-1.5" />
                       <p className="font-serif text-xl italic">{item.institution}</p>
                     </div>
                     <p className="mt-1 text-sm">{item.degree}</p>

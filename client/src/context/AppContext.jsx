@@ -5,13 +5,15 @@ import { api } from "../api/client.js";
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
-  // Portfolio content is intentionally local and data-driven. Edit constants.js to update it.\n  const projects = PROJECTS;\n  const loading = false;
+  // Portfolio content lives in data/constants.js. Components only render the template.
+  const projects = PROJECTS;
+  const loading = false;
   const [error, setError] = useState("");
   const [stats, setStats] = useState({ views: 0 });
   const [toasts, setToasts] = useState([]);
 
   const toast = (message, type = "success") => {
-    const id = `1789991390808-${Math.random()}`;
+    const id = `portfolio-${Date.now()}-${Math.random()}`;
     setToasts((current) => [...current, { id, message, type }]);
     window.setTimeout(() => setToasts((current) => current.filter((item) => item.id !== id)), 3800);
   };
@@ -19,24 +21,14 @@ export function AppProvider({ children }) {
   useEffect(() => {
     let active = true;
 
-    async function load() {
+    async function loadStats() {
       try {
-        const [projectResult, statResult] = await Promise.all([
-          api.getProjects(),
-          api.getStats()
-        ]);
-
+        const statResult = await api.getStats();
         if (!active) return;
 
-        if (Array.isArray(projectResult.data) && projectResult.data.length > 0) {
-          setProjects(projectResult.data);
-        }
-
-        setStats(
-          Object.fromEntries(
-            (statResult.data || []).map((item) => [item.key, item.value])
-          )
-        );
+        setStats(Object.fromEntries(
+          (statResult.data || []).map((item) => [item.key, item.value])
+        ));
 
         if (!sessionStorage.getItem("portfolio-viewed")) {
           try {
@@ -46,15 +38,15 @@ export function AppProvider({ children }) {
             }
             sessionStorage.setItem("portfolio-viewed", "true");
           } catch {
-            // View counting must never block portfolio rendering.
+            // Analytics must never block portfolio rendering.
           }
         }
       } catch (err) {
-        if (active) setError(err.message || "Portfolio API unavailable");
+        if (active) setError(err.message || "Portfolio stats unavailable");
       }
     }
 
-    load();
+    loadStats();
     return () => {
       active = false;
     };

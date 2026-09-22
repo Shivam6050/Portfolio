@@ -9,7 +9,11 @@ export default function Header() {
   return (
     <header className="site-header"><div className="section-shell header-inner">
       <a href="#top" className="brand-mark" aria-label="Shivam Sagar — home">
-        <span className="brand-mark-box"><span>S</span><span>S</span><i /></span>
+        <span className="brand-mark-glass" aria-hidden="true">
+          <span className="brand-letter">S</span><span className="brand-letter brand-letter-back">S</span>
+          <span className="brand-specular" />
+          <span className="brand-dot" />
+        </span>
         <span className="brand-mark-word">SHIVAM<span>.</span></span>
       </a>
 

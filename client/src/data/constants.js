@@ -194,12 +194,12 @@ const icon = (name, color) => "https://cdn.simpleicons.org/" + name + "/" + colo
 
 export const LOGOS = {
   javascript: icon("javascript", "F7DF1E"), typescript: icon("typescript", "3178C6"), sql: icon("postgresql", "4169E1"),
-  cplusplus: icon("cplusplus", "00599C"), c: icon("c", "A8B9CC"), html5: icon("html5", "E34F26"), css3: icon("css3", "1572B6"),
+  cplusplus: icon("cplusplus", "00599C"), c: icon("c", "A8B9CC"), html5: icon("html5", "E34F26"), css3: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Official_CSS_Logo.svg",
   react: icon("react", "61DAFB"), nextjs: icon("nextdotjs", "000000"), nodedotjs: icon("nodedotjs", "339933"),
   express: icon("express", "000000"), mongodb: icon("mongodb", "47A248"), postgresql: icon("postgresql", "4169E1"),
   supabase: icon("supabase", "3ECF8E"), prisma: icon("prisma", "2D3748"), googlegemini: icon("googlegemini", "8E75E2"),
   anthropic: icon("anthropic", "000000"), openai: "https://commons.wikimedia.org/wiki/Special:Redirect/file/OpenAI_logo_2025_(symbol).svg", git: icon("git", "F05032"),
-  github: icon("github", "181717"), gmail: "https://upload.wikimedia.org/wikipedia/commons/8/8f/Gmail_icon_%282026%29.svg", githubactions: icon("githubactions", "2088FF"), vscode: icon("visualstudiocode", "007ACC"),
+  github: icon("github", "181717"), gmail: "https://upload.wikimedia.org/wikipedia/commons/8/8f/Gmail_icon_%282026%29.svg", githubactions: icon("githubactions", "2088FF"), vscode: "https://raw.githubusercontent.com/MicrosoftDocs/visualstudio-docs/main/docs/media/vs-code-logo.svg",
   vercel: icon("vercel", "000000"), netlify: icon("netlify", "00C7B7"), postman: icon("postman", "FF6C37"),
   vitest: icon("vitest", "6E9F18"), youtube: icon("youtube", "FF0000"), linkedin: "https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg",
   google: icon("google", "4285F4"), responsive: icon("css3", "1572B6"), rag: "https://cdn.simpleicons.org/langchain/1C3C3C",
@@ -211,6 +211,6 @@ export const LOGOS = {
   flyrank: "https://flyrank.ai/favicon.ico",
   geeksforgeeks: "https://www.geeksforgeeks.org/favicon.ico",
   deepmind: "https://deepmind.google/favicon.ico",
-  "arya-college": "https://www.aryacollege.org/favicon.ico",
+  "arya-college": "https://www.aryacollege.org/wp-content/uploads/2026/05/IMG_0369.webp",
   "sainik-school": "https://sainikschoolbhubaneswar.edu.in/favicon.ico"
 };

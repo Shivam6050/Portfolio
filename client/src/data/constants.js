@@ -30,6 +30,7 @@ export const PROFILE = {
     },
     {
       institution: "Sainik School, Bhubaneswar",
+      logo: "sainik-school",
       period: "",
       degree: "Matriculation (Class X)",
       result: "83.8%"

@@ -15,9 +15,7 @@ export const PORTFOLIO_CONFIG = {
   ],
   hero: {
     sectionNumber: "01 / introduction",
-    role: "Full Stack Developer · Backend & AI Engineering",
-    currentLabel: "Currently",
-    current: "Backend AI Engineering · FlyRank AI"
+    currentLabel: "Currently"
   },
   work: {
     sectionNumber: "02 / selected work",

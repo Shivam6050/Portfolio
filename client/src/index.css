@@ -1267,3 +1267,32 @@ textarea {
 
 
 /* Portfolio project gallery — final sync */
+
+/* --- Project header alignment fix --- */
+.project-card-featured {
+  position: relative;
+}
+
+.project-card-featured .project-index {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  margin: 0;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.project-card-featured .project-content {
+  padding-top: 26px;
+}
+
+.project-heading-row {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 640px) {
+  .project-card-featured .project-content {
+    padding-top: 28px;
+  }
+}

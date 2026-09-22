@@ -1,23 +1,23 @@
-import { PROFILE } from "../../data/constants.js";
+import { PROFILE, PORTFOLIO_CONFIG } from "../../data/constants.js";
 import Logo from "../ui/Logo.jsx";
 
-export default function Experience() {
+export default function Experience() {\n  const { background } = PORTFOLIO_CONFIG;\n  const currentYear = new Date().getFullYear();
   return (
     <section id="experience" className="section-block experience-section">
       <div className="experience-inner">
       <div className="section-heading">
-        <p className="sec-num">03 / background</p>
+        <p className="sec-num">{background.sectionNumber}</p>
 
         <div>
-          <div className="section-meta"><span>Experience / education</span><span>2023—2027</span></div><h2 className="section-title">The path <em>so far</em></h2>
+          <div className="section-meta"><span>{background.meta}</span><span>{PROFILE.education[0]?.period?.match(/\d{4}/)?.[0] || ""}—{currentYear}</span></div><h2 className="section-title">{background.title} <em>{background.titleEmphasis}</em></h2>
           <p className="section-lede">
-            Backend AI engineering, MERN development, formal computer-science education, and focused training in modern AI systems.
+            {background.lede}
           </p>
 
           <div className="mt-12">
             <div className="mb-5 flex items-center justify-between border-b border-ink/15 pb-3">
               <h3 className="font-mono text-[10px] uppercase tracking-[.18em] text-muted">Experience</h3>
-              <span className="font-mono text-[9px] uppercase tracking-widest text-muted">01</span>
+              <span className="font-mono text-[9px] uppercase tracking-widest text-muted">{String(PROFILE.experience.length).padStart(2, "0")}</span>
             </div>
 
             <div className="space-y-10">
@@ -53,7 +53,7 @@ export default function Experience() {
             <div>
               <div className="mb-5 flex items-center justify-between border-b border-ink/15 pb-3">
                 <h3 className="font-mono text-[10px] uppercase tracking-[.18em] text-muted">Education</h3>
-                <span className="font-mono text-[9px] uppercase tracking-widest text-muted">02</span>
+                <span className="font-mono text-[9px] uppercase tracking-widest text-muted">{String(PROFILE.education.length).padStart(2, "0")}</span>
               </div>
 
               <div className="space-y-6">
@@ -75,7 +75,7 @@ export default function Experience() {
             <div>
               <div className="mb-5 flex items-center justify-between border-b border-ink/15 pb-3">
                 <h3 className="font-mono text-[10px] uppercase tracking-[.18em] text-muted">Certifications &amp; training</h3>
-                <span className="font-mono text-[9px] uppercase tracking-widest text-muted">03</span>
+                <span className="font-mono text-[9px] uppercase tracking-widest text-muted">{String(PROFILE.certifications.length).padStart(2, "0")}</span>
               </div>
 
               <div className="space-y-6">

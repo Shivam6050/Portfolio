@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Logo from "../ui/Logo.jsx";
-import { useApp } from "../../context/AppContext.jsx";\nimport { PORTFOLIO_CONFIG } from "../../data/constants.js";
+import { useApp } from "../../context/AppContext.jsx";
+import { PORTFOLIO_CONFIG } from "../../data/constants.js";
 
 function Skeleton() {
   return (
@@ -93,7 +94,8 @@ function ProjectPreview({ project }) {
 }
 
 export default function Projects() {
-  const { projects, loading, error } = useApp();\n  const { work } = PORTFOLIO_CONFIG;
+  const { projects, loading, error } = useApp();
+  const { work } = PORTFOLIO_CONFIG;
 
   return (
     <section id="work" className="section-shell section-block">

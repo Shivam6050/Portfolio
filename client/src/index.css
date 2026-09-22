@@ -1284,7 +1284,7 @@ textarea {
 }
 
 .project-card-featured .project-content {
-  padding-top: 26px;
+  padding-top: 32px;
 }
 
 .project-heading-row {
@@ -1293,6 +1293,6 @@ textarea {
 
 @media (max-width: 640px) {
   .project-card-featured .project-content {
-    padding-top: 28px;
+    padding-top: 32px;
   }
 }

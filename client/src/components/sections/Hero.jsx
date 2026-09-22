@@ -1,30 +1,30 @@
-import { PROFILE } from "../../data/constants.js";
+import { PROFILE, PORTFOLIO_CONFIG } from "../../data/constants.js";
 
-export default function Hero() {
+export default function Hero() {\n  const { hero, availability, timezone } = PORTFOLIO_CONFIG;
   return (
     <section id="top" className="hero-section">
       <div className="hero-container">
         <div className="hero-kicker">
-          <span className="eyebrow"><i /> Available for conversations</span>
-          <span>India · IST</span>
+          <span className="eyebrow"><i /> {availability}</span>
+          <span>{timezone}</span>
         </div>
 
         <div className="hero-layout">
           <main className="hero-main">
-            <p className="sec-num">01 / introduction</p>
+            <p className="sec-num">{hero.sectionNumber}</p>
 
             <div className="hero-identity">
               <div className="hero-heading">
-                <p className="hero-role">Full Stack Developer · Backend &amp; AI Engineering</p>
+                <p className="hero-role">{hero.role}</p>
                 <h1 className="hero-title">
                   <span className="hero-name hero-name-1">Shivam</span>
                   <span className="hero-name hero-name-2">Sagar<span className="text-rust">.</span></span>
                 </h1>
 
                 <div className="hero-current">
-                  <span className="hero-current-label">Currently</span>
+                  <span className="hero-current-label">{hero.currentLabel}</span>
                   <span className="hero-current-line" />
-                  <span>Backend AI Engineering · FlyRank AI</span>
+                  <span>{hero.current}</span>
                 </div>
               </div>
 

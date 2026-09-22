@@ -83,3 +83,6 @@ shivam-portfolio/
         ├── context/
         └── data/
 ```
+
+
+<!-- deployment trigger: 2026-09-22 portfolio sync -->

@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { PROFILE } from "../../data/constants.js";
+import { PROFILE, PORTFOLIO_CONFIG } from "../../data/constants.js";
 import { api } from "../../api/client.js";
 import { useApp } from "../../context/AppContext.jsx";
 import Logo from "../ui/Logo.jsx";
 
 const initialForm = { name: "", email: "", message: "" };
 
-export default function Contact() {
+export default function Contact() {\n  const { contact } = PORTFOLIO_CONFIG;
   const { toast } = useApp();
   const [form, setForm] = useState(initialForm);
   const [sending, setSending] = useState(false);
@@ -43,10 +43,10 @@ export default function Contact() {
     <section id="contact" className="section-shell section-block contact-section">
       <div className="contact-grid">
         <div>
-          <p className="sec-num">05 / contact</p>
-          <h2 className="section-title mt-5">Let&apos;s make something <em>useful.</em></h2>
+          <p className="sec-num">{contact.sectionNumber}</p>
+          <h2 className="section-title mt-5">{contact.title} <em>{contact.titleEmphasis}</em></h2>
           <p className="mt-6 max-w-lg leading-7 text-muted">
-            Have a product, backend problem or AI workflow in mind? Send a note and let&apos;s start there.
+            {contact.lede}
           </p>
 
           <div className="contact-details">

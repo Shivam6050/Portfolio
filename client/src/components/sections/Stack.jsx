@@ -1,7 +1,8 @@
 import { STACK_GROUPS, PORTFOLIO_CONFIG } from "../../data/constants.js";
 import Logo from "../ui/Logo.jsx";
 
-export default function Stack() {\n  const { stack } = PORTFOLIO_CONFIG;
+export default function Stack() {
+  const { stack } = PORTFOLIO_CONFIG;
   return (
     <section id="stack" className="section-shell section-block stack-section">
       <div className="section-heading">

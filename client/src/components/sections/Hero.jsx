@@ -1,6 +1,6 @@
 import { PROFILE, PORTFOLIO_CONFIG } from "../../data/constants.js";
 
-export default function Hero() {\n  const { hero, availability, timezone } = PORTFOLIO_CONFIG;
+export default function Hero() {\n  const { hero, availability, timezone } = PORTFOLIO_CONFIG;\n  const currentRole = PROFILE.experience?.[0];\n  const current = currentRole ? `${currentRole.role} · ${currentRole.company}` : "";
   return (
     <section id="top" className="hero-section">
       <div className="hero-container">
@@ -15,7 +15,7 @@ export default function Hero() {\n  const { hero, availability, timezone } = POR
 
             <div className="hero-identity">
               <div className="hero-heading">
-                <p className="hero-role">{hero.role}</p>
+                <p className="hero-role">{PROFILE.title}</p>
                 <h1 className="hero-title">
                   <span className="hero-name hero-name-1">Shivam</span>
                   <span className="hero-name hero-name-2">Sagar<span className="text-rust">.</span></span>
@@ -24,7 +24,7 @@ export default function Hero() {\n  const { hero, availability, timezone } = POR
                 <div className="hero-current">
                   <span className="hero-current-label">{hero.currentLabel}</span>
                   <span className="hero-current-line" />
-                  <span>{hero.current}</span>
+                  <span>{current}</span>
                 </div>
               </div>
 

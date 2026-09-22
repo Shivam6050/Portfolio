@@ -1,5 +1,53 @@
 import { PROFILE_PHOTO } from "./profilePhoto.js";
 
+
+
+// SINGLE SOURCE OF TRUTH
+// Edit this file to update portfolio content. Components are presentation-only.
+export const PORTFOLIO_CONFIG = {
+  availability: "Available for conversations",
+  timezone: "India · IST",
+  navigation: [
+    ["Work", "#work"],
+    ["Experience", "#experience"],
+    ["Stack", "#stack"],
+    ["Contact", "#contact"]
+  ],
+  hero: {
+    sectionNumber: "01 / introduction",
+    role: "Full Stack Developer · Backend & AI Engineering",
+    currentLabel: "Currently",
+    current: "Backend AI Engineering · FlyRank AI"
+  },
+  work: {
+    sectionNumber: "02 / selected work",
+    meta: "selected work",
+    title: "Things I’ve",
+    titleEmphasis: "built",
+    lede: "Systems where product thinking, backend architecture and AI meet practical software."
+  },
+  background: {
+    sectionNumber: "03 / background",
+    meta: "Experience / education",
+    title: "The path",
+    titleEmphasis: "so far",
+    lede: "Backend AI engineering, MERN development, formal computer-science education, and focused training in modern AI systems."
+  },
+  stack: {
+    sectionNumber: "04 / toolkit",
+    meta: "Technical stack",
+    title: "Tools of the",
+    titleEmphasis: "trade",
+    lede: "A practical stack spanning product interfaces, APIs, databases, AI integrations and delivery."
+  },
+  contact: {
+    sectionNumber: "05 / contact",
+    title: "Let’s make something",
+    titleEmphasis: "useful.",
+    lede: "Have a product, backend problem or AI workflow in mind? Send a note and let’s start there."
+  }
+};
+
 export const PROFILE = {
   name: "Shivam Sagar",
   firstName: "Shivam",

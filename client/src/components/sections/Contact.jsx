@@ -6,7 +6,8 @@ import Logo from "../ui/Logo.jsx";
 
 const initialForm = { name: "", email: "", message: "" };
 
-export default function Contact() {\n  const { contact } = PORTFOLIO_CONFIG;
+export default function Contact() {
+  const { contact } = PORTFOLIO_CONFIG;
   const { toast } = useApp();
   const [form, setForm] = useState(initialForm);
   const [sending, setSending] = useState(false);

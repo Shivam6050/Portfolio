@@ -1,12 +1,7 @@
 import { useState } from "react";
-import { PROFILE } from "../../data/constants.js";
+import { PROFILE, PORTFOLIO_CONFIG } from "../../data/constants.js";
 
-const links = [
-  ["Work", "#work"],
-  ["Experience", "#experience"],
-  ["Stack", "#stack"],
-  ["Contact", "#contact"]
-];
+const links = PORTFOLIO_CONFIG.navigation;
 
 export default function Header() {
   const [open, setOpen] = useState(false);

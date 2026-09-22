@@ -783,6 +783,7 @@ textarea {
 .hero-title {
   margin: 0;
   max-width: 780px;
+  line-height: .82;
 }
 .profile-frame {
   width: 148px;
@@ -980,7 +981,7 @@ textarea {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-top: 34px;
+  margin-top: 52px;
   max-width: 620px;
   font: 10px "JetBrains Mono";
   text-transform: uppercase;
@@ -1024,6 +1025,7 @@ textarea {
     transform: rotate(0deg);
   }
   .hero-current {
+    margin-top: 42px;
     flex-wrap: wrap;
     gap: 8px 10px;
     line-height: 1.6;

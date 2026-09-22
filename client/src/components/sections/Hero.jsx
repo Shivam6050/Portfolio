@@ -1,6 +1,9 @@
 import { PROFILE, PORTFOLIO_CONFIG } from "../../data/constants.js";
 
-export default function Hero() {\n  const { hero, availability, timezone } = PORTFOLIO_CONFIG;\n  const currentRole = PROFILE.experience?.[0];\n  const current = currentRole ? `${currentRole.role} · ${currentRole.company}` : "";
+export default function Hero() {
+  const { hero, availability, timezone } = PORTFOLIO_CONFIG;
+  const currentRole = PROFILE.experience?.[0];
+  const current = currentRole ? `${currentRole.role} · ${currentRole.company}` : "";
   return (
     <section id="top" className="hero-section">
       <div className="hero-container">

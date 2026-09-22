@@ -213,5 +213,5 @@ export const LOGOS = {
   geeksforgeeks: "https://www.geeksforgeeks.org/favicon.ico",
   deepmind: "https://deepmind.google/favicon.ico",
   "arya-college": "https://www.aryacollege.org/wp-content/uploads/2026/05/IMG_0369.webp",
-  "sainik-school": "https://www.clipartmax.com/png/middle/293-2939040_government-job-in-bhubaneswar-in-sainik-school-bhubaneshwar-sainik-school-society-logo.png"
+  "sainik-school": "/assets/sainik-school-bhubaneswar.png"
 };

@@ -212,5 +212,5 @@ export const LOGOS = {
   geeksforgeeks: "https://www.geeksforgeeks.org/favicon.ico",
   deepmind: "https://deepmind.google/favicon.ico",
   "arya-college": "https://www.aryacollege.org/wp-content/uploads/2026/05/IMG_0369.webp",
-  "sainik-school": "https://sainikschoolbhubaneswar.edu.in/favicon.ico"
+  "sainik-school": "https://school.betterstudy.in/storage/listings/logos/9b275666-2a5f-44dc-aa35-b28efd5e26f7.webp"
 };

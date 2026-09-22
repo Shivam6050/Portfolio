@@ -1,15 +1,15 @@
-import { STACK_GROUPS } from "../../data/constants.js";
+import { STACK_GROUPS, PORTFOLIO_CONFIG } from "../../data/constants.js";
 import Logo from "../ui/Logo.jsx";
 
-export default function Stack() {
+export default function Stack() {\n  const { stack } = PORTFOLIO_CONFIG;
   return (
     <section id="stack" className="section-shell section-block stack-section">
       <div className="section-heading">
-        <p className="sec-num">03 / toolkit</p>
+        <p className="sec-num">{stack.sectionNumber}</p>
         <div>
-          <div className="section-meta"><span>Technical stack</span><span>Hands-on</span></div><h2 className="section-title">Tools of the <em>trade</em></h2>
+          <div className="section-meta"><span>{stack.meta}</span><span>Hands-on</span></div><h2 className="section-title">{stack.title} <em>{stack.titleEmphasis}</em></h2>
           <p className="section-lede">
-            A practical stack spanning product interfaces, APIs, databases, AI integrations and delivery.
+            {stack.lede}
           </p>
 
           <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">

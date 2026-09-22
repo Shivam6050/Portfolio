@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Logo from "../ui/Logo.jsx";
-import { useApp } from "../../context/AppContext.jsx";
+import { useApp } from "../../context/AppContext.jsx";\nimport { PORTFOLIO_CONFIG } from "../../data/constants.js";
 
 function Skeleton() {
   return (
@@ -93,17 +93,17 @@ function ProjectPreview({ project }) {
 }
 
 export default function Projects() {
-  const { projects, loading, error } = useApp();
+  const { projects, loading, error } = useApp();\n  const { work } = PORTFOLIO_CONFIG;
 
   return (
     <section id="work" className="section-shell section-block">
       <div className="section-heading">
-        <p className="sec-num">02 / selected work</p>
+        <p className="sec-num">{work.sectionNumber}</p>
         <div>
-          <div className="section-meta"><span>03 projects</span><span>01—03</span></div>
-          <h2 className="section-title">Things I&apos;ve <em>built</em></h2>
+          <div className="section-meta"><span>{projects.length} projects</span><span>01—{String(projects.length).padStart(2, "0")}</span></div>
+          <h2 className="section-title">{work.title} <em>{work.titleEmphasis}</em></h2>
           <p className="section-lede">
-            Systems where product thinking, backend architecture and AI meet practical software.
+            {work.lede}
           </p>
         </div>
       </div>

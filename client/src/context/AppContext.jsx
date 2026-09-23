@@ -1,22 +1,48 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { PROJECTS } from "../data/constants.js";
+import { PROJECTS } from "../../../shared/projects.js";
 import { api } from "../api/client.js";
 
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
-  // Portfolio content lives in data/constants.js. Components only render the template.
-  const projects = PROJECTS;
-  const loading = false;
+  const [projects, setProjects] = useState(PROJECTS);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [stats, setStats] = useState({ views: 0 });
   const [toasts, setToasts] = useState([]);
 
   const toast = (message, type = "success") => {
     const id = `portfolio-${Date.now()}-${Math.random()}`;
-    setToasts((current) => [...current, { id, message, type }]);
+    setToasts((current) => [...current, { id, message, type }));
     window.setTimeout(() => setToasts((current) => current.filter((item) => item.id !== id)), 3800);
   };
+
+  useEffect(() => {
+    let active = true;
+
+    async function loadPortfolioData() {
+      try {
+        const result = await api.getProjects();
+        if (!active) return;
+
+        if (Array.isArray(result.data) && result.data.length > 0) {
+          setProjects(result.data);
+          setError("");
+        }
+      } catch (err) {
+        if (active) {
+          setError(err.message || "Live project data unavailable");
+        }
+      } finally {
+        if (active) setLoading(false);
+      }
+    }
+
+    loadPortfolioData();
+    return () => {
+      active = false;
+    };
+  }, []);
 
   useEffect(() => {
     let active = true;

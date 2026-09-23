@@ -14,7 +14,7 @@ export const PROJECTS = [
       { name: "prisma", label: "Prisma" }, { name: "postgresql", label: "PostgreSQL" }
     ],
     demo: "https://backend-capstone-llm-metering-pied.vercel.app",
-    preview: "https://image.thum.io/get/width/1200/crop/700/allowJPG/noanimate/https://backend-capstone-llm-metering-pied.vercel.app",
+    previewVariants: ["overview"],
     code: "https://github.com/Shivam6050/Backend-capstone-llm-metering",
     pattern: "pattern-1",
     thumbLabel: "metering.service",
@@ -33,7 +33,7 @@ export const PROJECTS = [
       { name: "youtube", label: "YouTube API" }, { name: "vitest", label: "Vitest" }
     ],
     demo: "https://learning-map-provider-bice.vercel.app",
-    preview: "https://image.thum.io/get/width/1200/crop/700/allowJPG/noanimate/https://learning-map-provider-bice.vercel.app",
+    previewVariants: ["overview"],
     code: "https://github.com/Shivam6050/learning-map-provider",
     pattern: "pattern-2",
     thumbLabel: "learning.map",
@@ -51,11 +51,7 @@ export const PROJECTS = [
       { name: "express", label: "Express" }, { name: "mongodb", label: "MongoDB" }
     ],
     demo: "https://ecommerce-project-frontend-two.vercel.app",
-    previews: [
-      "https://image.thum.io/get/width/1200/crop/700/allowJPG/noanimate/https://ecommerce-project-frontend-two.vercel.app/",
-      "https://image.thum.io/get/width/1200/crop/700/allowJPG/noanimate/https://ecommerce-project-frontend-two.vercel.app/cart",
-      "https://image.thum.io/get/width/1200/crop/700/allowJPG/noanimate/https://ecommerce-project-frontend-two.vercel.app/place-order"
-    ],
+    previewVariants: ["store", "cart", "checkout"],
     code: "https://github.com/Shivam6050/ecommerce-project",
     pattern: "pattern-3",
     thumbLabel: "shop.platform",

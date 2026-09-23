@@ -12,7 +12,7 @@ export default function Header() {
         <a href="#top" className="brand-mark" aria-label="Shivam Sagar — home">
           <span className="brand-mark-glass" aria-hidden="true">
             <img
-              src="/assets/portfolio-logo.png"
+              src="public/assets/portfolio-logo.png"
               alt="brand-icon"
               className="portfolio-logo"
             />

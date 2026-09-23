@@ -1,5 +1,6 @@
 {
   "name": "shivam-portfolio-server",
+  "author": "Shivam Sagar",
   "version": "1.0.0",
   "private": true,
   "type": "module",

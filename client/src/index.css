@@ -1327,14 +1327,20 @@ textarea {
   color: #141413;
 }
 .brand-mark-glass {
-  display: block;
-  width: 46px;
-  height: 46px;
-  flex: 0 0 46px;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
   overflow: hidden;
+  border: 1px solid rgba(20, 20, 19, .12);
   border-radius: 50%;
-  background: #fbf8f0;
-  box-shadow: 0 5px 16px rgba(20,20,19,.08);
+  background: rgba(251, 248, 240, .82);
+  box-shadow:
+    0 8px 24px rgba(20, 20, 19, .08),
+    inset 0 1px 0 rgba(255, 255, 255, .8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   transition: transform .2s ease, box-shadow .2s ease;
 }
 .brand-icon-image {
@@ -1342,11 +1348,13 @@ textarea {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
+  transform: scale(2.15);
 }
 .brand-mark:hover .brand-mark-glass {
   transform: translateY(-1px);
   box-shadow: 0 8px 20px rgba(20,20,19,.12);
 }
 @media (max-width: 640px) {
-  .brand-mark-glass { width: 40px; height: 40px; flex-basis: 40px; }
+  .brand-mark-glass { width: 42px; height: 42px; flex-basis: 42px; }
 }

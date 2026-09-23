@@ -2,11 +2,11 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 
-import { connectDB } from "./config/db.js";
-
 import projectRoutes from "./routes/projects.js";
 import messageRoutes from "./routes/messages.js";
 import statRoutes from "./routes/stats.js";
+
+import { requireDatabase } from "./middleware/database.js";
 
 import {
   notFound,
@@ -49,19 +49,6 @@ app.use((req, res, next) => {
 });
 
 // --------------------------------------------------
-// Database middleware
-// --------------------------------------------------
-
-app.use(async (req, res, next) => {
-  try {
-    await connectDB();
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
-
-// --------------------------------------------------
 // Root
 // --------------------------------------------------
 
@@ -70,6 +57,7 @@ app.get("/", (req, res) => {
     success: true,
     message: "Shivam Sagar Portfolio API is running",
     version: "1.0.0",
+    status: "ok",
     endpoints: {
       health: "/api/health",
       projects: "/api/projects",
@@ -86,7 +74,7 @@ app.get("/", (req, res) => {
 app.get("/api/health", (req, res) => {
   res.json({
     success: true,
-    message: "API connected",
+    message: "API is healthy",
     time: new Date().toISOString(),
   });
 });
@@ -95,11 +83,11 @@ app.get("/api/health", (req, res) => {
 // API Routes
 // --------------------------------------------------
 
-app.use("/api/projects", projectRoutes);
+app.use("/api/projects", requireDatabase, projectRoutes);
 
-app.use("/api/messages", messageRoutes);
+app.use("/api/messages", requireDatabase, messageRoutes);
 
-app.use("/api/stats", statRoutes);
+app.use("/api/stats", requireDatabase, statRoutes);
 
 // --------------------------------------------------
 // Error handling

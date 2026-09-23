@@ -1102,3 +1102,64 @@
   .brand-mark-glass { width: 42px; height: 42px; flex-basis: 42px; }
 }
 
+
+/* Self-contained project preview artwork: no screenshot-service dependency. */
+.project-preview-artwork {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 250px;
+  overflow: hidden;
+  background: #1d1b18;
+  color: #f2ede4;
+}
+.project-preview-artwork.pattern-1 { background: linear-gradient(135deg, #211f1b 0%, #493a2d 55%, #c46a3a 100%); }
+.project-preview-artwork.pattern-2 { background: linear-gradient(135deg, #17211f 0%, #304b45 58%, #c58a45 100%); }
+.project-preview-artwork.pattern-3 { background: linear-gradient(135deg, #211d20 0%, #4b3038 58%, #b76549 100%); }
+.preview-browser-bar {
+  display: flex;
+  gap: 6px;
+  padding: 13px 16px;
+  border-bottom: 1px solid rgba(255,255,255,.16);
+  background: rgba(0,0,0,.16);
+}
+.preview-browser-bar span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.55);
+}
+.preview-artwork-body { padding: 42px 11%; }
+.preview-artwork-eyebrow {
+  margin: 0 0 10px;
+  font: 9px "JetBrains Mono", monospace;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  opacity: .7;
+}
+.preview-artwork-body h4 {
+  max-width: 520px;
+  margin: 0;
+  font: 400 clamp(24px, 3.4vw, 42px)/1.02 "Instrument Serif", serif;
+}
+.preview-artwork-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 8px;
+  margin-top: 34px;
+}
+.preview-artwork-grid span {
+  height: 70px;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 8px;
+  background: rgba(255,255,255,.09);
+}
+.preview-artwork-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 34px;
+  font: 10px "JetBrains Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  opacity: .78;
+}

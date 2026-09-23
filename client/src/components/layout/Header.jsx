@@ -13,7 +13,7 @@ export default function Header() {
           <span className="brand-mark-glass" aria-hidden="true">
             <img
               src="/assets/portfolio-logo.png"
-              alt=""
+              alt="brand-icon"
               className="portfolio-logo"
             />
           </span>

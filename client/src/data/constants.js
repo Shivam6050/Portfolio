@@ -176,26 +176,30 @@ export const STACK_GROUPS = [
 ];
 
 const icon = (name, color) => "https://cdn.simpleicons.org/" + name + "/" + color;
+const concept = (label) =>
+  "data:image/svg+xml," +
+  encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#f2ede4"/><text x="32" y="37" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#141413">${label}</text></svg>`
+  );
 
 export const LOGOS = {
-  javascript: icon("javascript", "F7DF1E"), typescript: icon("typescript", "3178C6"), sql: icon("postgresql", "4169E1"),
-  cplusplus: icon("cplusplus", "00599C"), c: icon("c", "A8B9CC"), html5: icon("html5", "E34F26"), css3: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Official_CSS_Logo.svg",
+  javascript: icon("javascript", "F7DF1E"), typescript: icon("typescript", "3178C6"), sql: concept("SQL"),
+  cplusplus: icon("cplusplus", "00599C"), c: icon("c", "A8B9CC"), html5: icon("html5", "E34F26"), css3: icon("css3", "1572B6"),
   react: icon("react", "61DAFB"), nextjs: icon("nextdotjs", "000000"), nodedotjs: icon("nodedotjs", "339933"),
   express: icon("express", "000000"), mongodb: icon("mongodb", "47A248"), postgresql: icon("postgresql", "4169E1"),
   supabase: icon("supabase", "3ECF8E"), prisma: icon("prisma", "2D3748"), googlegemini: icon("googlegemini", "8E75E2"),
-  anthropic: icon("anthropic", "000000"), openai: "https://commons.wikimedia.org/wiki/Special:Redirect/file/OpenAI_logo_2025_(symbol).svg", git: icon("git", "F05032"),
-  github: icon("github", "181717"), gmail: "https://upload.wikimedia.org/wikipedia/commons/8/8f/Gmail_icon_%282026%29.svg", githubactions: icon("githubactions", "2088FF"), vscode: "https://raw.githubusercontent.com/MicrosoftDocs/visualstudio-docs/main/docs/media/vs-code-logo.svg",
+  anthropic: icon("anthropic", "000000"), openai: icon("openai", "000000"), git: icon("git", "F05032"),
+  github: icon("github", "181717"), gmail: icon("gmail", "EA4335"), githubactions: icon("githubactions", "2088FF"), vscode: icon("visualstudiocode", "007ACC"),
   vercel: icon("vercel", "000000"), netlify: icon("netlify", "00C7B7"), postman: icon("postman", "FF6C37"),
-  vitest: icon("vitest", "6E9F18"), youtube: icon("youtube", "FF0000"), linkedin: "https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg",
-  google: icon("google", "4285F4"), responsive: icon("css3", "1572B6"), rag: "https://cdn.simpleicons.org/langchain/1C3C3C",
-  mcp: icon("modelcontextprotocol", "000000"), prompt: "https://github.com/webmaxru/prompt-engineering-logo/raw/main/assets/prompt-engineering-logo.svg", evaluation: icon("vitest", "6E9F18"),
-  auth: "https://cdn.simpleicons.org/openid/3C3C3C", authorization: "https://cdn.simpleicons.org/keycloak/4D4D4D", oauth: "https://cdn.simpleicons.org/google/4285F4",
-  security: icon("owasp", "000000"), ratelimit: icon("cloudflare", "F38020"), system: icon("diagramsdotnet", "F08705"),
-  dsa: icon("cplusplus", "00599C"),
-  rest: icon("postman", "FF6C37"),
-  flyrank: "https://flyrank.ai/favicon.ico",
-  geeksforgeeks: "https://www.geeksforgeeks.org/favicon.ico",
-  deepmind: "https://deepmind.google/favicon.ico",
-  "arya-college": "https://www.aryacollege.org/wp-content/uploads/2026/05/IMG_0369.webp",
+  vitest: icon("vitest", "6E9F18"), youtube: icon("youtube", "FF0000"), linkedin: icon("linkedin", "0A66C2"),
+  google: icon("google", "4285F4"), responsive: concept("RWD"), rag: concept("RAG"),
+  mcp: concept("MCP"), prompt: concept("PROMPT"), evaluation: concept("EVAL"),
+  auth: concept("AUTH"), authorization: concept("ACL"), oauth: icon("google", "4285F4"),
+  security: icon("owasp", "000000"), ratelimit: concept("RATE"), system: concept("SYS"),
+  dsa: concept("DSA"), rest: concept("REST"),
+  flyrank: concept("FR"),
+  geeksforgeeks: icon("geeksforgeeks", "2F8D46"),
+  deepmind: icon("googledeepmind", "8E75E1"),
+  "arya-college": concept("ACE"),
   "sainik-school": "/assets/sainik-school-bhubaneswar.png"
 };

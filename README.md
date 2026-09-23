@@ -90,9 +90,12 @@ PORT=5000
 MONGODB_URI=mongodb://localhost:27017/shivam-portfolio
 CLIENT_ORIGIN=http://localhost:5173
 NODE_ENV=development
+RESEND_API_KEY=
+CONTACT_NOTIFICATION_EMAIL=your-email@example.com
+CONTACT_FROM_EMAIL=Portfolio <onboarding@resend.dev>
 ```
 
-For production, set `CLIENT_ORIGIN` to the deployed frontend origin and use a production MongoDB URI.
+For production, set `CLIENT_ORIGIN` to the deployed frontend origin and use a production MongoDB URI. To receive contact-form notifications, configure `RESEND_API_KEY`, `CONTACT_NOTIFICATION_EMAIL`, and a verified `CONTACT_FROM_EMAIL`. The contact message is saved first; email delivery is best-effort so a provider outage does not lose the enquiry.
 
 Client environment:
 

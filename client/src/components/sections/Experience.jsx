@@ -1,11 +1,15 @@
 import { PROFILE, PORTFOLIO_CONFIG } from "../../data/constants.js";
 import Logo from "../ui/Logo.jsx";
+import ExperienceThreeScene from "../ui/ExperienceThreeScene.jsx";
 
 export default function Experience() {
   const { background } = PORTFOLIO_CONFIG;
   const currentYear = new Date().getFullYear();
   return (
     <section id="experience" className="section-block experience-section">
+      <div className="experience-3d-layer" aria-hidden="true">
+        <ExperienceThreeScene />
+      </div>
       <div className="experience-inner">
       <div className="section-heading">
         <p className="sec-num">{background.sectionNumber}</p>

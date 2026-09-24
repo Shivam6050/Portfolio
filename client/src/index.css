@@ -1428,3 +1428,27 @@ textarea {
     padding-inline: 18px;
   }
 }
+
+
+/* --- Hero 3D layer: restrained spatial identity, same editorial palette --- */
+.hero-container { position: relative; isolation: isolate; }
+.hero-3d-layer {
+  position: absolute;
+  z-index: -1;
+  top: 42px;
+  right: -10px;
+  width: min(43vw, 560px);
+  height: min(43vw, 560px);
+  pointer-events: none;
+  opacity: .86;
+  mask-image: radial-gradient(circle at center, #000 45%, transparent 76%);
+  -webkit-mask-image: radial-gradient(circle at center, #000 45%, transparent 76%);
+}
+.hero-3d-canvas, .hero-3d-canvas canvas { width: 100%; height: 100%; display: block; }
+@media (max-width: 1050px) {
+  .hero-3d-layer { top: 95px; right: -70px; width: 470px; height: 470px; opacity: .42; }
+}
+@media (max-width: 700px) {
+  .hero-3d-layer { top: 105px; right: -115px; width: 390px; height: 390px; opacity: .24; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-3d-layer { opacity: .18; } }

@@ -23,16 +23,16 @@ export default function Stack() {
             {stack.lede}
           </p>
 
-          <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="toolkit-3d-grid mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {STACK_GROUPS.map((group) => (
-              <div key={group.title}>
+              <div className="toolkit-group" key={group.title}>
                 <h3 className="mb-4 font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
                   {group.title}
                 </h3>
 
-                <div className="grid grid-cols-2 gap-2">
+                <div className="toolkit-card-grid grid grid-cols-2 gap-2">
                   {group.items.map(([name, label]) => (
-                    <div className="logo-grid-item" key={name}>
+                    <div className="logo-grid-item toolkit-card" key={name}>
                       <Logo name={name} label={label} size={24} />
                       <span className="text-xs">{label}</span>
                     </div>

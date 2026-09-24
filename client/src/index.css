@@ -1645,8 +1645,8 @@ textarea {
   z-index: 1;
   left: 50%;
   top: 48%;
-  width: min(1000px, 82vw);
-  height: min(650px, 68vh);
+  width: 430px;
+  height: 330px;
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
@@ -1662,14 +1662,14 @@ textarea {
 }
 @media (max-width: 1050px) {
   .profile-3d-layer {
-    width: min(760px, 92vw);
-    height: min(520px, 62vh);
+    width: 350px;
+    height: 280px;
   }
 }
 @media (max-width: 700px) {
   .profile-3d-layer {
-    width: 92vw;
-    height: 430px;
+    width: 300px;
+    height: 245px;
     opacity: .7;
   }
 }
@@ -1678,7 +1678,6 @@ textarea {
     opacity: .45;
   }
 }
-
 
 /* --- Phase 2: tactile 3D project cards --- */
 .project-card-featured {

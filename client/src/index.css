@@ -1640,25 +1640,39 @@ textarea {
   position: relative;
   z-index: 4;
 }
+.profile-frame {
+  position: relative;
+  isolation: isolate;
+}
+
 .profile-3d-layer {
   position: absolute;
-  z-index: 1;
+  z-index: 0;
   left: 50%;
-  top: 48%;
+  top: 50%;
   width: 430px;
   height: 330px;
   transform: translate(-50%, -50%);
   pointer-events: none;
+  overflow: visible;
 }
+
 .hero-3d-canvas {
   width: 100%;
   height: 100%;
   overflow: visible;
 }
+
 .hero-3d-canvas canvas {
   display: block;
   width: 100% !important;
   height: 100% !important;
+}
+
+.profile-photo,
+.profile-caption {
+  position: relative;
+  z-index: 2;
 }
 @media (max-width: 1050px) {
   .profile-3d-layer {

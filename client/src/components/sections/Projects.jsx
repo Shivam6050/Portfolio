@@ -14,19 +14,24 @@ function Skeleton() {
 
 function ProjectPreview({ project }) {
   const previews = project.previews?.length ? project.previews : [project.preview];
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-
   const handlePointerMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - 0.5;
-    const y = (event.clientY - rect.top) / rect.height - 0.5;
-    setTilt({
-      x: Number((y * -4.5).toFixed(2)),
-      y: Number((x * 5.5).toFixed(2))
-    });
+    const surface = event.currentTarget;
+    const rect = surface.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+    surface.style.setProperty("--project-mx", `${x}%`);
+    surface.style.setProperty("--project-my", `${y}%`);
+    surface.style.setProperty("--project-rx", `${((50 - y) * 0.045).toFixed(2)}deg`);
+    surface.style.setProperty("--project-ry", `${((x - 50) * 0.055).toFixed(2)}deg`);
   };
 
-  const resetTilt = () => setTilt({ x: 0, y: 0 });
+  const resetTilt = (event) => {
+    const surface = event.currentTarget;
+    surface.style.setProperty("--project-mx", "50%");
+    surface.style.setProperty("--project-my", "50%");
+    surface.style.setProperty("--project-rx", "0deg");
+    surface.style.setProperty("--project-ry", "0deg");
+  };
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -50,8 +55,10 @@ function ProjectPreview({ project }) {
       onPointerMove={handlePointerMove}
       onPointerLeave={resetTilt}
       style={{
-        "--project-rotate-x": `${tilt.x}deg`,
-        "--project-rotate-y": `${tilt.y}deg`
+        "--project-mx": "50%",
+        "--project-my": "50%",
+        "--project-rx": "0deg",
+        "--project-ry": "0deg"
       }}
     >
       <a

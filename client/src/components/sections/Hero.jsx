@@ -10,11 +10,6 @@ export default function Hero() {
   return (
     <section id="top" className="hero-section">
       <div className="hero-container">
-        <div className="hero-3d-layer">
-          <Suspense fallback={null}>
-            <HeroThreeScene />
-          </Suspense>
-        </div>
         <div className="hero-kicker">
           <span className="eyebrow"><i /> {availability}</span>
           <span>{timezone}</span>
@@ -40,6 +35,11 @@ export default function Hero() {
               </div>
 
               <figure className="profile-frame">
+                <div className="profile-3d-layer">
+                  <Suspense fallback={null}>
+                    <HeroThreeScene />
+                  </Suspense>
+                </div>
                 <div className="profile-photo">
                   <img src={PROFILE.photo} alt="Portrait of Shivam Sagar" />
                 </div>

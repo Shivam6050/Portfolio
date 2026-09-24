@@ -13,7 +13,7 @@ export function AppProvider({ children }) {
 
   const toast = (message, type = "success") => {
     const id = `portfolio-${Date.now()}-${Math.random()}`;
-    setToasts((current) => [...current, { id, message, type }));
+    setToasts((current) => [...current, { id, message, type }]);
     window.setTimeout(() => setToasts((current) => current.filter((item) => item.id !== id)), 3800);
   };
 

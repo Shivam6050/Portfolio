@@ -1,4 +1,7 @@
+import { lazy, Suspense } from "react";
 import { PROFILE, PORTFOLIO_CONFIG } from "../../data/constants.js";
+
+const HeroThreeScene = lazy(() => import("../ui/HeroThreeScene.jsx"));
 
 export default function Hero() {
   const { hero, availability, timezone } = PORTFOLIO_CONFIG;
@@ -7,6 +10,11 @@ export default function Hero() {
   return (
     <section id="top" className="hero-section">
       <div className="hero-container">
+        <div className="hero-3d-layer">
+          <Suspense fallback={null}>
+            <HeroThreeScene />
+          </Suspense>
+        </div>
         <div className="hero-kicker">
           <span className="eyebrow"><i /> {availability}</span>
           <span>{timezone}</span>

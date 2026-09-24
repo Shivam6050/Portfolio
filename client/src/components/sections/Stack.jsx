@@ -7,7 +7,8 @@ const TOOLKIT_GROUPS = [
     key: "frontend",
     title: "Frontend",
     eyebrow: "01 / interface",
-    color: "rust",
+    left: "#b8431a",
+    right: "#e7e1d6",
     skills: [
       ["html5", "HTML5"], ["css3", "CSS3"], ["javascript", "JavaScript"],
       ["typescript", "TypeScript"], ["react", "React.js"], ["nextjs", "Next.js"],
@@ -18,7 +19,8 @@ const TOOLKIT_GROUPS = [
     key: "backend",
     title: "Backend",
     eyebrow: "02 / systems",
-    color: "ink",
+    left: "#242321",
+    right: "#b8431a",
     skills: [
       ["nodedotjs", "Node.js"], ["express", "Express.js"], ["mongodb", "MongoDB"],
       ["postgresql", "PostgreSQL"], ["supabase", "Supabase"], ["prisma", "Prisma"],
@@ -29,7 +31,8 @@ const TOOLKIT_GROUPS = [
     key: "general",
     title: "General",
     eyebrow: "03 / engineering",
-    color: "muted",
+    left: "#716d65",
+    right: "#e7e1d6",
     skills: [
       ["cplusplus", "C++"], ["c", "C"], ["sql", "SQL"], ["git", "Git"],
       ["github", "GitHub"], ["githubactions", "GitHub Actions"], ["postman", "Postman"],
@@ -40,51 +43,59 @@ const TOOLKIT_GROUPS = [
   }
 ];
 
-function ToolkitCharacter({ group, index }) {
+function CharacterNode({ group }) {
+  return (
+    <div className="toolkit-node" style={{ "--node-left": group.left, "--node-right": group.right }}>
+      <div className="toolkit-node-half toolkit-node-left">
+        <span className="toolkit-node-eye left" />
+      </div>
+      <div className="toolkit-node-half toolkit-node-right">
+        <span className="toolkit-node-eye right" />
+      </div>
+    </div>
+  );
+}
+
+function ToolkitPanel({ group, index }) {
   const count = group.skills.length;
 
   return (
-    <article className={`toolkit-character toolkit-character-${group.key}`} style={{ "--group-index": index }}>
-      <div className="toolkit-character-heading">
+    <article className={`toolkit-panel toolkit-panel-${group.key}`} style={{ "--panel-index": index }}>
+      <div className="toolkit-panel-heading">
         <span>{group.eyebrow}</span>
         <h3>{group.title}</h3>
       </div>
 
-      <div className="toolkit-rays" aria-hidden="true">
+      <div className="toolkit-network" aria-hidden="true">
         {group.skills.map((_, skillIndex) => {
-          // Keep the burst mostly upward, like the reference animation.
-          const spread = count > 12 ? 112 : 104;
+          const spread = count > 12 ? 116 : 108;
           const angle = -90 + ((skillIndex / Math.max(count - 1, 1)) - 0.5) * spread;
           return (
-            <i
+            <div
+              className="toolkit-branch"
               key={skillIndex}
-              style={{
-                "--angle": `${angle}deg`,
-                "--ray-index": skillIndex,
-                "--ray-count": count
-              }}
-            />
+              style={{ "--angle": `${angle}deg`, "--skill-index": skillIndex, "--skill-count": count }}
+            >
+              <span className="toolkit-branch-line" />
+              <span className="toolkit-branch-dot" />
+            </div>
           );
         })}
       </div>
 
-      <div className="toolkit-skill-labels">
+      <div className="toolkit-labels">
         {group.skills.map(([name, label], skillIndex) => {
-          const spread = count > 12 ? 112 : 104;
+          const spread = count > 12 ? 116 : 108;
           const angle = -90 + ((skillIndex / Math.max(count - 1, 1)) - 0.5) * spread;
           return (
             <div
-              className="toolkit-skill-label"
+              className="toolkit-label"
               key={name}
-              style={{
-                "--angle": `${angle}deg`,
-                "--skill-index": skillIndex,
-                "--skill-count": count
-              }}
+              style={{ "--angle": `${angle}deg`, "--skill-index": skillIndex, "--skill-count": count }}
             >
-              <span className="toolkit-label-line" />
-              <span className="toolkit-label-text">
-                <Logo name={name} label={label} size={15} />
+              <span className="toolkit-label-connector" />
+              <span className="toolkit-label-content">
+                <Logo name={name} label={label} size={14} />
                 <span>{label}</span>
               </span>
             </div>
@@ -92,9 +103,8 @@ function ToolkitCharacter({ group, index }) {
         })}
       </div>
 
-      <div className="toolkit-character-face" aria-hidden="true">
-        <div className="toolkit-eye toolkit-eye-left"><span /></div>
-        <div className="toolkit-eye toolkit-eye-right"><span /></div>
+      <div className="toolkit-node-anchor">
+        <CharacterNode group={group} />
       </div>
     </article>
   );
@@ -116,7 +126,7 @@ export default function Stack() {
           observer.disconnect();
         }
       },
-      { threshold: 0.18 }
+      { threshold: 0.12 }
     );
 
     observer.observe(node);
@@ -140,9 +150,9 @@ export default function Stack() {
 
             <p className="section-lede">{stack.lede}</p>
 
-            <div ref={stageRef} className={`toolkit-stage toolkit-reference-animation ${visible ? "is-visible" : ""}`}>
+            <div ref={stageRef} className={`toolkit-reference-stage ${visible ? "is-visible" : ""}`}>
               {TOOLKIT_GROUPS.map((group, index) => (
-                <ToolkitCharacter key={group.key} group={group} index={index} />
+                <ToolkitPanel key={group.key} group={group} index={index} />
               ))}
             </div>
           </div>

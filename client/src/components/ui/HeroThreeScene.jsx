@@ -113,10 +113,132 @@ function DepthPlanes({ motion }) {
   );
 }
 
+
+const PARTICLE_COUNT = 96;
+
+function SparkBurst({ motion }) {
+  const points = useRef(null);
+  const velocities = useRef([]);
+  const positions = useMemo(() => new Float32Array(PARTICLE_COUNT * 3), []);
+
+  useMemo(() => {
+    velocities.current = Array.from({ length: PARTICLE_COUNT }, (_, index) => {
+      const angle = (index / PARTICLE_COUNT) * Math.PI * 2 + (index % 7) * 0.13;
+      const spread = 0.65 + ((index * 17) % 31) / 100;
+      return new THREE.Vector3(
+        Math.cos(angle) * spread,
+        Math.sin(angle) * spread * 0.78 + 0.18,
+        ((index % 9) - 4) * 0.018
+      );
+    });
+  }, []);
+
+  const seeds = useMemo(
+    () => Array.from({ length: PARTICLE_COUNT }, (_, index) => (index * 0.037) % 1),
+    []
+  );
+
+  useFrame((state, delta) => {
+    if (!points.current || !motion) return;
+
+    const elapsed = state.clock.elapsedTime;
+    const cycle = (elapsed % 2.6) / 2.6;
+    const burst = cycle < 0.82;
+    const geometry = points.current.geometry;
+    const position = geometry.attributes.position.array;
+
+    for (let i = 0; i < PARTICLE_COUNT; i += 1) {
+      const velocity = velocities.current[i];
+      const localTime = burst
+        ? Math.max(0, cycle * 2.9 - seeds[i] * 0.55)
+        : 0;
+
+      if (!burst || localTime <= 0) {
+        position[i * 3] = 0;
+        position[i * 3 + 1] = 0;
+        position[i * 3 + 2] = 0;
+        continue;
+      }
+
+      const drag = Math.max(0, 1 - localTime * 0.28);
+      position[i * 3] = velocity.x * localTime * drag;
+      position[i * 3 + 1] =
+        velocity.y * localTime * drag - 0.24 * localTime * localTime;
+      position[i * 3 + 2] = velocity.z * localTime - 0.18;
+    }
+
+    geometry.attributes.position.needsUpdate = true;
+
+    const targetX = state.pointer.y * 0.018;
+    const targetY = state.pointer.x * 0.022;
+    points.current.rotation.x = THREE.MathUtils.damp(
+      points.current.rotation.x,
+      targetX,
+      3,
+      delta
+    );
+    points.current.rotation.y = THREE.MathUtils.damp(
+      points.current.rotation.y,
+      targetY,
+      3,
+      delta
+    );
+  });
+
+  return (
+    <points ref={points} position={[0, 0, 0.12]}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          count={PARTICLE_COUNT}
+          array={positions}
+          itemSize={3}
+        />
+      </bufferGeometry>
+      <pointsMaterial
+        size={0.045}
+        sizeAttenuation
+        color={RUST}
+        transparent
+        opacity={0.92}
+        depthWrite={false}
+        blending={THREE.AdditiveBlending}
+      />
+    </points>
+  );
+}
+
+function EmberTrail({ motion }) {
+  const ref = useRef(null);
+
+  useFrame((state, delta) => {
+    if (!ref.current || !motion) return;
+    const pulse = 0.72 + Math.sin(state.clock.elapsedTime * 5.2) * 0.18;
+    ref.current.scale.setScalar(pulse);
+    ref.current.rotation.z += delta * 0.7;
+  });
+
+  return (
+    <group ref={ref} position={[0, 0, 0.18]}>
+      <mesh>
+        <sphereGeometry args={[0.035, 8, 8]} />
+        <meshBasicMaterial
+          color={RUST}
+          transparent
+          opacity={0.75}
+          blending={THREE.AdditiveBlending}
+        />
+      </mesh>
+    </group>
+  );
+}
+
 function Scene({ motion }) {
   return (
     <group position={[0, 0, -0.7]}>
       <DepthPlanes motion={motion} />
+      <SparkBurst motion={motion} />
+      <EmberTrail motion={motion} />
       {RIBBONS.map((ribbon, index) => (
         <Ribbon key={index} {...ribbon} index={index} motion={motion} />
       ))}

@@ -69,7 +69,7 @@ function ProjectPreview({ project }) {
       <span className="project-depth-corner project-depth-corner-tl" aria-hidden="true" />
       <span className="project-depth-corner project-depth-corner-br" aria-hidden="true" />
       <span className="project-particle-field" aria-hidden="true">
-        {Array.from({ length: 16 }, (_, index) => (
+        {Array.from({ length: 24 }, (_, index) => (
           <i key={index} style={{ "--particle-index": index }} />
         ))}
       </span>

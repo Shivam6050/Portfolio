@@ -11,7 +11,7 @@ function AuraParticles({ motion }) {
   const data = useMemo(() => Array.from({ length: PARTICLE_COUNT }, (_, i) => {
     const a = (i / PARTICLE_COUNT) * Math.PI * 2;
     const lane = i % 3;
-    const speed = 0.28 + ((i * 19) % 17) / 100;
+    const speed = 0.17 + ((i * 19) % 13) / 120;
     return {
       angle: a + Math.sin(i * 2.7) * 0.11,
       radius: 0.05 + ((i * 23) % 47) / 180,
@@ -33,7 +33,7 @@ function AuraParticles({ motion }) {
     for (let i = 0; i < PARTICLE_COUNT; i += 1) {
       const p = data[i];
       const cycle = (t * p.speed + p.phase) % 1;
-      const travel = 0.08 + cycle * 1.9;
+      const travel = 0.06 + cycle * 1.55;
       const breathing = 1 + Math.sin(t * 1.7 + p.phase) * 0.12;
       const arc = Math.sin(cycle * Math.PI) * 0.42 * p.spread;
 
@@ -64,7 +64,7 @@ function AuraParticles({ motion }) {
         <bufferAttribute attach="attributes-position" count={PARTICLE_COUNT} array={positions} itemSize={3} />
       </bufferGeometry>
       <pointsMaterial
-        size={0.042}
+        size={0.07}
         sizeAttenuation
         color={RUST}
         transparent
@@ -73,32 +73,6 @@ function AuraParticles({ motion }) {
         blending={THREE.AdditiveBlending}
       />
     </points>
-  );
-}
-
-function AuraFlow({ motion }) {
-  const group = useRef(null);
-
-  useFrame((state, delta) => {
-    if (!group.current) return;
-    const t = state.clock.elapsedTime;
-    group.current.rotation.z += delta * 0.08;
-    const targetX = motion ? state.pointer.y * 0.025 : 0;
-    const targetY = motion ? state.pointer.x * 0.035 : 0;
-    group.current.rotation.x = THREE.MathUtils.damp(group.current.rotation.x, targetX, 3, delta);
-    group.current.rotation.y = THREE.MathUtils.damp(group.current.rotation.y, targetY, 3, delta);
-    group.current.scale.setScalar(1 + Math.sin(t * 1.2) * 0.025);
-  });
-
-  return (
-    <group ref={group}>
-      {[0, 1, 2].map((i) => (
-        <mesh key={i} rotation={[0, 0, i * 0.9]}>
-          <torusGeometry args={[0.92 + i * 0.28, 0.012, 8, 96]} />
-          <meshBasicMaterial color={INK} transparent opacity={0.11 - i * 0.02} />
-        </mesh>
-      ))}
-    </group>
   );
 }
 
@@ -120,7 +94,6 @@ function EmberCore() {
 function Scene({ motion }) {
   return (
     <group position={[0, 0, -0.7]}>
-      <AuraFlow motion={motion} />
       <AuraParticles motion={motion} />
       <EmberCore />
     </group>

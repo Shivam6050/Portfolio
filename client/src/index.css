@@ -1893,3 +1893,80 @@ textarea {
   }
   .project-depth-orbit { animation: none; }
 }
+
+
+/* --- Project preview: preserve the complete source image --- */
+.project-preview-3d .project-preview-link {
+  overflow: visible;
+  background: #ebe5d8;
+}
+.project-preview-3d .project-preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  background: #ebe5d8;
+}
+
+/* --- Project atmosphere: sparse particles at the spatial edges --- */
+.project-particle-field {
+  position: absolute;
+  inset: -14% -10%;
+  z-index: -1;
+  pointer-events: none;
+  overflow: visible;
+  transform: translateZ(-18px);
+}
+.project-particle-field i {
+  position: absolute;
+  left: calc(8% + (var(--particle-index) * 5.7%));
+  top: calc(12% + ((var(--particle-index) * 19) % 74) * 1%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #b8431a;
+  box-shadow: 0 0 9px rgba(184,67,26,.25);
+  opacity: 0;
+  animation: project-particle-drift 7s cubic-bezier(.37,0,.2,1) infinite;
+  animation-delay: calc(var(--particle-index) * -0.43s);
+}
+.project-particle-field i:nth-child(3n) {
+  width: 2px;
+  height: 2px;
+  background: #141413;
+  box-shadow: none;
+}
+.project-particle-field i:nth-child(4n) {
+  width: 3px;
+  height: 3px;
+}
+@keyframes project-particle-drift {
+  0%, 12% {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0) scale(.65);
+  }
+  28% {
+    opacity: .5;
+  }
+  68% {
+    opacity: .22;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(30px, -42px, 0) scale(.35);
+  }
+}
+.project-preview-3d:hover .project-particle-field i {
+  animation-duration: 8.5s;
+}
+@media (max-width: 800px) {
+  .project-particle-field {
+    opacity: .55;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-particle-field i {
+    animation: none;
+    opacity: .22;
+  }
+}

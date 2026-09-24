@@ -14,6 +14,19 @@ function Skeleton() {
 
 function ProjectPreview({ project }) {
   const previews = project.previews?.length ? project.previews : [project.preview];
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  const handlePointerMove = (event) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    setTilt({
+      x: Number((y * -4.5).toFixed(2)),
+      y: Number((x * 5.5).toFixed(2))
+    });
+  };
+
+  const resetTilt = () => setTilt({ x: 0, y: 0 });
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -32,7 +45,15 @@ function ProjectPreview({ project }) {
   if (!previews[active]) return null;
 
   return (
-    <div className="project-preview-shell">
+    <div
+      className="project-preview-shell project-preview-3d"
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetTilt}
+      style={{
+        "--project-rotate-x": `${tilt.x}deg`,
+        "--project-rotate-y": `${tilt.y}deg`
+      }}
+    >
       <a
         className="project-preview-link"
         href={project.demo || project.code}

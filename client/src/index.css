@@ -1675,3 +1675,221 @@ textarea {
     transform: none;
   }
 }
+
+/* Phase 2 — art-directed project diorama */
+.project-card-featured {
+  --stage-ease: cubic-bezier(.16, 1, .3, 1);
+  perspective: 1800px;
+  transform-style: preserve-3d;
+}
+.project-preview-3d[data-project-stage] {
+  --project-mx: 50%;
+  --project-my: 50%;
+  --project-rx: 0deg;
+  --project-ry: 0deg;
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  min-height: clamp(320px, 34vw, 540px);
+  transform:
+    rotateX(var(--project-rx))
+    rotateY(var(--project-ry))
+    translate3d(0,0,0);
+  transform-style: preserve-3d;
+  transition: transform 1.1s var(--stage-ease);
+  will-change: transform;
+}
+.project-preview-3d[data-project-stage]::before {
+  content: "";
+  position: absolute;
+  inset: 7% -4% -7% 5%;
+  z-index: -5;
+  border: 1px solid rgba(20,20,19,.12);
+  background: linear-gradient(135deg, rgba(255,255,255,.34), rgba(232,225,213,.68));
+  transform: translateZ(-90px) rotateZ(-1.5deg);
+  box-shadow: 0 34px 70px rgba(20,20,19,.10);
+  transition: transform 1.1s var(--stage-ease);
+}
+.project-preview-3d[data-project-stage]::after {
+  content: "";
+  position: absolute;
+  inset: 5% 2% -4% 1%;
+  z-index: -4;
+  border: 1px solid rgba(184,67,26,.13);
+  background: rgba(242,237,228,.45);
+  transform: translateZ(-48px) rotateZ(1deg);
+  transition: transform 1.1s var(--stage-ease);
+}
+.project-preview-3d:hover::before {
+  transform: translate3d(1.8%, 2%, -105px) rotateZ(-2deg);
+}
+.project-preview-3d:hover::after {
+  transform: translate3d(-1%, 1%, -62px) rotateZ(1.5deg);
+}
+
+/* A very quiet perspective grid makes the stage read as space, not a tilted card. */
+.project-depth-grid {
+  position: absolute;
+  z-index: -2;
+  inset: -7% -8% -9%;
+  pointer-events: none;
+  opacity: .25;
+  transform: translateZ(-72px) rotateX(58deg) translateY(12%);
+  transform-origin: center bottom;
+  background-image:
+    linear-gradient(rgba(20,20,19,.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20,20,19,.10) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(to bottom, transparent 5%, #000 48%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 5%, #000 48%, transparent 100%);
+  transition: transform 1.2s var(--stage-ease), opacity .8s ease;
+}
+.project-preview-3d:hover .project-depth-grid {
+  transform: translate3d(0, 3%, -62px) rotateX(58deg) translateY(12%);
+  opacity: .38;
+}
+
+/* Orbiting strokes give each project a unique, slow-moving spatial signature. */
+.project-depth-orbit {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  width: 76%;
+  height: 40%;
+  border: 1px solid rgba(20,20,19,.16);
+  border-radius: 50%;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  animation: project-orbit-drift 13s linear infinite;
+}
+.project-depth-orbit-a {
+  transform: translate3d(-50%,-50%,18px) rotateX(66deg) rotateZ(-14deg);
+}
+.project-depth-orbit-b {
+  width: 62%;
+  height: 31%;
+  border-color: rgba(184,67,26,.30);
+  animation-duration: 17s;
+  animation-direction: reverse;
+  transform: translate3d(-50%,-50%,4px) rotateX(66deg) rotateZ(22deg);
+}
+@keyframes project-orbit-drift {
+  from { rotate: 0deg; }
+  to { rotate: 360deg; }
+}
+
+/* Pointer-controlled light behaves like a moving studio source. */
+.project-depth-glow {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle 110px at var(--project-mx) var(--project-my),
+      rgba(184,67,26,.16), transparent 72%),
+    radial-gradient(circle 260px at var(--project-mx) var(--project-my),
+      rgba(255,255,255,.13), transparent 70%);
+  mix-blend-mode: screen;
+  opacity: .35;
+  transform: translateZ(38px);
+  transition: opacity .7s ease;
+}
+.project-preview-3d:hover .project-depth-glow { opacity: 1; }
+
+.project-depth-corner {
+  position: absolute;
+  z-index: 6;
+  width: 30px;
+  height: 30px;
+  pointer-events: none;
+  opacity: .65;
+  transition: transform .9s var(--stage-ease), opacity .5s ease;
+}
+.project-depth-corner::before,
+.project-depth-corner::after {
+  content: "";
+  position: absolute;
+  background: #b8431a;
+}
+.project-depth-corner::before { width: 30px; height: 1px; }
+.project-depth-corner::after { width: 1px; height: 30px; }
+.project-depth-corner-tl { left: -15px; top: -15px; transform: translateZ(55px); }
+.project-depth-corner-br { right: -15px; bottom: -15px; transform: rotate(180deg) translateZ(55px); }
+.project-preview-3d:hover .project-depth-corner-tl { transform: translate3d(-5px,-5px,80px); }
+.project-preview-3d:hover .project-depth-corner-br { transform: rotate(180deg) translate3d(-5px,-5px,80px); }
+
+.project-preview-3d .project-preview-link {
+  position: relative;
+  z-index: 3;
+  transform: translateZ(30px);
+  transform-style: preserve-3d;
+  overflow: hidden;
+  border: 1px solid rgba(20,20,19,.18);
+  background: #ebe5d8;
+  box-shadow: 0 24px 60px rgba(20,20,19,.11);
+  transition: transform 1s var(--stage-ease), box-shadow 1s var(--stage-ease);
+}
+.project-preview-3d:hover .project-preview-link {
+  transform: translate3d(0,-7px,48px);
+  box-shadow: 0 38px 82px rgba(20,20,19,.16);
+}
+.project-preview-3d .project-preview-image {
+  transform: scale(1.018) translate3d(0,0,0);
+  transform-origin: var(--project-mx) var(--project-my);
+  transition: transform 1.4s var(--stage-ease), filter 1s ease;
+}
+.project-preview-3d:hover .project-preview-image {
+  transform: scale(1.075) translate3d(
+    calc((50% - var(--project-mx)) * .035),
+    calc((50% - var(--project-my)) * .035),
+    0);
+  filter: saturate(1.02) contrast(1.02);
+}
+.project-preview-depth-label {
+  position: absolute;
+  z-index: 7;
+  top: 12px;
+  left: 14px;
+  padding: 5px 7px;
+  font: 700 7px/1 "JetBrains Mono", monospace;
+  letter-spacing: .14em;
+  color: rgba(20,20,19,.62);
+  background: rgba(242,237,228,.68);
+  border: 1px solid rgba(20,20,19,.10);
+  backdrop-filter: blur(8px);
+  transform: translateZ(60px);
+}
+.project-preview-3d .project-preview-overlay,
+.project-preview-3d .project-preview-status,
+.project-preview-3d .project-preview-arrow,
+.project-preview-3d .project-preview-dots {
+  transform: translateZ(58px);
+}
+.project-preview-3d .project-preview-overlay {
+  transition: transform .8s var(--stage-ease);
+}
+.project-preview-3d:hover .project-preview-overlay {
+  transform: translate3d(0,-4px,72px);
+}
+@media (max-width: 800px) {
+  .project-preview-3d[data-project-stage] { min-height: 300px; }
+  .project-depth-grid { opacity: .14; }
+  .project-depth-orbit { opacity: .55; }
+  .project-preview-depth-label { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-preview-3d[data-project-stage],
+  .project-preview-3d::before,
+  .project-preview-3d::after,
+  .project-preview-3d .project-preview-link,
+  .project-preview-3d .project-preview-image,
+  .project-depth-grid,
+  .project-depth-corner,
+  .project-preview-3d .project-preview-overlay {
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .project-depth-orbit { animation: none; }
+}

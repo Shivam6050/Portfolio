@@ -33,9 +33,9 @@ function AuraParticles({ motion }) {
     for (let i = 0; i < PARTICLE_COUNT; i += 1) {
       const p = data[i];
       const cycle = (t * p.speed + p.phase) % 1;
-      const travel = 0.06 + cycle * 1.55;
-      const breathing = 1 + Math.sin(t * 1.7 + p.phase) * 0.12;
-      const arc = Math.sin(cycle * Math.PI) * 0.42 * p.spread;
+      const travel = 0.08 + cycle * 2.65;
+      const breathing = 1 + Math.sin(t * 1.7 + p.phase) * 0.1;
+      const arc = Math.sin(cycle * Math.PI) * 0.62 * p.spread;
 
       arr[i * 3] =
         Math.cos(p.angle) * travel * p.spread * breathing +

@@ -1433,7 +1433,7 @@ textarea {
 
 /* --- Portrait depth scene: 3D forms originate from behind the profile frame --- */
 .profile-frame {
-  position: relative;
+  position: static;
   isolation: isolate;
   overflow: visible;
   z-index: 2;
@@ -1451,8 +1451,8 @@ textarea {
   z-index: 1;
   left: 50%;
   top: 48%;
-  width: 430px;
-  height: 330px;
+  width: min(1000px, 82vw);
+  height: min(650px, 68vh);
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
@@ -1468,14 +1468,14 @@ textarea {
 }
 @media (max-width: 1050px) {
   .profile-3d-layer {
-    width: 350px;
-    height: 280px;
+    width: min(760px, 92vw);
+    height: min(520px, 62vh);
   }
 }
 @media (max-width: 700px) {
   .profile-3d-layer {
-    width: 300px;
-    height: 245px;
+    width: 92vw;
+    height: 430px;
     opacity: .7;
   }
 }

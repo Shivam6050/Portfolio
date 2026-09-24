@@ -7,8 +7,6 @@ const TOOLKIT_GROUPS = [
     key: "frontend",
     title: "Frontend",
     eyebrow: "01 / interface",
-    left: "#b8431a",
-    right: "#e7e1d6",
     skills: [
       ["html5", "HTML5"], ["css3", "CSS3"], ["javascript", "JavaScript"],
       ["typescript", "TypeScript"], ["react", "React.js"], ["nextjs", "Next.js"],
@@ -19,8 +17,6 @@ const TOOLKIT_GROUPS = [
     key: "backend",
     title: "Backend",
     eyebrow: "02 / systems",
-    left: "#242321",
-    right: "#b8431a",
     skills: [
       ["nodedotjs", "Node.js"], ["express", "Express.js"], ["mongodb", "MongoDB"],
       ["postgresql", "PostgreSQL"], ["supabase", "Supabase"], ["prisma", "Prisma"],
@@ -31,8 +27,6 @@ const TOOLKIT_GROUPS = [
     key: "general",
     title: "General",
     eyebrow: "03 / engineering",
-    left: "#716d65",
-    right: "#e7e1d6",
     skills: [
       ["cplusplus", "C++"], ["c", "C"], ["sql", "SQL"], ["git", "Git"],
       ["github", "GitHub"], ["githubactions", "GitHub Actions"], ["postman", "Postman"],
@@ -43,22 +37,48 @@ const TOOLKIT_GROUPS = [
   }
 ];
 
-function CharacterNode({ group }) {
+function SkillRay({ name, label, index, count }) {
+  // A wide, upward-only fan like the reference video.
+  const spread = count > 13 ? 132 : count > 8 ? 124 : 112;
+  const angle = -90 + ((index / Math.max(count - 1, 1)) - 0.5) * spread;
+  const radius = count > 13 ? 44 : 43;
+  const x = 50 + Math.cos((angle * Math.PI) / 180) * radius;
+  const y = 80 + Math.sin((angle * Math.PI) / 180) * radius;
+
   return (
-    <div className="toolkit-node" style={{ "--node-left": group.left, "--node-right": group.right }}>
-      <div className="toolkit-node-half toolkit-node-left">
-        <span className="toolkit-node-eye left" />
+    <div
+      className="toolkit-ray"
+      style={{
+        "--ray-angle": `${angle}deg`,
+        "--ray-index": index,
+        "--ray-x": `${x}%`,
+        "--ray-y": `${y}%`
+      }}
+    >
+      <span className="toolkit-ray-line" />
+      <span className="toolkit-ray-dot" />
+      <span className="toolkit-ray-label">
+        <Logo name={name} label={label} size={12} />
+        <span>{label}</span>
+      </span>
+    </div>
+  );
+}
+
+function ReferenceNode() {
+  return (
+    <div className="toolkit-reference-node" aria-hidden="true">
+      <div className="toolkit-node-half toolkit-node-purple">
+        <i />
       </div>
-      <div className="toolkit-node-half toolkit-node-right">
-        <span className="toolkit-node-eye right" />
+      <div className="toolkit-node-half toolkit-node-yellow">
+        <i />
       </div>
     </div>
   );
 }
 
 function ToolkitPanel({ group, index }) {
-  const count = group.skills.length;
-
   return (
     <article className={`toolkit-panel toolkit-panel-${group.key}`} style={{ "--panel-index": index }}>
       <div className="toolkit-panel-heading">
@@ -66,45 +86,20 @@ function ToolkitPanel({ group, index }) {
         <h3>{group.title}</h3>
       </div>
 
-      <div className="toolkit-network" aria-hidden="true">
-        {group.skills.map((_, skillIndex) => {
-          const spread = count > 12 ? 116 : 108;
-          const angle = -90 + ((skillIndex / Math.max(count - 1, 1)) - 0.5) * spread;
-          return (
-            <div
-              className="toolkit-branch"
-              key={skillIndex}
-              style={{ "--angle": `${angle}deg`, "--skill-index": skillIndex, "--skill-count": count }}
-            >
-              <span className="toolkit-branch-line" />
-              <span className="toolkit-branch-dot" />
-            </div>
-          );
-        })}
+      <div className="toolkit-rays">
+        {group.skills.map(([name, label], skillIndex) => (
+          <SkillRay
+            key={name}
+            name={name}
+            label={label}
+            index={skillIndex}
+            count={group.skills.length}
+          />
+        ))}
       </div>
 
-      <div className="toolkit-labels">
-        {group.skills.map(([name, label], skillIndex) => {
-          const spread = count > 12 ? 116 : 108;
-          const angle = -90 + ((skillIndex / Math.max(count - 1, 1)) - 0.5) * spread;
-          return (
-            <div
-              className="toolkit-label"
-              key={name}
-              style={{ "--angle": `${angle}deg`, "--skill-index": skillIndex, "--skill-count": count }}
-            >
-              <span className="toolkit-label-connector" />
-              <span className="toolkit-label-content">
-                <Logo name={name} label={label} size={14} />
-                <span>{label}</span>
-              </span>
-            </div>
-          );
-        })}
-      </div>
-
-      <div className="toolkit-node-anchor">
-        <CharacterNode group={group} />
+      <div className="toolkit-node-wrap">
+        <ReferenceNode />
       </div>
     </article>
   );

@@ -20,13 +20,8 @@ export function errorHandler(error, req, res, next) {
     });
   }
 
-  const status = error.statusCode || 500;
-  const isProduction = process.env.NODE_ENV === "production";
-
-  res.status(status).json({
+  res.status(error.statusCode || 500).json({
     success: false,
-    message: status >= 500 && isProduction
-      ? "Internal server error"
-      : error.message || "Internal server error"
+    message: error.message || "Internal server error"
   });
 }

@@ -9,16 +9,12 @@ export async function connectDB() {
     throw new Error("MONGODB_URI is not configured");
   }
 
+  // Already connected
   if (mongoose.connection.readyState === 1) {
     return mongoose.connection;
   }
 
-  // A previous promise may have resolved, but the socket can later
-  // disconnect. Only reuse a promise while Mongoose is still connecting.
-  if (mongoose.connection.readyState !== 2) {
-    cachedPromise = null;
-  }
-
+  // Connection is currently being established
   if (cachedPromise) {
     return cachedPromise;
   }
@@ -32,6 +28,7 @@ export async function connectDB() {
       console.log(
         `MongoDB connected: ${mongooseInstance.connection.host}`
       );
+
       return mongooseInstance.connection;
     })
     .catch((error) => {
@@ -42,12 +39,3 @@ export async function connectDB() {
 
   return cachedPromise;
 }
-
-mongoose.connection.on("disconnected", () => {
-  cachedPromise = null;
-  console.warn("MongoDB disconnected; the next request will reconnect.");
-});
-
-mongoose.connection.on("error", (error) => {
-  console.error("MongoDB connection error:", error.message);
-});

@@ -12,64 +12,24 @@ function Skeleton() {
   );
 }
 
-function PreviewArtwork({ project, variant }) {
-  const labels = {
-    overview: ["dashboard", "usage → billing"],
-    store: ["storefront", "products → cart"],
-    cart: ["shopping cart", "items → totals"],
-    checkout: ["checkout", "address → payment"],
-  };
-
-  const [eyebrow, caption] = labels[variant] || [project.thumbLabel, project.thumbSub];
-
-  return (
-    <div className={`project-preview-artwork ${project.pattern}`} aria-hidden="true">
-      <div className="preview-browser-bar">
-        <span /><span /><span />
-      </div>
-      <div className="preview-artwork-body">
-        <p className="preview-artwork-eyebrow">{eyebrow}</p>
-        <h4>{project.title}</h4>
-        <div className="preview-artwork-grid">
-          <span />
-          <span />
-          <span />
-        </div>
-        <div className="preview-artwork-footer">
-          <span>{caption}</span>
-          <span>↗</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function ProjectPreview({ project }) {
-  const variants = project.previewVariants?.length
-    ? project.previewVariants
-    : project.previews?.length
-      ? project.previews
-      : project.preview
-        ? [project.preview]
-        : ["overview"];
+  const previews = project.previews?.length ? project.previews : [project.preview];
   const [active, setActive] = useState(0);
-  const hasRemoteImages = variants.some((item) => /^https?:\/\//.test(item));
 
   useEffect(() => {
-    if (variants.length < 2) return undefined;
+    if (previews.length < 2) return undefined;
     const timer = window.setInterval(
-      () => setActive((current) => (current + 1) % variants.length),
+      () => setActive((current) => (current + 1) % previews.length),
       4500
     );
     return () => window.clearInterval(timer);
-  }, [variants.length]);
+  }, [previews.length]);
 
   const move = (direction) => {
-    setActive((current) => (current + direction + variants.length) % variants.length);
+    setActive((current) => (current + direction + previews.length) % previews.length);
   };
 
-  const current = variants[active];
-  const isImage = /^https?:\/\//.test(current);
+  if (!previews[active]) return null;
 
   return (
     <div className="project-preview-shell">
@@ -78,34 +38,41 @@ function ProjectPreview({ project }) {
         href={project.demo || project.code}
         target="_blank"
         rel="noreferrer"
-        aria-label={`Open ${project.demo ? "live " : ""}${project.title}`}
+        aria-label={`Open live ${project.title}`}
       >
-        {isImage ? (
-          <img
-            className="project-preview-image"
-            src={current}
-            alt={`${project.title} preview`}
-            loading="lazy"
-            draggable="false"
-            onError={(event) => {
-              event.currentTarget.style.display = "none";
-            }}
-          />
-        ) : (
-          <PreviewArtwork project={project} variant={current} />
-        )}
+        <img
+          className="project-preview-image"
+          src={previews[active]}
+          alt={`${project.title} live website preview`}
+          loading="lazy"
+          draggable="false"
+        />
         <span className="project-preview-overlay">
           <span>{project.demo ? "Open live site" : "View source"}</span>
           <span aria-hidden="true">↗</span>
         </span>
       </a>
 
-      {variants.length > 1 && (
+      {previews.length > 1 && (
         <>
-          <button type="button" className="project-preview-arrow project-preview-prev" onClick={() => move(-1)} aria-label="Previous project preview">←</button>
-          <button type="button" className="project-preview-arrow project-preview-next" onClick={() => move(1)} aria-label="Next project preview">→</button>
+          <button
+            type="button"
+            className="project-preview-arrow project-preview-prev"
+            onClick={() => move(-1)}
+            aria-label="Previous project preview"
+          >
+            ←
+          </button>
+          <button
+            type="button"
+            className="project-preview-arrow project-preview-next"
+            onClick={() => move(1)}
+            aria-label="Next project preview"
+          >
+            →
+          </button>
           <div className="project-preview-dots" aria-label="Project preview selector">
-            {variants.map((_, index) => (
+            {previews.map((_, index) => (
               <button
                 key={index}
                 type="button"
@@ -120,9 +87,7 @@ function ProjectPreview({ project }) {
       )}
 
       <span className="project-preview-status">
-        {variants.length > 1
-          ? `${String(active + 1).padStart(2, "0")} / ${String(variants.length).padStart(2, "0")}`
-          : "PROJECT PREVIEW"}
+        {previews.length > 1 ? `${String(active + 1).padStart(2, "0")} / ${String(previews.length).padStart(2, "0")}` : "LIVE PREVIEW"}
       </span>
     </div>
   );

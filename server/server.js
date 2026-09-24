@@ -2,11 +2,11 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 
+import { connectDB } from "./config/db.js";
+
 import projectRoutes from "./routes/projects.js";
 import messageRoutes from "./routes/messages.js";
 import statRoutes from "./routes/stats.js";
-
-import { requireDatabase } from "./middleware/database.js";
 
 import {
   notFound,
@@ -33,20 +33,6 @@ app.use(
 
 app.use(express.json({ limit: "100kb" }));
 
-// Basic API security headers. This service returns JSON and does not need
-// browser-executable framing or content sniffing.
-app.use((req, res, next) => {
-  res.setHeader("X-Content-Type-Options", "nosniff");
-  res.setHeader("X-Frame-Options", "DENY");
-  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
-  res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
-  if (process.env.NODE_ENV === "production") {
-    res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
-  }
-  next();
-});
-
-
 // Request logger
 app.use((req, res, next) => {
   const started = Date.now();
@@ -63,6 +49,19 @@ app.use((req, res, next) => {
 });
 
 // --------------------------------------------------
+// Database middleware
+// --------------------------------------------------
+
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+// --------------------------------------------------
 // Root
 // --------------------------------------------------
 
@@ -71,7 +70,6 @@ app.get("/", (req, res) => {
     success: true,
     message: "Shivam Sagar Portfolio API is running",
     version: "1.0.0",
-    status: "ok",
     endpoints: {
       health: "/api/health",
       projects: "/api/projects",
@@ -88,7 +86,7 @@ app.get("/", (req, res) => {
 app.get("/api/health", (req, res) => {
   res.json({
     success: true,
-    message: "API is healthy",
+    message: "API connected",
     time: new Date().toISOString(),
   });
 });
@@ -97,11 +95,11 @@ app.get("/api/health", (req, res) => {
 // API Routes
 // --------------------------------------------------
 
-app.use("/api/projects", requireDatabase, projectRoutes);
+app.use("/api/projects", projectRoutes);
 
-app.use("/api/messages", requireDatabase, messageRoutes);
+app.use("/api/messages", messageRoutes);
 
-app.use("/api/stats", requireDatabase, statRoutes);
+app.use("/api/stats", statRoutes);
 
 // --------------------------------------------------
 // Error handling

@@ -17,6 +17,11 @@ export default function Hero() {
 
         <div className="hero-layout">
           <main className="hero-main">
+            <div className="hero-particle-field" aria-hidden="true">
+              <Suspense fallback={null}>
+                <HeroThreeScene />
+              </Suspense>
+            </div>
             <p className="sec-num">{hero.sectionNumber}</p>
 
             <div className="hero-identity">
@@ -35,11 +40,6 @@ export default function Hero() {
               </div>
 
               <figure className="profile-frame">
-                <div className="profile-3d-layer">
-                  <Suspense fallback={null}>
-                    <HeroThreeScene />
-                  </Suspense>
-                </div>
                 <div className="profile-photo">
                   <img src={PROFILE.photo} alt="Portrait of Shivam Sagar" />
                 </div>

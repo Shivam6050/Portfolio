@@ -1358,3 +1358,73 @@ textarea {
 @media (max-width: 640px) {
   .brand-mark-glass { width: 42px; height: 42px; flex-basis: 42px; }
 }
+
+
+/* --- Hero CTA system: balanced editorial controls --- */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.hero-actions .btn-ink,
+.hero-actions .tag {
+  min-height: 46px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  line-height: 1;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.hero-actions .btn-ink {
+  padding: 0 22px;
+  border: 1px solid #141413;
+  background: #141413;
+  color: #f2ede4;
+  box-shadow: none;
+}
+
+.hero-actions .btn-ink:hover {
+  transform: translateY(-2px);
+  background: #b8431a;
+  border-color: #b8431a;
+}
+
+.hero-actions .tag {
+  padding: 0 20px;
+  border: 1px solid rgba(20,20,19,.18);
+  background: rgba(242,237,228,.28);
+  color: rgba(20,20,19,.78);
+  transition: border-color .2s ease, background .2s ease, color .2s ease, transform .2s ease;
+}
+
+.hero-actions .tag:hover {
+  transform: translateY(-2px);
+  border-color: rgba(20,20,19,.4);
+  background: rgba(20,20,19,.04);
+  color: #141413;
+}
+
+@media (max-width: 640px) {
+  .hero-actions {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .hero-actions .btn-ink,
+  .hero-actions .tag {
+    min-height: 46px;
+    flex: 1 1 100%;
+    width: 100%;
+    padding-inline: 18px;
+  }
+}

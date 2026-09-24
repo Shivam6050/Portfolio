@@ -52,6 +52,7 @@ function ProjectPreview({ project }) {
   return (
     <div
       className="project-preview-shell project-preview-3d"
+      data-project-stage
       onPointerMove={handlePointerMove}
       onPointerLeave={resetTilt}
       style={{
@@ -61,6 +62,13 @@ function ProjectPreview({ project }) {
         "--project-ry": "0deg"
       }}
     >
+      <span className="project-depth-grid" aria-hidden="true" />
+      <span className="project-depth-orbit project-depth-orbit-a" aria-hidden="true" />
+      <span className="project-depth-orbit project-depth-orbit-b" aria-hidden="true" />
+      <span className="project-depth-glow" aria-hidden="true" />
+      <span className="project-depth-corner project-depth-corner-tl" aria-hidden="true" />
+      <span className="project-depth-corner project-depth-corner-br" aria-hidden="true" />
+
       <a
         className="project-preview-link"
         href={project.demo || project.code}
@@ -79,6 +87,7 @@ function ProjectPreview({ project }) {
           <span>{project.demo ? "Open live site" : "View source"}</span>
           <span aria-hidden="true">↗</span>
         </span>
+        <span className="project-preview-depth-label" aria-hidden="true">SHIVAM / 3D WORKSPACE</span>
       </a>
 
       {previews.length > 1 && (

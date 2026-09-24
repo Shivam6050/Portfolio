@@ -10,13 +10,6 @@ export default function Header() {
     <header className="site-header">
       <div className="section-shell header-inner">
         <a href="#top" className="brand-mark" aria-label="Shivam Sagar — home">
-          <span className="brand-mark-glass" aria-hidden="true">
-            <img
-              src="/assets/portfolio-logo.png"
-              alt=""
-              className="brand-icon-image"
-            />
-          </span>
           <span className="brand-mark-word">
             SHIVAM<span>.</span>
           </span>

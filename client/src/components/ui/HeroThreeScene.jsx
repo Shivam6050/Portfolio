@@ -1,104 +1,4 @@
-import { useMemo, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import * as THREE from "three";
-
-const INK = "#141413";
-const RUST = "#b8431a";
-const PARTICLE_COUNT = 180;
-
-function AuraParticles({ motion }) {
-  const points = useRef(null);
-  const data = useMemo(() => Array.from({ length: PARTICLE_COUNT }, (_, i) => {
-    const a = (i / PARTICLE_COUNT) * Math.PI * 2;
-    const lane = i % 3;
-    const speed = 0.17 + ((i * 19) % 13) / 120;
-    return {
-      angle: a + Math.sin(i * 2.7) * 0.11,
-      radius: 0.05 + ((i * 23) % 47) / 180,
-      speed,
-      spread: 0.7 + ((i * 11) % 29) / 40,
-      lane,
-      phase: (i * 0.173) % (Math.PI * 2),
-      z: -0.25 + lane * 0.12
-    };
-  }), []);
-
-  const positions = useMemo(() => new Float32Array(PARTICLE_COUNT * 3), []);
-
-  useFrame((state, delta) => {
-    if (!points.current) return;
-    const t = state.clock.elapsedTime;
-    const arr = points.current.geometry.attributes.position.array;
-
-    for (let i = 0; i < PARTICLE_COUNT; i += 1) {
-      const p = data[i];
-      const cycle = (t * p.speed + p.phase) % 1;
-      const travel = 0.08 + cycle * 2.65;
-      const breathing = 1 + Math.sin(t * 1.7 + p.phase) * 0.1;
-      const arc = Math.sin(cycle * Math.PI) * 0.62 * p.spread;
-
-      arr[i * 3] =
-        Math.cos(p.angle) * travel * p.spread * breathing +
-        Math.cos(p.angle + Math.PI / 2) * arc;
-      arr[i * 3 + 1] =
-        Math.sin(p.angle) * travel * p.spread * breathing +
-        Math.sin(p.angle + Math.PI / 2) * arc;
-      arr[i * 3 + 2] =
-        p.z +
-        Math.sin(t * 1.25 + p.phase) * 0.16 +
-        cycle * 0.35;
-
-    }
-
-    points.current.geometry.attributes.position.needsUpdate = true;
-
-    const targetX = motion ? state.pointer.y * 0.035 : 0;
-    const targetY = motion ? state.pointer.x * 0.05 : 0;
-    points.current.rotation.x = THREE.MathUtils.damp(points.current.rotation.x, targetX, 3, delta);
-    points.current.rotation.y = THREE.MathUtils.damp(points.current.rotation.y, targetY, 3, delta);
-  });
-
-  return (
-    <points ref={points}>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={PARTICLE_COUNT} array={positions} itemSize={3} />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.07}
-        sizeAttenuation
-        color={RUST}
-        transparent
-        opacity={0.8}
-        depthWrite={false}
-        blending={THREE.AdditiveBlending}
-      />
-    </points>
-  );
-}
-
-function EmberCore() {
-  const ref = useRef(null);
-  useFrame((state) => {
-    if (!ref.current) return;
-    const pulse = 0.9 + Math.sin(state.clock.elapsedTime * 2.8) * 0.1;
-    ref.current.scale.setScalar(pulse);
-  });
-  return (
-    <mesh ref={ref} position={[0, 0, 0.32]}>
-      <sphereGeometry args={[0.07, 12, 12]} />
-      <meshBasicMaterial color={RUST} transparent opacity={0.8} blending={THREE.AdditiveBlending} />
-    </mesh>
-  );
-}
-
-function Scene({ motion }) {
-  return (
-    <group position={[0, 0, -0.7]}>
-      <AuraParticles motion={motion} />
-      <EmberCore />
-    </group>
-  );
-}
+import AuraParticleCanvas from "./AuraParticleCanvas.jsx";
 
 export default function HeroThreeScene() {
   const reducedMotion =
@@ -107,14 +7,7 @@ export default function HeroThreeScene() {
 
   return (
     <div className="hero-3d-canvas" aria-hidden="true">
-      <Canvas
-        dpr={[1, 1.5]}
-        camera={{ position: [0, 0, 5], fov: 36, near: 0.1, far: 20 }}
-        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-        frameloop="always"
-      >
-        <Scene motion={!reducedMotion} />
-      </Canvas>
+      <AuraParticleCanvas motion={!reducedMotion} />
     </div>
   );
 }

@@ -1645,25 +1645,31 @@ textarea {
   isolation: isolate;
 }
 
-.profile-3d-layer {
+.hero-main {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-particle-field {
   position: absolute;
   z-index: 0;
-  left: 50%;
-  top: 50%;
-  width: 430px;
-  height: 330px;
+  left: calc(100% - 74px);
+  top: 42%;
+  width: min(1050px, 92vw);
+  height: 760px;
   transform: translate(-50%, -50%);
   pointer-events: none;
   overflow: visible;
+  opacity: .9;
 }
 
-.hero-3d-canvas {
+.hero-particle-field .hero-3d-canvas {
   width: 100%;
   height: 100%;
   overflow: visible;
 }
 
-.hero-3d-canvas canvas {
+.hero-particle-field .hero-3d-canvas canvas {
   display: block;
   width: 100% !important;
   height: 100% !important;
@@ -1674,21 +1680,33 @@ textarea {
   position: relative;
   z-index: 2;
 }
+
+.profile-frame {
+  position: relative;
+  z-index: 3;
+}
+
 @media (max-width: 1050px) {
-  .profile-3d-layer {
-    width: 350px;
-    height: 280px;
+  .hero-particle-field {
+    left: 72%;
+    top: 46%;
+    width: 820px;
+    height: 650px;
   }
 }
+
 @media (max-width: 700px) {
-  .profile-3d-layer {
-    width: 300px;
-    height: 245px;
-    opacity: .7;
+  .hero-particle-field {
+    left: 50%;
+    top: 56%;
+    width: 650px;
+    height: 540px;
+    opacity: .68;
   }
 }
+
 @media (prefers-reduced-motion: reduce) {
-  .profile-3d-layer {
+  .hero-particle-field {
     opacity: .45;
   }
 }

@@ -1,10 +1,15 @@
 import { STACK_GROUPS, PORTFOLIO_CONFIG } from "../../data/constants.js";
 import Logo from "../ui/Logo.jsx";
+import ToolkitThreeScene from "../ui/ToolkitThreeScene.jsx";
 
 export default function Stack() {
   const { stack } = PORTFOLIO_CONFIG;
   return (
     <section id="stack" className="section-shell section-block stack-section">
+      <div className="toolkit-3d-layer" aria-hidden="true">
+        <ToolkitThreeScene />
+      </div>
+      <div className="toolkit-content">
       <div className="section-heading">
         <p className="sec-num">{stack.sectionNumber}</p>
         <div>
@@ -31,6 +36,7 @@ export default function Stack() {
             ))}
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

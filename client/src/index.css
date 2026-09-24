@@ -1430,25 +1430,57 @@ textarea {
 }
 
 
-/* --- Hero 3D layer: restrained spatial identity, same editorial palette --- */
-.hero-container { position: relative; isolation: isolate; }
-.hero-3d-layer {
-  position: absolute;
-  z-index: -1;
-  top: 42px;
-  right: -10px;
-  width: min(43vw, 560px);
-  height: min(43vw, 560px);
-  pointer-events: none;
-  opacity: .86;
-  mask-image: radial-gradient(circle at center, #000 45%, transparent 76%);
-  -webkit-mask-image: radial-gradient(circle at center, #000 45%, transparent 76%);
+
+/* --- Portrait depth scene: 3D forms originate from behind the profile frame --- */
+.profile-frame {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  z-index: 2;
 }
-.hero-3d-canvas, .hero-3d-canvas canvas { width: 100%; height: 100%; display: block; }
+.profile-photo {
+  position: relative;
+  z-index: 3;
+}
+.profile-caption {
+  position: relative;
+  z-index: 4;
+}
+.profile-3d-layer {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 48%;
+  width: 430px;
+  height: 330px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.hero-3d-canvas {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.hero-3d-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
 @media (max-width: 1050px) {
-  .hero-3d-layer { top: 95px; right: -70px; width: 470px; height: 470px; opacity: .42; }
+  .profile-3d-layer {
+    width: 350px;
+    height: 280px;
+  }
 }
 @media (max-width: 700px) {
-  .hero-3d-layer { top: 105px; right: -115px; width: 390px; height: 390px; opacity: .24; }
+  .profile-3d-layer {
+    width: 300px;
+    height: 245px;
+    opacity: .7;
+  }
 }
-@media (prefers-reduced-motion: reduce) { .hero-3d-layer { opacity: .18; } }
+@media (prefers-reduced-motion: reduce) {
+  .profile-3d-layer {
+    opacity: .45;
+  }
+}

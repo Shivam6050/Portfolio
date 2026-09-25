@@ -123,6 +123,7 @@ export default function Contact() {
             </button>
           </div>
         </form></div>
+        </div>
       </div>
     </section>
   );

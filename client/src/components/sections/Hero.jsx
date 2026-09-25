@@ -1,7 +1,5 @@
-import { lazy, Suspense } from "react";
+import AuraParticleCanvas from "../ui/AuraParticleCanvas.jsx";
 import { PROFILE, PORTFOLIO_CONFIG } from "../../data/constants.js";
-
-const HeroThreeScene = lazy(() => import("../ui/HeroThreeScene.jsx"));
 
 export default function Hero() {
   const { hero, availability, timezone } = PORTFOLIO_CONFIG;
@@ -17,11 +15,6 @@ export default function Hero() {
 
         <div className="hero-layout">
           <main className="hero-main">
-            <div className="hero-particle-field" aria-hidden="true">
-              <Suspense fallback={null}>
-                <HeroThreeScene />
-              </Suspense>
-            </div>
             <p className="sec-num">{hero.sectionNumber}</p>
 
             <div className="hero-identity">
@@ -40,6 +33,9 @@ export default function Hero() {
               </div>
 
               <figure className="profile-frame">
+                <div className="profile-particle-field" aria-hidden="true">
+                  <AuraParticleCanvas motion />
+                </div>
                 <div className="profile-photo">
                   <img src={PROFILE.photo} alt="Portrait of Shivam Sagar" />
                 </div>

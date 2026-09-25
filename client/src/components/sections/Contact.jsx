@@ -98,7 +98,7 @@ export default function Contact() {
           <span className="contact-depth-glow" aria-hidden="true" />
           <span className="contact-depth-corner contact-depth-corner-tl" aria-hidden="true" />
           <span className="contact-depth-corner contact-depth-corner-br" aria-hidden="true" />
-          <div className="contact-particle-canvas" aria-hidden="true"><AuraParticleCanvas motion speedMultiplier={0.55} /></div>
+          <div className="contact-particle-canvas" aria-hidden="true"><AuraParticleCanvas motion speedMultiplier={0.55} spreadMultiplier={1.8} /></div>
           <div className="contact-form-surface"><div className="form-header"><span>CONTACT / 01</span><span>REPLY VIA EMAIL</span></div><form onSubmit={submit}>
           <div className="grid gap-6 sm:grid-cols-2">
             <label className="form-label">

@@ -3,6 +3,7 @@ import { PROFILE, PORTFOLIO_CONFIG } from "../../data/constants.js";
 import { api } from "../../api/client.js";
 import { useApp } from "../../context/AppContext.jsx";
 import Logo from "../ui/Logo.jsx";
+import AuraParticleCanvas from "../ui/AuraParticleCanvas.jsx";
 
 const initialForm = { name: "", email: "", message: "" };
 
@@ -15,6 +16,25 @@ export default function Contact() {
   const update = (event) => {
     const { name, value } = event.target;
     setForm((current) => ({ ...current, [name]: value }));
+  };
+
+  const handlePointerMove = (event) => {
+    const surface = event.currentTarget;
+    const rect = surface.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+    surface.style.setProperty("--contact-mx", `${x}%`);
+    surface.style.setProperty("--contact-my", `${y}%`);
+    surface.style.setProperty("--contact-rx", `${((50 - y) * 0.035).toFixed(2)}deg`);
+    surface.style.setProperty("--contact-ry", `${((x - 50) * 0.045).toFixed(2)}deg`);
+  };
+
+  const resetTilt = (event) => {
+    const surface = event.currentTarget;
+    surface.style.setProperty("--contact-mx", "50%");
+    surface.style.setProperty("--contact-my", "50%");
+    surface.style.setProperty("--contact-rx", "0deg");
+    surface.style.setProperty("--contact-ry", "0deg");
   };
 
   const submit = async (event) => {
@@ -72,7 +92,18 @@ export default function Contact() {
           </div>
         </div>
 
-        <div className="contact-panel"><div className="form-header"><span>CONTACT / 01</span><span>REPLY VIA EMAIL</span></div><form onSubmit={submit}>
+        <div className="contact-panel-stage">
+          <div className="contact-particle-field" aria-hidden="true">
+            <AuraParticleCanvas motion speedMultiplier={0.55} spreadMultiplier={1.8} />
+          </div>
+          <div className="contact-panel contact-panel-3d" onPointerMove={handlePointerMove} onPointerLeave={resetTilt} style={{ "--contact-mx": "50%", "--contact-my": "50%", "--contact-rx": "0deg", "--contact-ry": "0deg" }}>
+          <span className="contact-depth-grid" aria-hidden="true" />
+          <span className="contact-depth-orbit contact-depth-orbit-a" aria-hidden="true" />
+          <span className="contact-depth-orbit contact-depth-orbit-b" aria-hidden="true" />
+          <span className="contact-depth-glow" aria-hidden="true" />
+          <span className="contact-depth-corner contact-depth-corner-tl" aria-hidden="true" />
+          <span className="contact-depth-corner contact-depth-corner-br" aria-hidden="true" />
+          <div className="contact-form-surface"><div className="form-header"><span>CONTACT / 01</span><span>REPLY VIA EMAIL</span></div><form onSubmit={submit}>
           <div className="grid gap-6 sm:grid-cols-2">
             <label className="form-label">
               Name
@@ -96,6 +127,8 @@ export default function Contact() {
             </button>
           </div>
         </form></div>
+          </div>
+        </div>
       </div>
     </section>
   );

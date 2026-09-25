@@ -1,3 +1,4 @@
+import AuraParticleCanvas from "../ui/AuraParticleCanvas.jsx";
 import { PROFILE, PORTFOLIO_CONFIG } from "../../data/constants.js";
 
 export default function Hero() {
@@ -32,6 +33,9 @@ export default function Hero() {
               </div>
 
               <figure className="profile-frame">
+                <div className="profile-particle-field" aria-hidden="true">
+                  <AuraParticleCanvas motion speedMultiplier={0.55} />
+                </div>
                 <div className="profile-photo">
                   <img src={PROFILE.photo} alt="Portrait of Shivam Sagar" />
                 </div>

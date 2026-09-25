@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Logo from "../ui/Logo.jsx";
 import { useApp } from "../../context/AppContext.jsx";
 import { PORTFOLIO_CONFIG } from "../../data/constants.js";
+import AuraParticleCanvas from "../ui/AuraParticleCanvas.jsx";
 
 function Skeleton() {
   return (
@@ -14,6 +15,24 @@ function Skeleton() {
 
 function ProjectPreview({ project }) {
   const previews = project.previews?.length ? project.previews : [project.preview];
+  const handlePointerMove = (event) => {
+    const surface = event.currentTarget;
+    const rect = surface.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
+    surface.style.setProperty("--project-mx", `${x}%`);
+    surface.style.setProperty("--project-my", `${y}%`);
+    surface.style.setProperty("--project-rx", `${((50 - y) * 0.045).toFixed(2)}deg`);
+    surface.style.setProperty("--project-ry", `${((x - 50) * 0.055).toFixed(2)}deg`);
+  };
+
+  const resetTilt = (event) => {
+    const surface = event.currentTarget;
+    surface.style.setProperty("--project-mx", "50%");
+    surface.style.setProperty("--project-my", "50%");
+    surface.style.setProperty("--project-rx", "0deg");
+    surface.style.setProperty("--project-ry", "0deg");
+  };
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -32,7 +51,28 @@ function ProjectPreview({ project }) {
   if (!previews[active]) return null;
 
   return (
-    <div className="project-preview-shell">
+    <div
+      className="project-preview-shell project-preview-3d"
+      data-project-stage
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetTilt}
+      style={{
+        "--project-mx": "50%",
+        "--project-my": "50%",
+        "--project-rx": "0deg",
+        "--project-ry": "0deg"
+      }}
+    >
+      <span className="project-depth-grid" aria-hidden="true" />
+      <span className="project-depth-orbit project-depth-orbit-a" aria-hidden="true" />
+      <span className="project-depth-orbit project-depth-orbit-b" aria-hidden="true" />
+      <span className="project-depth-glow" aria-hidden="true" />
+      <span className="project-depth-corner project-depth-corner-tl" aria-hidden="true" />
+      <span className="project-depth-corner project-depth-corner-br" aria-hidden="true" />
+      <div className="project-particle-canvas" aria-hidden="true">
+        <AuraParticleCanvas motion />
+      </div>
+
       <a
         className="project-preview-link"
         href={project.demo || project.code}
@@ -51,6 +91,7 @@ function ProjectPreview({ project }) {
           <span>{project.demo ? "Open live site" : "View source"}</span>
           <span aria-hidden="true">↗</span>
         </span>
+        <span className="project-preview-depth-label" aria-hidden="true">SHIVAM / 3D WORKSPACE</span>
       </a>
 
       {previews.length > 1 && (

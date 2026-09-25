@@ -605,21 +605,30 @@ textarea {
 .contact-panel-stage {
   position: relative;
   min-width: 0;
-  overflow: visible;
-  isolation: isolate;
+  overflow: visible !important;
 }
 
 .contact-particle-field {
   position: absolute;
-  z-index: 0;
+  z-index: 1;
   inset: -34% -28%;
   pointer-events: none;
-  overflow: visible;
-  opacity: .95;
+  overflow: visible !important;
+  opacity: 1;
+  transform: translateZ(0);
 }
 
-.contact-particle-field > div,
+.contact-particle-field > div {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: visible !important;
+}
+
 .contact-particle-field canvas {
+  position: absolute !important;
+  inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
   display: block;
@@ -629,6 +638,11 @@ textarea {
 .contact-panel-stage .contact-panel-3d {
   position: relative;
   z-index: 2;
+}
+
+.contact-section,
+.contact-grid {
+  overflow: visible !important;
 }
 
 

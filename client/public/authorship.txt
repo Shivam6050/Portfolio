@@ -1,0 +1,18 @@
+Copyright (c) 2026 Shivam Sagar. All rights reserved in original material owned by Shivam Sagar.
+
+Original portfolio: https://github.com/Shivam6050/Portfolio
+Contact: shivamsagar372004@gmail.com
+
+This portfolio identifies Shivam Sagar as its creator. Do not misrepresent its
+original design, personal content, or source as your own work. No general license
+to reuse original material is granted by this notice. Contact the author for
+permission. Rights granted by applicable law or GitHub's terms are unaffected.
+
+Third-party libraries, fonts, logos, and other assets remain the property of
+their respective owners and retain their own licenses and notices. This notice
+does not claim ownership of those materials or override their license terms.
+See client/public/assets/toolkit/ for bundled icon licenses and sources.
+In the deployed site, those notices are available under /assets/toolkit/.
+
+Attribution notices can be removed from editable copies. This notice documents
+provenance; it is not a technical copy-protection mechanism.

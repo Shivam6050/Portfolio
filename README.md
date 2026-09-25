@@ -93,3 +93,9 @@ Run `npm test` in each package and `npm run build` in `client`.
 If deploying behind a reverse proxy, configure `TRUST_PROXY_HOPS` only after verifying the proxy count and that clients cannot bypass it. Otherwise rate limits can group all visitors under the proxy IP. In-memory rate limits are per process and reset on restart; multi-instance deployments need a shared rate-limit store.
 
 Contact submissions are stored in MongoDB; this application does not send email notifications or expose a public inbox endpoint.
+
+## Authorship and reuse
+
+Created by **Shivam Sagar**. The original repository is [Shivam6050/Portfolio](https://github.com/Shivam6050/Portfolio). See [COPYRIGHT.txt](COPYRIGHT.txt) for the authorship notice and permission contact. Third-party materials retain their respective licenses.
+
+The visible signature and repository history document attribution; they cannot prevent someone from modifying a copy.

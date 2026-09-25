@@ -2200,3 +2200,15 @@ section[id] { scroll-margin-top: 96px; }
 
 .project-preview-pause { position: absolute; z-index: 5; top: 14px; left: 14px; padding: 7px 9px; background: #f2ede4; color: #141413; font: 9px "JetBrains Mono", monospace; border: 1px solid rgba(20,20,19,.2); cursor: pointer; }
 .project-preview-pause:disabled { cursor: default; }
+
+/* Artist signature: lightweight, selectable lettering with an ink flourish. */
+.artist-credit { display: flex; align-items: center; justify-content: space-between; gap: 24px; border-top: 1px solid rgba(20,20,19,.14); padding-top: 28px; padding-bottom: 32px; }
+.artist-signature { display: inline-flex; flex-direction: column; width: 240px; flex-shrink: 0; color: #141413; transform: rotate(-4deg); }
+.artist-signature-name { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-size: 42px; line-height: 1.1; letter-spacing: -1.5px; }
+.artist-signature-dot { color: #b8431a; }
+.artist-signature svg { width: 100%; height: 24px; fill: none; stroke: #b8431a; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.artist-credit-copy { font-size: 12px; line-height: 1.8; color: #6b6760; text-align: right; }
+.artist-credit-copy p { margin: 0; }
+.artist-credit-copy a { text-decoration: underline; text-underline-offset: 4px; }
+.artist-signature:focus-visible { outline: 2px solid #b8431a; outline-offset: 8px; }
+@media (max-width: 640px) { .artist-credit { flex-direction: column; align-items: flex-start; } .artist-credit-copy { text-align: left; } }

@@ -597,259 +597,12 @@ textarea {
 }
 
 
-.contact-grid {
-  position: relative;
-  perspective: 1800px;
-}
-
-.contact-panel-stage {
-  position: relative;
-  min-width: 0;
-  overflow: visible !important;
-}
-
-.contact-particle-field {
-  position: absolute;
-  z-index: 1;
-  inset: -34% -28%;
-  pointer-events: none;
-  overflow: visible !important;
-  opacity: 1;
-  transform: translateZ(0);
-}
-
-.contact-particle-field > div {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  overflow: visible !important;
-}
-
-.contact-particle-field canvas {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  display: block;
-  overflow: visible !important;
-}
-
-.contact-panel-stage .contact-panel-3d {
-  position: relative;
-  z-index: 2;
-}
-
-.contact-section,
-.contact-grid {
-  overflow: visible !important;
-}
-
-
-
-.contact-panel-3d {
-  --contact-mx: 50%;
-  --contact-my: 50%;
-  --contact-rx: 0deg;
-  --contact-ry: 0deg;
-  position: relative;
-  transform: rotateX(var(--contact-rx)) rotateY(var(--contact-ry)) translateZ(0);
-  transform-style: preserve-3d;
-  will-change: transform;
-  transition: transform .55s cubic-bezier(.16,1,.3,1), box-shadow .55s ease;
-  overflow: visible;
-  isolation: isolate;
-  box-shadow: 10px 12px 0 rgba(20,20,19,.045);
-}
-
-.contact-panel-3d::before {
-  content: "";
-  position: absolute;
-  inset: 9px -9px -9px 9px;
-  z-index: -4;
-  border: 1px solid rgba(20,20,19,.09);
-  background: #e8e1d5;
-  transform: translateZ(-26px);
-  transition: transform .55s cubic-bezier(.16,1,.3,1);
-}
-
-.contact-panel-3d::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  pointer-events: none;
-  background:
-    linear-gradient(115deg, rgba(255,255,255,.16), transparent 30%),
-    radial-gradient(circle at 50% 0%, rgba(184,67,26,.10), transparent 38%);
-  mix-blend-mode: screen;
-  opacity: 0;
-  transition: opacity .35s ease;
-}
-
-.contact-panel-3d:hover {
-  box-shadow: 18px 22px 45px rgba(20,20,19,.12);
-}
-
-.contact-panel-3d:hover::before {
-  transform: translateZ(-38px) translate(4px, 5px);
-}
-
-.contact-panel-3d:hover::after {
-  opacity: 1;
-}
-
-.contact-form-surface {
-  position: relative;
-  z-index: 3;
-  transform: translateZ(30px);
-  transform-style: preserve-3d;
-  overflow: hidden;
-  border: 1px solid rgba(20,20,19,.16);
-  background: #ebe5d8;
-  box-shadow: 0 24px 60px rgba(20,20,19,.11);
-}
-
-.contact-depth-grid {
-  position: absolute;
-  z-index: -3;
-  inset: -7% -8% -9%;
-  pointer-events: none;
-  opacity: .25;
-  transform: translateZ(-72px) rotateX(58deg) translateY(12%);
-  transform-origin: center bottom;
-  background-image:
-    linear-gradient(rgba(20,20,19,.10) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(20,20,19,.10) 1px, transparent 1px);
-  background-size: 32px 32px;
-  mask-image: linear-gradient(to bottom, transparent 5%, #000 48%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 5%, #000 48%, transparent 100%);
-}
-
-.contact-panel-3d:hover .contact-depth-grid {
-  opacity: .38;
-}
-
-.contact-depth-orbit {
-  position: absolute;
-  z-index: -2;
-  left: 50%;
-  top: 50%;
-  width: 76%;
-  height: 40%;
-  border: 1px solid rgba(20,20,19,.16);
-  border-radius: 50%;
-  pointer-events: none;
-  transform-style: preserve-3d;
-  animation: contact-orbit-drift 15s linear infinite;
-}
-
-.contact-depth-orbit-a {
-  transform: translate3d(-50%,-50%,18px) rotateX(66deg) rotateZ(-14deg);
-}
-
-.contact-depth-orbit-b {
-  width: 62%;
-  height: 31%;
-  border-color: rgba(184,67,26,.30);
-  animation-duration: 19s;
-  animation-direction: reverse;
-  transform: translate3d(-50%,-50%,4px) rotateX(66deg) rotateZ(22deg);
-}
-
-@keyframes contact-orbit-drift {
-  from { rotate: 0deg; }
-  to { rotate: 360deg; }
-}
-
-.contact-depth-glow {
-  position: absolute;
-  z-index: 4;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(circle 110px at var(--contact-mx) var(--contact-my), rgba(184,67,26,.16), transparent 72%),
-    radial-gradient(circle 260px at var(--contact-mx) var(--contact-my), rgba(255,255,255,.13), transparent 70%);
-  mix-blend-mode: screen;
-  opacity: .35;
-  transform: translateZ(38px);
-  transition: opacity .7s ease;
-}
-
-.contact-panel-3d:hover .contact-depth-glow {
-  opacity: 1;
-}
-
-.contact-depth-corner {
-  position: absolute;
-  z-index: 6;
-  width: 30px;
-  height: 30px;
-  pointer-events: none;
-  opacity: .65;
-}
-
-.contact-depth-corner::before,
-.contact-depth-corner::after {
-  content: "";
-  position: absolute;
-  background: #b8431a;
-}
-
-.contact-depth-corner::before { width: 30px; height: 1px; }
-.contact-depth-corner::after { width: 1px; height: 30px; }
-
-.contact-depth-corner-tl {
-  left: -15px;
-  top: -15px;
-  transform: translateZ(55px);
-}
-
-.contact-depth-corner-br {
-  right: -15px;
-  bottom: -15px;
-  transform: rotate(180deg) translateZ(55px);
-}
-
-.contact-panel-3d {
-  overflow: visible;
-  background: transparent;
-}
-
-.contact-particle-canvas {
-  position: absolute;
-  inset: -24% -20%;
-  z-index: 1;
-  pointer-events: none;
-  overflow: visible;
-  opacity: .78;
-  transform: translateZ(-18px) scale(1.04);
-  transform-origin: center;
-}
-
-.contact-particle-canvas canvas {
-  display: block;
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.contact-form-surface .form-header,
-.contact-form-surface form {
-  position: relative;
-  z-index: 3;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .contact-panel-3d {
-    transform: none !important;
-    transition: none;
-  }
-  .contact-panel-3d::before,
-  .contact-depth-orbit,
-  .contact-particle-canvas {
-    animation: none !important;
-  }
-}
+/* Shared particle atmosphere, isolated behind the contact form. */
+.contact-panel-stage { position: relative; min-width: 0; isolation: isolate; align-self: center; }
+.contact-particle-field { position: absolute; inset: -28% -22%; z-index: 0; pointer-events: none; opacity: .9; }
+.contact-particle-field > div, .contact-particle-field canvas { width: 100% !important; height: 100% !important; display: block; }
+.contact-panel-stage .contact-panel-3d { position: relative; z-index: 1; transform: none; }
+.contact-form-surface { position: relative; background: #f5f0e7; }
 
 /* --- Contact / footer system --- */
 .contact-section { position: relative; }
@@ -876,41 +629,6 @@ textarea {
   letter-spacing:.15em;
   color:rgba(20,20,19,.5);
 }
-.contact-panel.contact-panel-3d {
-  overflow: visible;
-  background: transparent;
-}
-
-.contact-panel.contact-panel-3d .contact-particle-canvas {
-  display: block;
-  visibility: visible;
-  z-index: 2;
-  inset: -34% -30%;
-  opacity: 1;
-  overflow: visible;
-  transform: translateZ(-14px) scale(1.02);
-  transform-origin: center;
-}
-
-.contact-panel.contact-panel-3d .contact-particle-canvas > div,
-.contact-panel.contact-panel-3d .contact-particle-canvas canvas {
-  width: 100% !important;
-  height: 100% !important;
-  min-width: 100% !important;
-  min-height: 100% !important;
-  display: block;
-  overflow: visible !important;
-}
-
-.contact-panel.contact-panel-3d .contact-form-surface {
-  z-index: 4;
-}
-
-.contact-panel.contact-panel-3d .contact-form-surface {
-  position: relative;
-  z-index: 3;
-}
-
 .contact-panel form { padding: 28px 28px 24px; }
 .contact-panel .form-input {
   background: transparent;
@@ -2485,4 +2203,48 @@ textarea {
   .project-particle-canvas {
     opacity: .35;
   }
+}
+
+/* Editorial finish: consistent margins, softer surfaces and clear controls. */
+.site-header { background: rgba(242,237,228,.94); backdrop-filter: blur(16px); }
+.site-header .header-inner { width: min(100% - 48px, 1280px); }
+section[id] { scroll-margin-top: 96px; }
+.section-title { text-wrap: balance; }
+.section-lede { max-width: 58ch; line-height: 1.8; }
+.hero-summary { max-width: 68ch; line-height: 1.85; }
+.hero-kicker { border-bottom-color: rgba(184,67,26,.22); }
+.project-card-featured { padding-bottom: 64px; }
+.project-list { gap: 64px; }
+.project-heading-row { padding-bottom: 12px; border-bottom: 1px solid rgba(184,67,26,.18); }
+.project-tag { padding: 6px 9px; background: rgba(184,67,26,.07); border: 1px solid rgba(184,67,26,.13); }
+.project-detail { color: #6b6760; }
+.logo-grid-item { border-color: rgba(20,20,19,.1); background: rgba(255,255,255,.25); transition: background .2s, border-color .2s; }
+.logo-grid-item:hover { background: rgba(255,255,255,.55); border-color: rgba(184,67,26,.35); }
+.contact-section { border-top: 1px solid rgba(184,67,26,.2); }
+.contact-grid { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(40px, 7vw, 100px); align-items: center; }
+.contact-grid > div:first-child { position: relative; z-index: 2; }
+.contact-panel-stage .contact-panel { border: 1px solid rgba(184,67,26,.22); border-radius: 4px; box-shadow: 0 24px 70px rgba(65,44,24,.09), 8px 8px 0 rgba(184,67,26,.045); }
+.contact-panel .form-header { padding: 20px 28px; background: #eee6d9; color: #6b5142; gap: 12px; flex-wrap: wrap; }
+.form-status { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+.form-status i { width: 5px; height: 5px; border-radius: 50%; background: #4a5d3a; box-shadow: 0 0 0 3px rgba(74,93,58,.09); }
+.contact-panel form { padding: 32px; }
+.contact-panel .form-label { color: #665b50; font-size: 10px; }
+.contact-panel .form-input { margin-top: 12px; padding: 14px 12px; border: 1px solid rgba(20,20,19,.15); border-radius: 2px; background: rgba(255,255,255,.4); font-size: 16px; transition: border-color .2s, box-shadow .2s; }
+.contact-panel .form-input:focus { border: 1px solid #b8431a; box-shadow: 0 0 0 3px rgba(184,67,26,.08); }
+.contact-panel .form-input::placeholder { color: #83796f; }
+.contact-panel .btn-ink { min-height: 46px; padding: 14px 20px; }
+.contact-details a { letter-spacing: .02em; overflow-wrap: anywhere; }
+.site-footer { border-top: 1px solid rgba(184,67,26,.2); background: #e9e2d5; }
+:where(a, button):focus-visible { outline: 2px solid #b8431a; outline-offset: 5px; }
+@media (max-width: 900px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 64px; }
+  .contact-panel-stage { width: 100%; max-width: 640px; margin-inline: auto; }
+}
+@media (max-width: 640px) {
+  .site-header .header-inner { width: calc(100% - 32px); gap: 14px; }
+  .contact-panel form { padding: 24px 18px; }
+  .contact-panel .form-header { padding: 18px; }
+  .contact-particle-field { inset: -20% -12%; opacity: .75; }
+  .project-card-featured { padding-bottom: 36px; }
+  .project-list { gap: 48px; }
 }

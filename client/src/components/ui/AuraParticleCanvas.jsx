@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -44,7 +44,7 @@ function AuraParticles({ motion = true, speedMultiplier = 1, spreadMultiplier = 
 
   useFrame((state, delta) => {
     if (!points.current) return;
-    const t = state.clock.elapsedTime;
+    const t = motion ? state.clock.elapsedTime : 0;
     const arr = points.current.geometry.attributes.position.array;
 
     for (let i = 0; i < PARTICLE_COUNT; i += 1) {
@@ -89,11 +89,11 @@ function AuraParticles({ motion = true, speedMultiplier = 1, spreadMultiplier = 
   );
 }
 
-function EmberCore() {
+function EmberCore({ motion }) {
   const ref = useRef(null);
   useFrame((state) => {
     if (!ref.current) return;
-    const pulse = 0.9 + Math.sin(state.clock.elapsedTime * 2.8) * 0.1;
+    const pulse = 0.9 + Math.sin((motion ? state.clock.elapsedTime : 0) * 2.8) * 0.1;
     ref.current.scale.setScalar(pulse);
   });
 
@@ -109,20 +109,28 @@ function Scene({ motion, speedMultiplier, spreadMultiplier }) {
   return (
     <group position={[0, 0, -0.7]}>
       <AuraParticles motion={motion} speedMultiplier={speedMultiplier} spreadMultiplier={spreadMultiplier} />
-      <EmberCore />
+      <EmberCore motion={motion} />
     </group>
   );
 }
 
 export default function AuraParticleCanvas({ motion = true, speedMultiplier = 1, spreadMultiplier = 1 }) {
+  const [reducedMotion, setReducedMotion] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  useEffect(() => {
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(preference.matches);
+    preference.addEventListener("change", update);
+    return () => preference.removeEventListener("change", update);
+  }, []);
+  const animate = motion && !reducedMotion;
   return (
     <Canvas
       dpr={[1, 1.5]}
       camera={{ position: [0, 0, 5], fov: 36, near: 0.1, far: 20 }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-      frameloop="always"
+      frameloop={animate ? "always" : "demand"}
     >
-      <Scene motion={motion} speedMultiplier={speedMultiplier} spreadMultiplier={spreadMultiplier} />
+      <Scene motion={animate} speedMultiplier={speedMultiplier} spreadMultiplier={spreadMultiplier} />
     </Canvas>
   );
 }

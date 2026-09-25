@@ -51,7 +51,7 @@ function CareerConstellation() {
       ref.current.rotation.x += delta * (index === 1 ? 0.08 : 0.025);
     });
 
-    const arr = pointsGeometry.current?.attributes.position.array;
+    const arr = pointsGeometry.current?.geometry?.attributes.position?.array;
     if (!arr) return;
 
     for (let i = 0; i < particles.length; i += 1) {
@@ -63,7 +63,7 @@ function CareerConstellation() {
       arr[i * 3 + 2] = Math.sin(a) * p.radius * 0.62;
     }
 
-    pointsGeometry.current.attributes.position.needsUpdate = true;
+    pointsGeometry.current.geometry.attributes.position.needsUpdate = true;
   });
 
   const pointsGeometry = useRef(null);

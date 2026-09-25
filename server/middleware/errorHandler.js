@@ -6,7 +6,11 @@ export function notFound(req, res) {
 }
 
 export function errorHandler(error, req, res, next) {
-  console.error(error);
+  // Do not log request bodies, credentials, or database documents.
+  console.error({ name: error.name, code: error.code, type: error.type });
+  if (error.type === "entity.parse.failed") {
+    return res.status(400).json({ success: false, message: "Invalid JSON request body" });
+  }
 
   if (error.code === 11000) {
     return res.status(409).json({ success: false, message: "A record with that value already exists" });

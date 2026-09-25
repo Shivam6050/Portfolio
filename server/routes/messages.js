@@ -1,3 +1,4 @@
+import { withDatabase } from "../middleware/withDatabase.js";
 import { Router } from "express";
 import rateLimit from "express-rate-limit";
 import { createMessage } from "../controllers/messageController.js";
@@ -12,6 +13,6 @@ const messageLimiter = rateLimit({
   message: { success: false, message: "Too many messages. Please try again in a few minutes." }
 });
 
-router.post("/", messageLimiter, createMessage);
+router.post("/", messageLimiter, withDatabase, createMessage);
 
 export default router;

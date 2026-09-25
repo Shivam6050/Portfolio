@@ -48,6 +48,7 @@ test('server errors do not expose internal details', (t) => {
 
 test('health, missing routes and malformed JSON respond without a database', async (t) => {
   process.env.NODE_ENV = 'test';
+  t.mock.method(mongoose, "connect", async () => { throw new Error("Unexpected database connection"); });
   const { default: app } = await import('../server.js');
   const server = app.listen(0, '127.0.0.1');
   await new Promise(resolve => server.once('listening', resolve));
@@ -55,6 +56,11 @@ test('health, missing routes and malformed JSON respond without a database', asy
   const base = 'http://127.0.0.1:' + server.address().port;
   assert.equal((await fetch(base + '/api/health')).status, 200);
   assert.equal((await fetch(base + '/missing')).status, 404);
+  assert.equal((await fetch(base + '/api/messages')).status, 404);
+  assert.equal((await fetch(base + '/api/projects', { method: 'DELETE' })).status, 404);
+  assert.equal((await fetch(base + '/api/stats/missing')).status, 404);
   const res = await fetch(base + '/api/messages', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{broken' });
   assert.equal(res.status, 400);
+  assert.equal((await res.json()).message, "Invalid JSON request body");
+  assert.equal(mongoose.connect.mock.callCount(), 0);
 });

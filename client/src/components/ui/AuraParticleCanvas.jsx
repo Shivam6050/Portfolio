@@ -1,5 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useEffect, useMemo, useRef } from "react";
+import { useFrame } from "@react-three/fiber";
+import Canvas from "./SafeCanvas.jsx";
+import useReducedMotion from "../../hooks/useReducedMotion.js";
 import * as THREE from "three";
 
 const RUST = "#b8431a";
@@ -25,6 +27,10 @@ function createParticleTexture() {
 
 function AuraParticles({ motion = true, speedMultiplier = 1, spreadMultiplier = 1 }) {
   const particleTexture = useMemo(createParticleTexture, []);
+  useEffect(() => {
+    particleTexture.needsUpdate = true;
+    return () => particleTexture.dispose();
+  }, [particleTexture]);
   const points = useRef(null);
   const data = useMemo(() => Array.from({ length: PARTICLE_COUNT }, (_, i) => {
     const a = (i / PARTICLE_COUNT) * Math.PI * 2;
@@ -115,13 +121,7 @@ function Scene({ motion, speedMultiplier, spreadMultiplier }) {
 }
 
 export default function AuraParticleCanvas({ motion = true, speedMultiplier = 1, spreadMultiplier = 1 }) {
-  const [reducedMotion, setReducedMotion] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  useEffect(() => {
-    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReducedMotion(preference.matches);
-    preference.addEventListener("change", update);
-    return () => preference.removeEventListener("change", update);
-  }, []);
+  const reducedMotion = useReducedMotion();
   const animate = motion && !reducedMotion;
   return (
     <Canvas

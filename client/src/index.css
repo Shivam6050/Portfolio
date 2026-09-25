@@ -2197,3 +2197,6 @@ section[id] { scroll-margin-top: 96px; }
   .toolkit-group::after { display: none; }
   .toolkit-sheen { display: none; }
 }
+
+.project-preview-pause { position: absolute; z-index: 5; top: 14px; left: 14px; padding: 7px 9px; background: #f2ede4; color: #141413; font: 9px "JetBrains Mono", monospace; border: 1px solid rgba(20,20,19,.2); cursor: pointer; }
+.project-preview-pause:disabled { cursor: default; }

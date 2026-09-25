@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { PROJECTS } from "../data/constants.js";
 import { api } from "../api/client.js";
 
@@ -12,11 +12,21 @@ export function AppProvider({ children }) {
   const [stats, setStats] = useState({ views: 0 });
   const [toasts, setToasts] = useState([]);
 
-  const toast = (message, type = "success") => {
+  const timers = useRef(new Set());
+  useEffect(() => () => {
+    timers.current.forEach(timer => window.clearTimeout(timer));
+    timers.current.clear();
+  }, []);
+
+  const toast = useCallback((message, type = "success") => {
     const id = `portfolio-${Date.now()}-${Math.random()}`;
     setToasts((current) => [...current, { id, message, type }]);
-    window.setTimeout(() => setToasts((current) => current.filter((item) => item.id !== id)), 3800);
-  };
+    const timer = window.setTimeout(() => {
+      timers.current.delete(timer);
+      setToasts((current) => current.filter((item) => item.id !== id));
+    }, 3800);
+    timers.current.add(timer);
+  }, []);
 
   useEffect(() => {
     let active = true;
@@ -54,7 +64,7 @@ export function AppProvider({ children }) {
 
   const value = useMemo(
     () => ({ projects, loading, error, stats, toasts, toast }),
-    [projects, loading, error, stats, toasts]
+    [projects, loading, error, stats, toasts, toast]
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

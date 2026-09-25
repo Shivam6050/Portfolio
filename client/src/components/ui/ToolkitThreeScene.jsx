@@ -1,5 +1,7 @@
 import { useMemo, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
+import Canvas from "./SafeCanvas.jsx";
+import useReducedMotion from "../../hooks/useReducedMotion.js";
 import * as THREE from "three";
 
 const RUST = "#b8431a";
@@ -7,7 +9,7 @@ const INK = "#141413";
 
 const NODE_COUNT = 18;
 
-function ToolkitSystem() {
+function ToolkitSystem({ motion }) {
   const root = useRef(null);
   const core = useRef(null);
   const inner = useRef(null);
@@ -44,6 +46,7 @@ function ToolkitSystem() {
   const particles = useRef(null);
 
   useFrame((state, delta) => {
+    if (!motion) return;
     const t = state.clock.elapsedTime;
 
     if (root.current) {
@@ -194,6 +197,7 @@ function ToolkitSystem() {
 }
 
 export default function ToolkitThreeScene() {
+  const reducedMotion = useReducedMotion();
   return (
     <Canvas
       dpr={[1, 1.5]}
@@ -203,9 +207,9 @@ export default function ToolkitThreeScene() {
         alpha: true,
         powerPreference: "high-performance"
       }}
-      frameloop="always"
+      frameloop={reducedMotion ? "demand" : "always"}
     >
-      <ToolkitSystem />
+      <ToolkitSystem motion={!reducedMotion} />
     </Canvas>
   );
 }

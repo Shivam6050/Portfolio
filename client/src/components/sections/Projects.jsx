@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import useReducedMotion from "../../hooks/useReducedMotion.js";
 import Logo from "../ui/Logo.jsx";
 import { useApp } from "../../context/AppContext.jsx";
 import { PORTFOLIO_CONFIG } from "../../data/constants.js";
@@ -14,6 +15,8 @@ function Skeleton() {
 }
 
 function ProjectPreview({ project }) {
+  const reducedMotion = useReducedMotion();
+  const [paused, setPaused] = useState(false);
   const previews = project.previews?.length ? project.previews : [project.preview];
   const handlePointerMove = (event) => {
     const surface = event.currentTarget;
@@ -36,13 +39,13 @@ function ProjectPreview({ project }) {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    if (previews.length < 2) return undefined;
+    if (previews.length < 2 || paused || reducedMotion) return undefined;
     const timer = window.setInterval(
       () => setActive((current) => (current + 1) % previews.length),
       4500
     );
     return () => window.clearInterval(timer);
-  }, [previews.length]);
+  }, [previews.length, paused, reducedMotion]);
 
   const move = (direction) => {
     setActive((current) => (current + direction + previews.length) % previews.length);
@@ -78,7 +81,7 @@ function ProjectPreview({ project }) {
         href={project.demo || project.code}
         target="_blank"
         rel="noreferrer"
-        aria-label={`Open live ${project.title}`}
+        aria-label={`${project.demo ? "Open live" : "View source for"} ${project.title}`}
       >
         <img
           className="project-preview-image"
@@ -91,11 +94,14 @@ function ProjectPreview({ project }) {
           <span>{project.demo ? "Open live site" : "View source"}</span>
           <span aria-hidden="true">↗</span>
         </span>
-        <span className="project-preview-depth-label" aria-hidden="true">SHIVAM / 3D WORKSPACE</span>
+        {previews.length === 1 && <span className="project-preview-depth-label" aria-hidden="true">SHIVAM / 3D WORKSPACE</span>}
       </a>
 
       {previews.length > 1 && (
         <>
+          <button className="project-preview-pause" type="button" onClick={() => setPaused(value => !value)} aria-pressed={paused} disabled={reducedMotion}>
+            {reducedMotion ? "Motion off" : paused ? "Play previews" : "Pause previews"}
+          </button>
           <button
             type="button"
             className="project-preview-arrow project-preview-prev"

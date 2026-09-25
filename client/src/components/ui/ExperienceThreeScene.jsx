@@ -1,11 +1,13 @@
 import { useMemo, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
+import Canvas from "./SafeCanvas.jsx";
+import useReducedMotion from "../../hooks/useReducedMotion.js";
 import * as THREE from "three";
 
 const RUST = "#b8431a";
 const INK = "#141413";
 
-function CareerConstellation() {
+function CareerConstellation({ motion }) {
   const group = useRef(null);
   const core = useRef(null);
   const orbitA = useRef(null);
@@ -30,10 +32,11 @@ function CareerConstellation() {
   const positions = useMemo(() => new Float32Array(90 * 3), []);
 
   useFrame((state, delta) => {
-    const t = state.clock.elapsedTime;
+    const t = motion ? state.clock.elapsedTime : 0;
+    if (!motion) delta = 0;
     if (group.current) {
-      const targetX = state.pointer.y * 0.08;
-      const targetY = state.pointer.x * 0.1;
+      const targetX = motion ? state.pointer.y * 0.08 : 0;
+      const targetY = motion ? state.pointer.x * 0.1 : 0;
       group.current.rotation.x = THREE.MathUtils.damp(group.current.rotation.x, targetX, 2.5, delta);
       group.current.rotation.y = THREE.MathUtils.damp(group.current.rotation.y, targetY, 2.5, delta);
     }
@@ -151,14 +154,15 @@ function CareerConstellation() {
 }
 
 export default function ExperienceThreeScene() {
+  const reducedMotion = useReducedMotion();
   return (
     <Canvas
       dpr={[1, 1.5]}
       camera={{ position: [0, 0, 4.6], fov: 34, near: 0.1, far: 20 }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-      frameloop="always"
+      frameloop={reducedMotion ? "demand" : "always"}
     >
-      <CareerConstellation />
+      <CareerConstellation motion={!reducedMotion} />
     </Canvas>
   );
 }

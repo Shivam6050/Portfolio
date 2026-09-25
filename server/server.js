@@ -2,7 +2,6 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 
-import { connectDB } from "./config/db.js";
 
 import projectRoutes from "./routes/projects.js";
 import messageRoutes from "./routes/messages.js";
@@ -89,14 +88,7 @@ app.get("/api/health", (req, res) => {
 // API Routes
 // --------------------------------------------------
 
-app.use(["/api/projects", "/api/messages", "/api/stats"], async (req, res, next) => {
-  try {
-    await connectDB();
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
+
 
 app.use("/api/projects", projectRoutes);
 

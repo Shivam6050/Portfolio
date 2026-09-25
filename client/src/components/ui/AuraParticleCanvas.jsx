@@ -5,7 +5,26 @@ import * as THREE from "three";
 const RUST = "#b8431a";
 const PARTICLE_COUNT = 180;
 
-function AuraParticles({ motion = true }) {
+function createParticleTexture() {
+  const size = 64;
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext("2d");
+  const gradient = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+  gradient.addColorStop(0, "rgba(255,255,255,1)");
+  gradient.addColorStop(0.72, "rgba(255,255,255,0.98)");
+  gradient.addColorStop(1, "rgba(255,255,255,0)");
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, size, size);
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.needsUpdate = true;
+  return texture;
+}
+
+
+function AuraParticles({ motion = true, speedMultiplier = 1 }) {
+  const particleTexture = useMemo(createParticleTexture, []);
   const points = useRef(null);
   const data = useMemo(() => Array.from({ length: PARTICLE_COUNT }, (_, i) => {
     const a = (i / PARTICLE_COUNT) * Math.PI * 2;
@@ -30,7 +49,7 @@ function AuraParticles({ motion = true }) {
 
     for (let i = 0; i < PARTICLE_COUNT; i += 1) {
       const p = data[i];
-      const cycle = (t * p.speed + p.phase) % 1;
+      const cycle = (t * p.speed * speedMultiplier + p.phase) % 1;
       const travel = 0.08 + cycle * 2.65;
       const breathing = 1 + Math.sin(t * 1.7 + p.phase) * 0.1;
       const arc = Math.sin(cycle * Math.PI) * 0.62 * p.spread;
@@ -57,6 +76,8 @@ function AuraParticles({ motion = true }) {
       </bufferGeometry>
       <pointsMaterial
         size={0.07}
+        map={particleTexture}
+        alphaTest={0.02}
         sizeAttenuation
         color={RUST}
         transparent
@@ -84,16 +105,16 @@ function EmberCore() {
   );
 }
 
-function Scene({ motion }) {
+function Scene({ motion, speedMultiplier }) {
   return (
     <group position={[0, 0, -0.7]}>
-      <AuraParticles motion={motion} />
+      <AuraParticles motion={motion} speedMultiplier={speedMultiplier} />
       <EmberCore />
     </group>
   );
 }
 
-export default function AuraParticleCanvas({ motion = true }) {
+export default function AuraParticleCanvas({ motion = true, speedMultiplier = 1 }) {
   return (
     <Canvas
       dpr={[1, 1.5]}
@@ -101,7 +122,7 @@ export default function AuraParticleCanvas({ motion = true }) {
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       frameloop="always"
     >
-      <Scene motion={motion} />
+      <Scene motion={motion} speedMultiplier={speedMultiplier} />
     </Canvas>
   );
 }

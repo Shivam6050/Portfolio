@@ -839,10 +839,10 @@ textarea {
   display: block;
   visibility: visible;
   z-index: 2;
-  inset: -58% -48%;
+  inset: -34% -30%;
   opacity: 1;
   overflow: visible;
-  transform: translateZ(-14px) scale(1.08);
+  transform: translateZ(-14px) scale(1.02);
   transform-origin: center;
 }
 

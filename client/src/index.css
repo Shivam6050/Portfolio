@@ -2171,3 +2171,29 @@ section[id] { scroll-margin-top: 96px; }
 .toolkit-icon { flex-basis: 32px; width: 32px; height: 32px; }
 .toolkit-brand-logo { display: block; width: 26px; height: 26px; object-fit: contain; filter: none; opacity: 1; }
 .toolkit-concept-icon { display: block; flex-shrink: 0; color: #6b6760; }
+
+/* Toolkit depth: pointer-driven perspective without changing brand artwork. */
+.toolkit-reveal { min-width: 0; perspective: 1100px; }
+.toolkit-reveal .toolkit-group { height: 100%; transform-style: preserve-3d; transition: transform .35s ease, box-shadow .35s ease, border-color .25s ease; }
+.toolkit-group::after { content: ""; position: absolute; inset: 7px -5px -7px 5px; border: 1px solid rgba(184,67,26,.16); border-radius: 5px; background: #e9e1d4; transform: translateZ(-14px); pointer-events: none; }
+.toolkit-sheen { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 20%), rgba(255,255,255,.7), transparent 65%); opacity: 0; transition: opacity .3s ease; }
+.toolkit-group-meta, .toolkit-group h3, .toolkit-description { position: relative; transform: translateZ(18px); }
+.toolkit-card-grid { position: relative; transform-style: preserve-3d; transform: translateZ(24px); }
+.toolkit-card { transition: transform .25s ease, box-shadow .25s ease, background .2s ease; }
+@media (prefers-reduced-motion: no-preference) {
+  .toolkit-reveal.is-visible { animation: toolkit-arrive .7s cubic-bezier(.16,1,.3,1) var(--reveal-delay, 0ms) backwards; }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .toolkit-reveal .toolkit-group:hover { transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-5px); box-shadow: 0 24px 36px rgba(65,44,24,.12); }
+  .toolkit-group:hover .toolkit-sheen { opacity: 1; }
+  .toolkit-card:hover { transform: translateZ(12px) translateY(-2px); box-shadow: 0 5px 12px rgba(65,44,24,.08); }
+}
+@keyframes toolkit-arrive {
+  from { opacity: 0; transform: translateY(26px) rotateX(5deg); }
+  to { opacity: 1; transform: translateY(0) rotateX(0); }
+}
+@media (prefers-reduced-motion: reduce), (pointer: coarse) {
+  .toolkit-reveal .toolkit-group, .toolkit-group-meta, .toolkit-group h3, .toolkit-description, .toolkit-card-grid, .toolkit-card { transform: none; }
+  .toolkit-group::after { display: none; }
+  .toolkit-sheen { display: none; }
+}

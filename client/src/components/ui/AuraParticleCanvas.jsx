@@ -23,7 +23,7 @@ function createParticleTexture() {
 }
 
 
-function AuraParticles({ motion = true, speedMultiplier = 1 }) {
+function AuraParticles({ motion = true, speedMultiplier = 1, spreadMultiplier = 1 }) {
   const particleTexture = useMemo(createParticleTexture, []);
   const points = useRef(null);
   const data = useMemo(() => Array.from({ length: PARTICLE_COUNT }, (_, i) => {
@@ -50,9 +50,9 @@ function AuraParticles({ motion = true, speedMultiplier = 1 }) {
     for (let i = 0; i < PARTICLE_COUNT; i += 1) {
       const p = data[i];
       const cycle = (t * p.speed * speedMultiplier + p.phase) % 1;
-      const travel = 0.08 + cycle * 2.65;
+      const travel = (0.08 + cycle * 2.65) * spreadMultiplier;
       const breathing = 1 + Math.sin(t * 1.7 + p.phase) * 0.1;
-      const arc = Math.sin(cycle * Math.PI) * 0.62 * p.spread;
+      const arc = Math.sin(cycle * Math.PI) * 0.62 * p.spread * spreadMultiplier;
 
       arr[i * 3] = Math.cos(p.angle) * travel * p.spread * breathing +
         Math.cos(p.angle + Math.PI / 2) * arc;
@@ -105,16 +105,16 @@ function EmberCore() {
   );
 }
 
-function Scene({ motion, speedMultiplier }) {
+function Scene({ motion, speedMultiplier, spreadMultiplier }) {
   return (
     <group position={[0, 0, -0.7]}>
-      <AuraParticles motion={motion} speedMultiplier={speedMultiplier} />
+      <AuraParticles motion={motion} speedMultiplier={speedMultiplier} spreadMultiplier={spreadMultiplier} />
       <EmberCore />
     </group>
   );
 }
 
-export default function AuraParticleCanvas({ motion = true, speedMultiplier = 1 }) {
+export default function AuraParticleCanvas({ motion = true, speedMultiplier = 1, spreadMultiplier = 1 }) {
   return (
     <Canvas
       dpr={[1, 1.5]}
@@ -122,7 +122,7 @@ export default function AuraParticleCanvas({ motion = true, speedMultiplier = 1 
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       frameloop="always"
     >
-      <Scene motion={motion} speedMultiplier={speedMultiplier} />
+      <Scene motion={motion} speedMultiplier={speedMultiplier} spreadMultiplier={spreadMultiplier} />
     </Canvas>
   );
 }

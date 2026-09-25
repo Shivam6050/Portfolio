@@ -1,5 +1,5 @@
 import { STACK_GROUPS, PORTFOLIO_CONFIG } from "../../data/constants.js";
-import Logo from "../ui/Logo.jsx";
+import ToolkitLogo from "../ui/ToolkitLogo.jsx";
 
 const descriptions = [
   "The foundations behind every build.",
@@ -34,7 +34,7 @@ export default function Stack() {
             <ul className="toolkit-card-grid">
               {group.items.map(([name, label]) => (
                 <li className="toolkit-card" key={name}>
-                  <span className="toolkit-icon"><Logo name={name} label={label} size={22} /></span>
+                  <span className="toolkit-icon"><ToolkitLogo name={name} /></span>
                   <span className="toolkit-label">{label}</span>
                 </li>
               ))}

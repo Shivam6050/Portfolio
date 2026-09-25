@@ -2166,3 +2166,8 @@ section[id] { scroll-margin-top: 96px; }
   .project-card-featured { padding-bottom: 36px; }
   .project-list { gap: 48px; }
 }
+
+/* Preserve original brand artwork, with a consistent slot beside each label. */
+.toolkit-icon { flex-basis: 32px; width: 32px; height: 32px; }
+.toolkit-brand-logo { display: block; width: 26px; height: 26px; object-fit: contain; filter: none; opacity: 1; }
+.toolkit-concept-icon { display: block; flex-shrink: 0; color: #6b6760; }

@@ -598,8 +598,40 @@ textarea {
 
 
 .contact-grid {
+  position: relative;
   perspective: 1800px;
 }
+
+.contact-panel-stage {
+  position: relative;
+  min-width: 0;
+  overflow: visible;
+  isolation: isolate;
+}
+
+.contact-particle-field {
+  position: absolute;
+  z-index: 0;
+  inset: -34% -28%;
+  pointer-events: none;
+  overflow: visible;
+  opacity: .95;
+}
+
+.contact-particle-field > div,
+.contact-particle-field canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  overflow: visible !important;
+}
+
+.contact-panel-stage .contact-panel-3d {
+  position: relative;
+  z-index: 2;
+}
+
+
 
 .contact-panel-3d {
   --contact-mx: 50%;

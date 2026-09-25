@@ -765,14 +765,20 @@ textarea {
   transform: rotate(180deg) translateZ(55px);
 }
 
+.contact-panel-3d {
+  overflow: visible;
+  background: transparent;
+}
+
 .contact-particle-canvas {
   position: absolute;
-  inset: -18% -12%;
+  inset: -24% -20%;
   z-index: 1;
   pointer-events: none;
   overflow: visible;
-  opacity: .62;
-  transform: translateZ(-18px);
+  opacity: .78;
+  transform: translateZ(-18px) scale(1.04);
+  transform-origin: center;
 }
 
 .contact-particle-canvas canvas {
@@ -2363,12 +2369,13 @@ textarea {
 /* --- Project atmosphere: exact same particle engine as the hero --- */
 .project-particle-canvas {
   position: absolute;
-  inset: -16% -12%;
+  inset: -28% -22%;
   z-index: 1;
   pointer-events: none;
   overflow: visible;
   opacity: .9;
-  transform: translateZ(-18px);
+  transform: translateZ(-18px) scale(1.08);
+  transform-origin: center;
 }
 
 .project-particle-canvas canvas {
@@ -2379,8 +2386,8 @@ textarea {
 
 @media (max-width: 800px) {
   .project-particle-canvas {
-    inset: -10% -8%;
-    opacity: .65;
+    inset: -18% -14%;
+    opacity: .7;
   }
 }
 

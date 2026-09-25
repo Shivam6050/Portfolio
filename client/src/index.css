@@ -1912,7 +1912,6 @@ textarea {
   }
 }
 
-<<<<<<< HEAD
 /* Match the navigation breakpoint to the desktop navigation visibility. */
 @media (min-width: 768px) and (max-width: 900px) {
   .header-inner .mobile-menu-button { display: inline-flex; }
@@ -1922,7 +1921,6 @@ textarea {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
-=======
 
 
 /* --- Portrait depth scene: 3D forms originate from behind the profile frame --- */
@@ -2488,5 +2486,3 @@ textarea {
     opacity: .35;
   }
 }
-
->>>>>>> 314caaec9e5c5fd6f02eb29cc776cb2540f4cd20

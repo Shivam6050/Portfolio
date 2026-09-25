@@ -34,7 +34,7 @@ export default function Hero() {
 
               <figure className="profile-frame">
                 <div className="profile-particle-field" aria-hidden="true">
-                  <AuraParticleCanvas motion />
+                  <AuraParticleCanvas motion speedMultiplier={0.55} />
                 </div>
                 <div className="profile-photo">
                   <img src={PROFILE.photo} alt="Portrait of Shivam Sagar" />

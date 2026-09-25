@@ -58,7 +58,7 @@ export const PROFILE = {
   location: "India",
   photo: PROFILE_PHOTO,
   summary:
-    "Computer Science Engineering undergraduate and Full Stack Developer with hands-on experience building production-oriented applications using React.js, Next.js, Node.js, Express.js, MongoDB, PostgreSQL, and TypeScript. Experienced in REST API development, authentication, database design, cloud deployment, testing, CI/CD, and backend architecture. Additional Backend AI Engineering experience includes integrating multiple third-party LLM APIs, usage metering, billing, AI workflows, retrieval-augmented workflows, and evaluation/testing for production AI systems.",
+    "I build full-stack applications and AI-powered backends, from React interfaces to APIs, databases and LLM integrations. Currently studying Computer Science and Engineering.",
   education: [
     {
       institution: "Arya College of Engineering",

@@ -1,4 +1,4 @@
-import AuraParticleCanvas from "../ui/AuraParticleCanvas.jsx";
+import AuraParticleCanvas from "../ui/DeferredScene.jsx";
 import { PROFILE, PORTFOLIO_CONFIG } from "../../data/constants.js";
 
 export default function Hero() {
@@ -37,7 +37,7 @@ export default function Hero() {
                   <AuraParticleCanvas motion speedMultiplier={0.55} />
                 </div>
                 <div className="profile-photo">
-                  <img src={PROFILE.photo} alt="Portrait of Shivam Sagar" />
+                  <img src={PROFILE.photo} alt="Portrait of Shivam Sagar" fetchPriority="high" decoding="async" />
                 </div>
                 <figcaption className="profile-caption">
                   <span>SHIVAM / SS</span>
@@ -50,7 +50,7 @@ export default function Hero() {
               <p className="hero-summary">{PROFILE.summary}</p>
               <div className="hero-actions">
                 <a className="btn-ink" href="#work">View selected work ↘</a>
-                <a className="tag" href={`mailto:${PROFILE.email}`}>Available for conversations</a>
+                <a className="tag" href={`mailto:${PROFILE.email}`}>Get in touch ↗</a>
               </div>
             </div>
           </div>

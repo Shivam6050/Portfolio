@@ -1,9 +1,10 @@
+import useVisible from "../../hooks/useVisible.js";
 import { useEffect, useState } from "react";
 import useReducedMotion from "../../hooks/useReducedMotion.js";
 import Logo from "../ui/Logo.jsx";
 import { useApp } from "../../context/AppContext.jsx";
 import { PORTFOLIO_CONFIG } from "../../data/constants.js";
-import AuraParticleCanvas from "../ui/AuraParticleCanvas.jsx";
+import AuraParticleCanvas from "../ui/DeferredScene.jsx";
 
 function Skeleton() {
   return (
@@ -16,9 +17,11 @@ function Skeleton() {
 
 function ProjectPreview({ project }) {
   const reducedMotion = useReducedMotion();
+  const [previewRef, visible] = useVisible();
   const [paused, setPaused] = useState(false);
   const previews = project.previews?.length ? project.previews : [project.preview];
   const handlePointerMove = (event) => {
+    if (reducedMotion || event.pointerType !== "mouse") return;
     const surface = event.currentTarget;
     const rect = surface.getBoundingClientRect();
     const x = ((event.clientX - rect.left) / rect.width) * 100;
@@ -39,13 +42,13 @@ function ProjectPreview({ project }) {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    if (previews.length < 2 || paused || reducedMotion) return undefined;
+    if (previews.length < 2 || paused || reducedMotion || !visible) return undefined;
     const timer = window.setInterval(
       () => setActive((current) => (current + 1) % previews.length),
       4500
     );
     return () => window.clearInterval(timer);
-  }, [previews.length, paused, reducedMotion]);
+  }, [previews.length, paused, reducedMotion, visible]);
 
   const move = (direction) => {
     setActive((current) => (current + direction + previews.length) % previews.length);
@@ -55,6 +58,7 @@ function ProjectPreview({ project }) {
 
   return (
     <div
+      ref={previewRef}
       className="project-preview-shell project-preview-3d"
       data-project-stage
       onPointerMove={handlePointerMove}
@@ -88,6 +92,7 @@ function ProjectPreview({ project }) {
           src={previews[active]}
           alt={`${project.title} live website preview`}
           loading="lazy"
+          decoding="async"
           draggable="false"
         />
         <span className="project-preview-overlay">

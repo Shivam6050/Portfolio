@@ -3,7 +3,7 @@ import { PROFILE, PORTFOLIO_CONFIG } from "../../data/constants.js";
 import { api } from "../../api/client.js";
 import { useApp } from "../../context/AppContext.jsx";
 import Logo from "../ui/Logo.jsx";
-import AuraParticleCanvas from "../ui/AuraParticleCanvas.jsx";
+import AuraParticleCanvas from "../ui/DeferredScene.jsx";
 
 const initialForm = { name: "", email: "", message: "" };
 

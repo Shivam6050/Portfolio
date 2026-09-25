@@ -1,6 +1,6 @@
 import { PROFILE, PORTFOLIO_CONFIG } from "../../data/constants.js";
 import Logo from "../ui/Logo.jsx";
-import ExperienceThreeScene from "../ui/ExperienceThreeScene.jsx";
+import ExperienceThreeScene from "../ui/DeferredScene.jsx";
 
 export default function Experience() {
   const { background } = PORTFOLIO_CONFIG;
@@ -8,7 +8,7 @@ export default function Experience() {
   return (
     <section id="experience" className="section-block experience-section">
       <div className="experience-3d-layer" aria-hidden="true">
-        <ExperienceThreeScene />
+        <ExperienceThreeScene kind="experience" />
       </div>
       <div className="experience-inner">
       <div className="section-heading">
@@ -22,8 +22,8 @@ export default function Experience() {
 
           <div className="mt-12">
             <div className="mb-5 flex items-center justify-between border-b border-ink/15 pb-3">
-              <h3 className="font-mono text-[10px] uppercase tracking-[.18em] text-muted">Experience</h3>
-              <span className="font-mono text-[9px] uppercase tracking-widest text-muted">{String(PROFILE.experience.length).padStart(2, "0")}</span>
+              <h3 className="font-mono text-[11px] uppercase tracking-[.18em] text-muted">Experience</h3>
+              <span className="font-mono text-[11px] uppercase tracking-widest text-muted">{String(PROFILE.experience.length).padStart(2, "0")}</span>
             </div>
 
             <div className="space-y-10">
@@ -34,11 +34,11 @@ export default function Experience() {
                       <Logo name={item.logo} label={item.company} size={34} className="border border-ink/10 bg-cream p-1" />
                       <p className="font-serif text-2xl italic">{item.company}</p>
                     </div>
-                    <p className="mt-1 font-mono text-[9px] uppercase tracking-widest text-muted">{item.period}</p>
+                    <p className="mt-1 font-mono text-[11px] uppercase tracking-widest text-muted">{item.period}</p>
                     <p className="mt-3 text-sm font-medium">{item.role}</p>
                     <div className="mt-2 flex flex-wrap gap-2">
                       {item.stack.map(([name, label]) => (
-                        <span key={name} className="inline-flex items-center gap-1.5 font-mono text-[8px] uppercase tracking-wider text-muted">
+                        <span key={name} className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider text-muted">
                           <Logo name={name} label={label} size={13} />
                           {label}
                         </span>
@@ -58,8 +58,8 @@ export default function Experience() {
           <div className="mt-16 grid gap-12 lg:grid-cols-2">
             <div>
               <div className="mb-5 flex items-center justify-between border-b border-ink/15 pb-3">
-                <h3 className="font-mono text-[10px] uppercase tracking-[.18em] text-muted">Education</h3>
-                <span className="font-mono text-[9px] uppercase tracking-widest text-muted">{String(PROFILE.education.length).padStart(2, "0")}</span>
+                <h3 className="font-mono text-[11px] uppercase tracking-[.18em] text-muted">Education</h3>
+                <span className="font-mono text-[11px] uppercase tracking-widest text-muted">{String(PROFILE.education.length).padStart(2, "0")}</span>
               </div>
 
               <div className="space-y-6">
@@ -70,7 +70,7 @@ export default function Experience() {
                       <p className="font-serif text-xl italic">{item.institution}</p>
                     </div>
                     <p className="mt-1 text-sm">{item.degree}</p>
-                    <p className="mt-1 font-mono text-[9px] uppercase tracking-widest text-muted">
+                    <p className="mt-1 font-mono text-[11px] uppercase tracking-widest text-muted">
                       {[item.period, item.result].filter(Boolean).join(" · ")}
                     </p>
                   </article>
@@ -80,8 +80,8 @@ export default function Experience() {
 
             <div>
               <div className="mb-5 flex items-center justify-between border-b border-ink/15 pb-3">
-                <h3 className="font-mono text-[10px] uppercase tracking-[.18em] text-muted">Certifications &amp; training</h3>
-                <span className="font-mono text-[9px] uppercase tracking-widest text-muted">{String(PROFILE.certifications.length).padStart(2, "0")}</span>
+                <h3 className="font-mono text-[11px] uppercase tracking-[.18em] text-muted">Certifications &amp; training</h3>
+                <span className="font-mono text-[11px] uppercase tracking-widest text-muted">{String(PROFILE.certifications.length).padStart(2, "0")}</span>
               </div>
 
               <div className="space-y-6">
@@ -89,7 +89,7 @@ export default function Experience() {
                   <article key={item.issuer} className="border border-ink/10 bg-cream p-5">
                     <div className="flex items-center gap-3">
                       <Logo name={item.logo} label={item.issuer} size={30} className="border border-ink/10 bg-cream p-1" />
-                      <p className="font-mono text-[9px] uppercase tracking-widest text-rust">{item.issuer}</p>
+                      <p className="font-mono text-[11px] uppercase tracking-widest text-rust">{item.issuer}</p>
                     </div>
                     <h4 className="mt-2 font-serif text-2xl italic">{item.title}</h4>
                     <p className="mt-3 text-sm leading-6 text-muted">{item.detail}</p>

@@ -890,7 +890,7 @@ textarea {
 .hero-section {
   width: 100%;
   box-sizing: border-box;
-  padding: 54px clamp(22px, 5vw, 72px) 105px;
+  padding: 40px clamp(22px, 5vw, 72px) 64px;
 }
 .hero-container {
   width: min(100%, 1320px);
@@ -2129,7 +2129,7 @@ textarea {
 section[id] { scroll-margin-top: 96px; }
 .section-title { text-wrap: balance; }
 .section-lede { max-width: 58ch; line-height: 1.8; }
-.hero-summary { max-width: 68ch; line-height: 1.85; }
+.hero-summary { max-width: 58ch; line-height: 1.75; color: #6b6760; }
 .hero-kicker { border-bottom-color: rgba(184,67,26,.22); }
 .project-card-featured { padding-bottom: 64px; }
 .project-list { gap: 64px; }
@@ -2146,7 +2146,7 @@ section[id] { scroll-margin-top: 96px; }
 .form-status { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
 .form-status i { width: 5px; height: 5px; border-radius: 50%; background: #4a5d3a; box-shadow: 0 0 0 3px rgba(74,93,58,.09); }
 .contact-panel form { padding: 32px; }
-.contact-panel .form-label { color: #665b50; font-size: 10px; }
+.contact-panel .form-label { color: #665b50; font-size: 12px; }
 .contact-panel .form-input { margin-top: 12px; padding: 14px 12px; border: 1px solid rgba(20,20,19,.15); border-radius: 2px; background: rgba(255,255,255,.4); font-size: 16px; transition: border-color .2s, box-shadow .2s; }
 .contact-panel .form-input:focus { border: 1px solid #b8431a; box-shadow: 0 0 0 3px rgba(184,67,26,.08); }
 .contact-panel .form-input::placeholder { color: #83796f; }

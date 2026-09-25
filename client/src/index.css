@@ -465,7 +465,8 @@ textarea {
 
 .experience-3d-layer {
   position: absolute;
-  top: 7%;
+  /* Anchor the scene beside the heading, above the experience entries. */
+  top: clamp(-120px, -7vw, -64px);
   right: -4%;
   width: min(52vw, 760px);
   height: min(48vw, 680px);

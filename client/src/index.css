@@ -1655,23 +1655,33 @@ textarea {
   isolation: isolate;
 }
 
-.hero-particle-field {
-  position: absolute;
-  z-index: 1;
-  inset: -18% -10%;
-  pointer-events: none;
+.profile-frame {
+  position: relative;
+  z-index: 4;
   overflow: visible;
-  opacity: .9;
-  transform: translateZ(-18px);
 }
 
-.hero-particle-field .hero-3d-canvas {
+.profile-particle-field {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  width: min(1000px, 78vw);
+  height: 760px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  overflow: visible;
+  opacity: .95;
+}
+
+.profile-particle-field > .canvas-container,
+.profile-particle-field .hero-3d-canvas {
   width: 100%;
   height: 100%;
   overflow: visible;
 }
 
-.hero-particle-field .hero-3d-canvas canvas {
+.profile-particle-field canvas {
   display: block;
   width: 100% !important;
   height: 100% !important;
@@ -1683,32 +1693,23 @@ textarea {
   z-index: 3;
 }
 
-.profile-frame {
-  position: relative;
-  z-index: 4;
-}
-
 @media (max-width: 1050px) {
-  .hero-particle-field {
-    left: 72%;
-    top: 46%;
+  .profile-particle-field {
     width: 820px;
     height: 650px;
   }
 }
 
 @media (max-width: 700px) {
-  .hero-particle-field {
-    left: 50%;
-    top: 56%;
+  .profile-particle-field {
     width: 650px;
     height: 540px;
-    opacity: .68;
+    opacity: .72;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-particle-field {
+  .profile-particle-field {
     opacity: .45;
   }
 }

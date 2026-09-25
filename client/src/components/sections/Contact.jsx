@@ -19,9 +19,10 @@ export default function Contact() {
 
   const submit = async (event) => {
     event.preventDefault();
+    if (sending) return;
 
     if (!form.name.trim()) return toast("Please enter your name.", "error");
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
       return toast("Please enter a valid email.", "error");
     }
     if (form.message.trim().length < 10) {
@@ -75,16 +76,16 @@ export default function Contact() {
           <div className="grid gap-6 sm:grid-cols-2">
             <label className="form-label">
               Name
-              <input className="form-input" name="name" value={form.name} onChange={update} maxLength={80} placeholder="Your name" />
+              <input className="form-input" name="name" required autoComplete="name" value={form.name} onChange={update} maxLength={80} placeholder="Your name" />
             </label>
             <label className="form-label">
               Email
-              <input className="form-input" name="email" type="email" value={form.email} onChange={update} maxLength={160} placeholder="you@example.com" />
+              <input className="form-input" name="email" required autoComplete="email" type="email" value={form.email} onChange={update} maxLength={160} placeholder="you@example.com" />
             </label>
           </div>
           <label className="form-label mt-6">
             Message
-            <textarea className="form-input min-h-44 resize-y" name="message" value={form.message} onChange={update} minLength={10} maxLength={3000} placeholder="Tell me what you're building..." />
+            <textarea className="form-input min-h-44 resize-y" name="message" required value={form.message} onChange={update} minLength={10} maxLength={3000} placeholder="Tell me what you're building..." />
           </label>
           <div className="mt-6 flex items-center justify-between gap-4">
             <span className="font-mono text-[9px] uppercase tracking-widest text-muted">

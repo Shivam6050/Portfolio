@@ -1,4 +1,5 @@
 import "dotenv/config";
+import mongoose from "mongoose";
 import { connectDB } from "../config/db.js";
 import Project from "../models/Project.js";
 import Stat from "../models/Stat.js";
@@ -49,8 +50,9 @@ const projects = [
 
 try {
   await connectDB();
-  await Project.deleteMany({});
-  await Project.insertMany(projects);
+  for (const project of projects) {
+    await Project.findOneAndUpdate({ slug: project.slug }, { $set: project }, { upsert: true, runValidators: true });
+  }
   await Stat.findOneAndUpdate(
     { key: "views" },
     { $setOnInsert: { key: "views", value: 0 } },
@@ -61,5 +63,5 @@ try {
   console.error("Seed failed:", error);
   process.exitCode = 1;
 } finally {
-  process.exit();
+  await mongoose.disconnect();
 }

@@ -2,6 +2,10 @@ import Message from "../models/Message.js";
 
 export async function createMessage(req, res, next) {
   try {
+    if (!["name", "email", "message"].every((key) => typeof req.body?.[key] === "string")) {
+      return res.status(400).json({ success: false, message: "Name, email and message must be strings" });
+    }
+
     const name = req.body?.name?.trim();
     const email = req.body?.email?.trim().toLowerCase();
     const message = req.body?.message?.trim();

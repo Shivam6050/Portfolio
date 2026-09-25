@@ -44,6 +44,8 @@ export default function Header() {
           className="mobile-menu-button inline-flex h-10 w-10 items-center justify-center border border-ink/15 md:hidden"
           aria-label="Toggle menu"
           aria-expanded={open}
+          aria-controls="mobile-navigation"
+          onKeyDown={(event) => { if (event.key === "Escape") setOpen(false); }}
           onClick={() => setOpen((value) => !value)}
         >
           <span className="space-y-1.5">
@@ -53,7 +55,7 @@ export default function Header() {
         </button>
 
         {open && (
-          <div className="mobile-menu absolute left-5 right-5 top-20 border border-ink/10 bg-paper p-3 shadow-lg md:hidden">
+          <nav id="mobile-navigation" aria-label="Mobile navigation" onKeyDown={(event) => { if (event.key === "Escape") setOpen(false); }} className="mobile-menu absolute left-5 right-5 top-20 border border-ink/10 bg-paper p-3 shadow-lg md:hidden">
             {links.map(([label, href]) => (
               <a
                 key={href}
@@ -64,7 +66,7 @@ export default function Header() {
                 {label}
               </a>
             ))}
-          </div>
+          </nav>
         )}
       </div>
     </header>

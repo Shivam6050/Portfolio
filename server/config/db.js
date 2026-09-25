@@ -35,7 +35,8 @@ export async function connectDB() {
       cachedPromise = null;
       console.error("MongoDB connection failed:", error.message);
       throw error;
-    });
+    })
+    .finally(() => { cachedPromise = null; });
 
   return cachedPromise;
 }

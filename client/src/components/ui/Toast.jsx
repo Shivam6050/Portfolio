@@ -4,7 +4,7 @@ export default function Toast() {
   const { toasts } = useApp();
 
   return (
-    <div className="fixed bottom-5 right-5 z-[100] flex w-[min(360px,calc(100vw-2rem))] flex-col gap-2">
+    <div role="status" aria-live="polite" aria-atomic="true" className="fixed bottom-5 right-5 z-[100] flex w-[min(360px,calc(100vw-2rem))] flex-col gap-2">
       {toasts.map((item) => (
         <div
           key={item.id}

@@ -14,6 +14,13 @@ import {
 } from "./middleware/errorHandler.js";
 
 const app = express();
+app.disable("x-powered-by");
+// Set only to the verified number of reverse proxies in your deployment.
+if (process.env.TRUST_PROXY_HOPS) {
+  const hops = Number(process.env.TRUST_PROXY_HOPS);
+  if (!Number.isInteger(hops) || hops < 1) throw new Error("Invalid TRUST_PROXY_HOPS");
+  app.set("trust proxy", hops);
+}
 
 const PORT = process.env.PORT || 5000;
 
@@ -49,19 +56,6 @@ app.use((req, res, next) => {
 });
 
 // --------------------------------------------------
-// Database middleware
-// --------------------------------------------------
-
-app.use(async (req, res, next) => {
-  try {
-    await connectDB();
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
-
-// --------------------------------------------------
 // Root
 // --------------------------------------------------
 
@@ -86,7 +80,7 @@ app.get("/", (req, res) => {
 app.get("/api/health", (req, res) => {
   res.json({
     success: true,
-    message: "API connected",
+    message: "API is running",
     time: new Date().toISOString(),
   });
 });
@@ -94,6 +88,15 @@ app.get("/api/health", (req, res) => {
 // --------------------------------------------------
 // API Routes
 // --------------------------------------------------
+
+app.use(["/api/projects", "/api/messages", "/api/stats"], async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
 
 app.use("/api/projects", projectRoutes);
 
@@ -113,7 +116,7 @@ app.use(errorHandler);
 // Local development
 // --------------------------------------------------
 
-if (!process.env.VERCEL) {
+if (!process.env.VERCEL && process.env.NODE_ENV !== "test") {
   app.listen(PORT, () => {
     console.log(
       `Portfolio API running on http://localhost:${PORT}`

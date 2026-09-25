@@ -20,8 +20,11 @@ export function errorHandler(error, req, res, next) {
     });
   }
 
-  res.status(error.statusCode || 500).json({
+  const candidate = error.statusCode || error.status;
+  const status = error.name === "CastError" ? 400 :
+    (Number.isInteger(candidate) && candidate >= 400 && candidate <= 599 ? candidate : 500);
+  res.status(status).json({
     success: false,
-    message: error.message || "Internal server error"
+    message: status >= 500 ? "Internal server error" : (error.message || "Invalid request")
   });
 }

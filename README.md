@@ -36,13 +36,10 @@ Copy-Item .env.example .env
 
 ## API
 
+- `GET /api/health` (process health; does not require MongoDB)
 - `GET /api/projects`
 - `GET /api/projects/:slug`
-- `POST /api/projects`
-- `PUT /api/projects/:id`
-- `DELETE /api/projects/:id`
 - `POST /api/messages`
-- `GET /api/messages`
 - `GET /api/stats`
 - `POST /api/stats/view`
 
@@ -85,4 +82,14 @@ shivam-portfolio/
 ```
 
 
-<!-- deployment trigger: 2026-09-22 portfolio sync -->
+## Production and verification
+
+The rendered portfolio content is maintained in `client/src/data/constants.js`. The database projects API is separate; seeding it does not change the page. Seeding updates the known projects by slug and preserves other projects.
+
+For a separately hosted backend, set `VITE_API_URL` to its origin before running `npm run build` in `client`. Vite embeds this value at build time. Without it, the frontend host must proxy `/api` to the backend; the development proxy is not included in production builds.
+
+Run `npm test` in each package and `npm run build` in `client`.
+
+If deploying behind a reverse proxy, configure `TRUST_PROXY_HOPS` only after verifying the proxy count and that clients cannot bypass it. Otherwise rate limits can group all visitors under the proxy IP. In-memory rate limits are per process and reset on restart; multi-instance deployments need a shared rate-limit store.
+
+Contact submissions are stored in MongoDB; this application does not send email notifications or expose a public inbox endpoint.

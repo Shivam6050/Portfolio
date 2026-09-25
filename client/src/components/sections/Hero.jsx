@@ -13,15 +13,15 @@ export default function Hero() {
         </div>
 
         <div className="hero-layout">
-          <main className="hero-main">
+          <div className="hero-main">
             <p className="sec-num">{hero.sectionNumber}</p>
 
             <div className="hero-identity">
               <div className="hero-heading">
                 <p className="hero-role">{PROFILE.title}</p>
                 <h1 className="hero-title">
-                  <span className="hero-name hero-name-1">Shivam</span>
-                  <span className="hero-name hero-name-2">Sagar<span className="text-rust">.</span></span>
+                  <span className="hero-name hero-name-1">{PROFILE.firstName}</span>
+                  <span className="hero-name hero-name-2">{PROFILE.lastName}<span className="text-rust">.</span></span>
                 </h1>
 
                 <div className="hero-current">
@@ -49,7 +49,7 @@ export default function Hero() {
                 <a className="tag" href={`mailto:${PROFILE.email}`}>Available for conversations</a>
               </div>
             </div>
-          </main>
+          </div>
         </div>
       </div>
     </section>

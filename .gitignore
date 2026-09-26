@@ -1,7 +1,14 @@
+# Installed dependencies: regenerate with npm ci; keep package manifests/lockfiles tracked.
 node_modules/
+# Generated Vite build output: rebuild rather than hand-edit or commit.
 dist/
+# Local credentials/configuration: publish only .env.example placeholders.
 .env
+# Local runtime/debug logs may contain machine-specific or sensitive information.
 *.log
+# macOS Finder metadata.
 .DS_Store
+# Local VS Code workspace preferences.
 .vscode/
+# Local JetBrains IDE settings.
 .idea/

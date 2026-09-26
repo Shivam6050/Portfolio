@@ -2,6 +2,10 @@
 
 Editorial, warm, paper-inspired full-stack portfolio built with React/Vite/Tailwind on the client and Node/Express/MongoDB on the server.
 
+## Code documentation
+
+See [CODE_GUIDE.md](CODE_GUIDE.md) for the architecture, customization map, API flow, configuration fields, and verification commands. Source comments explain the nearby operations and styling rules without changing runtime behavior.
+
 ## Requirements
 
 - Node.js 18+
